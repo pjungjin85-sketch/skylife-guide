@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>스카이라이프 모바일 현장영업 안내</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=Noto+Serif+KR:wght@600;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0f1e;
+    --surface: #111827;
+    --surface2: #1a2235;
+    --accent: #00c4f4;
+    --accent2: #0077ff;
+    --gold: #f59e0b;
+    --green: #10b981;
+    --red: #ef4444;
+    --text: #e8edf5;
+    --text-muted: #8899b4;
+    --border: rgba(0,196,244,0.15);
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--bg); color:var(--text); font-family:'Noto Sans KR',sans-serif; min-height:100vh; overflow-x:hidden; }
+
+  header { background:linear-gradient(135deg,#0a0f1e 0%,#0d1a3a 50%,#0a1628 100%); border-bottom:1px solid var(--border); padding:0 24px; position:sticky; top:0; z-index:100; backdrop-filter:blur(16px); }
+  .header-inner { max-width:1100px; margin:0 auto; display:flex; align-items:center; height:64px; gap:16px; }
+  .logo-badge { background:linear-gradient(135deg,var(--accent2),var(--accent)); color:#fff; font-weight:900; font-size:13px; padding:5px 12px; border-radius:6px; letter-spacing:.05em; white-space:nowrap; }
+  .header-title { font-size:16px; font-weight:700; }
+  .header-sub { font-size:12px; color:var(--text-muted); margin-left:auto; white-space:nowrap; }
+
+  .hero { background:linear-gradient(160deg,#0d1a3a 0%,#0a0f1e 60%); padding:48px 24px 36px; position:relative; overflow:hidden; }
+  .hero::before { content:''; position:absolute; top:-60px; right:-60px; width:300px; height:300px; background:radial-gradient(circle,rgba(0,119,255,.15) 0%,transparent 70%); pointer-events:none; }
+  .hero-inner { max-width:1100px; margin:0 auto; }
+  .hero-tag { display:inline-flex; align-items:center; gap:6px; background:rgba(0,196,244,.1); border:1px solid rgba(0,196,244,.3); color:var(--accent); font-size:12px; font-weight:600; padding:4px 12px; border-radius:20px; margin-bottom:16px; letter-spacing:.04em; }
+  .hero-tag::before { content:'●'; font-size:8px; animation:blink 1.4s infinite; }
+  @keyframes blink { 0%,100%{opacity:1}50%{opacity:.3} }
+  .hero h1 { font-family:'Noto Serif KR',serif; font-size:clamp(24px,4vw,38px); font-weight:900; line-height:1.25; margin-bottom:12px; background:linear-gradient(135deg,#e8edf5 30%,var(--accent) 100%); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+  .hero p { font-size:14px; color:var(--text-muted); line-height:1.7; max-width:600px; }
+
+  .target-bar { max-width:1100px; margin:0 auto; padding:20px 24px 0; display:flex; gap:12px; flex-wrap:wrap; }
+  .target-chip { display:flex; align-items:center; gap:8px; background:var(--surface2); border:1px solid var(--border); border-radius:8px; padding:10px 16px; font-size:13px; font-weight:500; }
+  .quick-link { display:flex; align-items:center; gap:12px; background:var(--surface2); border:1px solid var(--border); border-radius:10px; padding:12px 16px; text-decoration:none; color:var(--text); transition:all .2s; flex:1; min-width:240px; }
+  .quick-link:hover { border-color:var(--accent); background:var(--surface3); transform:translateY(-1px); }
+  .quick-link-icon { font-size:22px; flex-shrink:0; }
+  .quick-link-title { font-size:14px; font-weight:700; color:var(--text); margin-bottom:2px; }
+  .quick-link-desc { font-size:11px; color:var(--text-muted); }
+  .quick-link-arrow { margin-left:auto; font-size:18px; color:var(--accent); flex-shrink:0; }
+  .target-chip .icon { font-size:18px; }
+  .target-chip .label { color:var(--text-muted); font-size:11px; display:block; }
+
+  main { max-width:1100px; margin:32px auto; padding:0 24px 60px; }
+  .section-title { font-size:11px; font-weight:700; letter-spacing:.12em; color:var(--accent); text-transform:uppercase; margin-bottom:16px; padding-bottom:8px; border-bottom:1px solid var(--border); }
+
+  .card-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:16px; margin-bottom:8px; }
+  .card { background:var(--surface); border:1px solid var(--border); border-radius:14px; overflow:hidden; cursor:pointer; transition:transform .2s,border-color .2s,box-shadow .2s; }
+  .card:hover { transform:translateY(-3px); border-color:rgba(0,196,244,.4); box-shadow:0 12px 40px rgba(0,119,255,.12); }
+  .card.active { border-color:var(--accent); box-shadow:0 0 0 2px rgba(0,196,244,.2); }
+  .card-header { padding:20px 20px 16px; display:flex; align-items:flex-start; gap:14px; }
+  .card-icon { width:44px; height:44px; border-radius:10px; display:flex; align-items:center; justify-content:center; font-size:22px; flex-shrink:0; }
+  .card-meta { flex:1; }
+  .card-label { font-size:10px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; margin-bottom:4px; opacity:.7; }
+  .card-title { font-size:15px; font-weight:700; line-height:1.3; }
+  .card-desc { font-size:12px; color:var(--text-muted); margin-top:4px; line-height:1.5; }
+  .card-footer { padding:0 20px 16px; display:flex; align-items:center; justify-content:space-between; }
+  .card-tags { display:flex; gap:6px; flex-wrap:wrap; }
+  .tag { font-size:11px; padding:2px 8px; border-radius:4px; background:rgba(255,255,255,.06); color:var(--text-muted); border:1px solid rgba(255,255,255,.08); }
+  .chevron { color:var(--text-muted); font-size:14px; transition:transform .3s,color .2s; }
+  .card.active .chevron { transform:rotate(90deg); color:var(--accent); }
+
+  .detail-panel { display:none; background:var(--surface2); border:1px solid rgba(0,196,244,.25); border-radius:14px; margin-top:4px; margin-bottom:24px; overflow:hidden; animation:slideDown .25s ease; }
+  .detail-panel.open { display:block; }
+  @keyframes slideDown { from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:translateY(0)} }
+  .detail-inner { padding:24px; }
+  .detail-inner h3 { font-size:16px; font-weight:700; margin-bottom:16px; color:var(--accent); display:flex; align-items:center; gap:8px; }
+
+  .steps { display:flex; flex-direction:column; gap:12px; }
+  .step { display:flex; gap:14px; align-items:flex-start; background:rgba(255,255,255,.03); border-radius:10px; padding:14px 16px; border-left:3px solid transparent; transition:border-color .2s; }
+  .step:hover { border-left-color:var(--accent2); }
+  .step-num { width:26px; height:26px; background:linear-gradient(135deg,var(--accent2),var(--accent)); border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:12px; font-weight:700; color:#fff; flex-shrink:0; }
+  .step-title { font-size:13px; font-weight:700; margin-bottom:4px; }
+  .step-desc { font-size:12px; color:var(--text-muted); line-height:1.7; }
+  .step-tip { margin-top:6px; font-size:11px; color:var(--gold); background:rgba(245,158,11,.08); border:1px solid rgba(245,158,11,.2); border-radius:6px; padding:5px 10px; display:inline-block; }
+
+  .sub-steps { margin-top:8px; display:flex; flex-direction:column; gap:6px; }
+  .sub-step { display:flex; gap:8px; align-items:flex-start; font-size:12px; color:var(--text-muted); line-height:1.6; padding:6px 10px; background:rgba(0,196,244,.04); border-radius:6px; border-left:2px solid rgba(0,196,244,.3); }
+  .sub-step-num { font-weight:700; color:var(--accent); flex-shrink:0; }
+
+  .info-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:12px; }
+  .info-box { background:rgba(255,255,255,.03); border-radius:10px; padding:14px 16px; border:1px solid rgba(255,255,255,.06); }
+  .info-box-title { font-size:12px; font-weight:700; margin-bottom:8px; }
+  .info-box ul { padding-left:16px; }
+  .info-box li { font-size:12px; color:var(--text-muted); line-height:1.8; }
+
+  .checklist { display:flex; flex-direction:column; gap:8px; }
+  .check-item { display:flex; align-items:flex-start; gap:10px; font-size:13px; line-height:1.5; padding:8px 12px; border-radius:8px; background:rgba(255,255,255,.02); }
+  .check-item.required .check-icon { color:var(--red); }
+  .check-item.recommended .check-icon { color:var(--gold); }
+  .check-item.optional .check-icon { color:var(--green); }
+  .check-icon { font-size:16px; flex-shrink:0; margin-top:1px; }
+  .check-text strong { color:var(--text); font-size:13px; }
+  .check-text span { color:var(--text-muted); font-size:12px; display:block; line-height:1.6; }
+
+  .alert { border-radius:10px; padding:12px 16px; font-size:12px; line-height:1.6; margin-top:12px; display:flex; gap:10px; align-items:flex-start; }
+  .alert-icon { font-size:16px; flex-shrink:0; margin-top:1px; }
+  .alert.warn { background:rgba(245,158,11,.1); border:1px solid rgba(245,158,11,.25); color:#fbbf24; }
+  .alert.info { background:rgba(0,196,244,.08); border:1px solid rgba(0,196,244,.2); color:#67e8f9; }
+  .alert.danger { background:rgba(239,68,68,.08); border:1px solid rgba(239,68,68,.2); color:#fca5a5; }
+
+  .data-table { width:100%; border-collapse:collapse; font-size:12px; margin-top:8px; }
+  .data-table th { background:rgba(0,196,244,.1); color:var(--accent); font-weight:700; padding:10px 14px; text-align:left; font-size:11px; letter-spacing:.04em; border-bottom:1px solid var(--border); }
+  .data-table td { padding:10px 14px; border-bottom:1px solid rgba(255,255,255,.05); color:var(--text-muted); line-height:1.5; vertical-align:top; }
+  .data-table td strong { color:var(--text); }
+  .data-table tr:last-child td { border-bottom:none; }
+  .data-table tr:hover td { background:rgba(255,255,255,.02); }
+
+  .ars-table { width:100%; border-collapse:collapse; font-size:12px; margin-top:10px; }
+  .ars-table th { background:rgba(124,58,237,.15); color:#a78bfa; font-weight:700; padding:8px 12px; text-align:left; font-size:11px; border-bottom:1px solid rgba(124,58,237,.2); }
+  .ars-table td { padding:9px 12px; border-bottom:1px solid rgba(255,255,255,.04); color:var(--text-muted); }
+  .ars-table td:last-child { color:var(--accent); font-weight:700; font-size:13px; }
+  .ars-table tr:last-child td { border-bottom:none; }
+  .ars-table tr:hover td { background:rgba(255,255,255,.02); }
+
+  .badge { display:inline-block; font-size:10px; font-weight:700; padding:2px 7px; border-radius:4px; letter-spacing:.04em; }
+  .badge-blue { background:rgba(0,119,255,.2); color:#60a5fa; border:1px solid rgba(0,119,255,.3); }
+  .badge-green { background:rgba(16,185,129,.15); color:#34d399; border:1px solid rgba(16,185,129,.25); }
+  .badge-gold { background:rgba(245,158,11,.15); color:#fbbf24; border:1px solid rgba(245,158,11,.25); }
+
+  .tab-bar { display:flex; gap:8px; margin-bottom:14px; }
+  .tab-btn { padding:8px 18px; border-radius:8px; font-size:13px; font-weight:700; cursor:pointer; border:1px solid var(--border); background:rgba(255,255,255,.04); color:var(--text-muted); transition:all .2s; }
+  .tab-btn.active { background:linear-gradient(135deg,var(--accent2),var(--accent)); color:#fff; border-color:transparent; }
+  .tab-content { display:none; }
+  .tab-content.active { display:block; }
+
+  .divider { height:1px; background:var(--border); margin:20px 0; }
+  footer { text-align:center; padding:24px; font-size:11px; color:var(--text-muted); border-top:1px solid var(--border); }
+
+  @media(max-width:600px){
+    .card-grid{grid-template-columns:1fr;}
+    .info-grid{grid-template-columns:1fr;}
+    .header-sub{display:none;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="logo-badge">KT SkyLife Mobile</div>
+    <div class="header-title">현장영업 안내 가이드</div>
+    <div class="header-sub">대리점·설치기사 전용</div>
+  </div>
+</header>
+
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-tag">현장 영업 참고자료</div>
+    <h1>고객 대면 영업 시<br>꼭 알아야 할 핵심 가이드</h1>
+    <p>모바일 가입 안내부터 유심 장착, 번호이동, 요금제 설명까지 — 현장에서 바로 꺼내 쓸 수 있는 실무 안내서입니다.</p>
+  </div>
+</div>
+
+<div class="target-bar">
+  <a href="https://pjungjin85-sketch.github.io/skylife-plans/plans_full.html" target="_blank" class="quick-link">
+    <span class="quick-link-icon">📋</span>
+    <div>
+      <div class="quick-link-title">전체 요금제 리스트</div>
+      <div class="quick-link-desc">LTE · 5G · 대리점 판매 가능 전 상품</div>
+    </div>
+    <span class="quick-link-arrow">→</span>
+  </a>
+  <a href="https://pjungjin85-sketch.github.io/skylife/" target="_blank" class="quick-link">
+    <span class="quick-link-icon">🧮</span>
+    <div>
+      <div class="quick-link-title">SKYlife 모바일 수수료 계산기</div>
+      <div class="quick-link-desc">개통 수수료 빠른 계산</div>
+    </div>
+    <span class="quick-link-arrow">→</span>
+  </a>
+</div>
+
+<main>
+
+  <!-- ① 현장 영업 프로세스 -->
+  <div class="section-title">① 현장 영업 프로세스</div>
+  <div class="card-grid">
+    <div class="card" onclick="toggle('sales-flow')">
+      <div class="card-header">
+        <div class="card-icon" style="background:rgba(0,119,255,0.15)">🗣️</div>
+        <div class="card-meta">
+          <div class="card-label" style="color:#60a5fa">영업 기본</div>
+          <div class="card-title">고객 접근 &amp; 첫 대화</div>
+          <div class="card-desc">고객과의 첫 접점에서 신뢰를 쌓는 대화 흐름</div>
+        </div>
+      </div>
+      <div class="card-footer"><div class="card-tags"><span class="tag">인사</span><span class="tag">니즈파악</span></div><span class="chevron">›</span></div>
+    </div>
+    <div class="card" onclick="toggle('plan-intro')">
+      <div class="card-header">
+        <div class="card-icon" style="background:rgba(124,58,237,0.15)">📋</div>
+        <div class="card-meta">
+          <div class="card-label" style="color:#a78bfa">요금제 안내</div>
+          <div class="card-title">요금제 설명 &amp; 비교</div>
+          <div class="card-desc">고객용·대리점용 요금제 탭 전환 비교</div>
+        </div>
+      </div>
+      <div class="card-footer"><div class="card-tags"><span class="tag">고객용</span><span class="tag">대리점용</span></div><span class="chevron">›</span></div>
+    </div>
+    <div class="card" onclick="toggle('bundle-sales')">
+      <div class="card-header">
+        <div class="card-icon" style="background:rgba(16,185,129,0.15)">🎁</div>
+        <div class="card-meta">
+          <div class="card-label" style="color:#34d399">결합 영업</div>
+          <div class="card-title">인터넷·TV 결합 안내</div>
+          <div class="card-desc">기존 KT/스카이라이프 이용 고객 결합 혜택</div>
+        </div>
+      </div>
+      <div class="card-footer"><div class="card-tags"><span class="tag">결합할인</span><span class="tag">가족결합</span></div><span class="chevron">›</span></div>
+    </div>
+  </div>
+
+  <div class="detail-panel" id="detail-sales-flow">
+    <div class="detail-inner">
+      <h3>🗣️ 고객 접근 &amp; 첫 대화 흐름</h3>
+      <div class="steps">
+        <div class="step"><div class="step-num">1</div><div class="step-content">
+          <div class="step-title">자연스러운 인사 &amp; 소속 안내</div>
+          <div class="step-desc">"안녕하세요, KT 스카이라이프 OOO대리점 소속 OOO입니다." — 소속을 명확히 밝혀 신뢰감 형성</div>
+        </div></div>
+        <div class="step"><div class="step-num">2</div><div class="step-content">
+          <div class="step-title">현재 이용 통신사 &amp; 요금 파악</div>
+          <div class="step-desc">현재 쓰시는 통신사, 월 요금, 데이터 사용량을 자연스럽게 확인합니다.</div>
+          <div class="step-tip">💡 "혹시 한 달에 데이터 얼마나 쓰세요?" — 부담 없는 질문으로 시작</div>
+        </div></div>
+        <div class="step"><div class="step-num">3</div><div class="step-content">
+          <div class="step-title">불만족 포인트 파악</div>
+          <div class="step-desc">요금이 비싸다 / 속도가 느리다 / 혜택이 없다 등 고객의 불편 사항을 경청합니다.</div>
+        </div></div>
+        <div class="step"><div class="step-num">4</div><div class="step-content">
+          <div class="step-title">맞춤 솔루션 제시</div>
+          <div class="step-desc">파악한 니즈를 바탕으로 요금제 또는 결합상품을 제안합니다.</div>
+          <div class="step-tip">💡 "지금 요금보다 월 OO원 절감 가능합니다" — 숫자로 임팩트</div>
+        </div></div>
+        <div class="step"><div class="step-num">5</div><div class="step-content">
+          <div class="step-title">가입 진행 &amp; 개통 안내</div>
+          <div class="step-desc">고객 동의 후 필요 서류 안내 및 가입 절차를 설명합니다.</div>
+        </div></div>
+      </div>
+      <div class="alert warn"><span class="alert-icon">⚠️</span><div>과도한 혜택 과장은 민원으로 이어질 수 있습니다. 정확한 조건과 혜택을 안내하세요.</div></div>
+    </div>
+  </div>
+
+  <div class="detail-panel" id="detail-plan-intro">
+    <div class="detail-inner">
+      <h3>📋 요금제 설명 &amp; 비교</h3>
+      <div class="tab-bar">
+        <button class="tab-btn active" onclick="switchTab(this,'tab-customer')">👤 고객용 요금제</button>
+        <button class="tab-btn" onclick="switchTab(this,'tab-dealer')">🏪 대리점용 요금제</button>
+      </div>
+      <div class="tab-content active" id="tab-customer">
+        <div class="alert info" style="margin-bottom:10px"><span class="alert-icon">ℹ️</span><div>저렴한 가격으로 스펙 좋은 요금제 — 고객 설득용</div></div>
+        <table class="data-table">
+          <thead><tr><th>상품명</th><th>판매가</th><th>스펙 (음성/문자/데이터)</th><th>제휴혜택</th></tr></thead>
+          <tbody>
+            <tr><td><strong>초슬림 500M/60분</strong></td><td><strong style="color:var(--green)">1,900원</strong></td><td>기본제공 / 7GB+1Mbps</td><td>-</td></tr>
+            <tr><td><strong>슬림 1GB/100분</strong></td><td><strong style="color:var(--green)">3,900원</strong></td><td>기본제공 / 7GB+1Mbps</td><td>밀리의 서재 구독권</td></tr>
+            <tr><td><strong>슬림 1.5GB/150분</strong></td><td><strong style="color:var(--green)">5,000원</strong></td><td>기본제공 / 7GB+1Mbps</td><td>네이버페이 5천P</td></tr>
+            <tr><td><strong>슬림 2GB/200분</strong></td><td><strong style="color:var(--green)">4,900원</strong></td><td>기본제공 / 7GB+1Mbps</td><td>지니뮤직</td></tr>
+            <tr><td><strong>슬림 3GB/300분</strong></td><td><strong style="color:var(--green)">6,900원</strong></td><td>기본제공 / 7GB+1Mbps</td><td>-</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="tab-content" id="tab-dealer">
+        <div class="alert warn" style="margin-bottom:10px"><span class="alert-icon">⚠️</span><div>수수료 우수 요금제 — 대리점 내부 참고용</div></div>
+        <table class="data-table">
+          <thead><tr><th>상품명</th><th>판매가</th><th>스펙 (음성/문자/데이터)</th><th>제휴혜택</th></tr></thead>
+          <tbody>
+            <tr><td><strong>SKY 모두 충분 7GB+(밀리의서재)</strong></td><td><strong style="color:var(--gold)">17,900원</strong></td><td>기본제공 / 7GB+1Mbps</td><td>-</td></tr>
+            <tr><td><strong>SKY 모두 충분 7GB+(모아진)</strong></td><td><strong style="color:var(--gold)">17,900원</strong></td><td>기본제공 / 7GB+1Mbps</td><td>밀리의 서재 구독권</td></tr>
+            <tr><td><strong>모두 충분 7GB+(밀리의서재)</strong></td><td><strong style="color:var(--gold)">16,200원</strong></td><td>기본제공 / 7GB+1Mbps</td><td>네이버페이 5천P</td></tr>
+            <tr><td><strong>모두 충분 7GB+(모아진)</strong></td><td><strong style="color:var(--gold)">16,200원</strong></td><td>기본제공 / 7GB+1Mbps</td><td>지니뮤직</td></tr>
+            <tr><td><strong>모두 충분 7GB+(지니뮤직)</strong></td><td><strong style="color:var(--gold)">19,000원</strong></td><td>기본제공 / 7GB+1Mbps</td><td>-</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div style="margin-top:14px;padding:14px 16px;background:rgba(0,196,244,0.06);border:1px solid rgba(0,196,244,0.2);border-radius:12px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;">
+        <div>
+          <div style="font-size:13px;font-weight:700;color:var(--text);margin-bottom:3px;">📋 전체 요금제 리스트</div>
+          <div style="font-size:12px;color:var(--text-muted);">대리점 판매 가능 전 상품 · LTE/5G · 검색·필터 지원 · 총 115개</div>
+        </div>
+        <a href="https://pjungjin85-sketch.github.io/skylife-plans/plans_full.html" target="_blank" style="display:inline-flex;align-items:center;gap:7px;background:linear-gradient(135deg,var(--accent2),var(--accent));color:#fff;font-weight:700;font-size:13px;padding:10px 18px;border-radius:10px;text-decoration:none;white-space:nowrap;flex-shrink:0;">전체 요금제 보기 →</a>
+      </div>
+      <div class="divider"></div>
+      <div class="info-grid">
+        <div class="info-box">
+          <div class="info-box-title" style="color:var(--accent)">📌 설명 순서</div>
+          <ul><li>① 현재 요금과 비교</li><li>② 절감 금액 강조</li><li>③ 데이터·통화 조건</li><li>④ 부가 혜택 설명</li></ul>
+        </div>
+        <div class="info-box">
+          <div class="info-box-title" style="color:var(--green)">✅ 추가 안내사항</div>
+          <ul><li>약정 및 위약금 없음 안내</li><li>요금제별 제휴 혜택 안내</li></ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="detail-panel" id="detail-bundle-sales">
+    <div class="detail-inner">
+      <h3>🎁 인터넷·TV 결합 안내</h3>
+      <div class="steps">
+        <div class="step"><div class="step-num">1</div><div class="step-content">
+          <div class="step-title">기존 스카이라이프/KT 이용 확인</div>
+          <div class="step-desc">인터넷, IPTV, 위성방송 등 기존 이용 서비스를 확인합니다.</div>
+        </div></div>
+        <div class="step"><div class="step-num">2</div><div class="step-content">
+          <div class="step-title">결합 가능 회선 수 확인</div>
+          <div class="step-desc">세대 내 스카이라이프 모바일 회선 수를 파악하여 최대 결합 혜택 안내</div>
+        </div></div>
+        <div class="step"><div class="step-num">3</div><div class="step-content">
+          <div class="step-title">월 절감액 계산 &amp; 제시</div>
+          <div class="step-desc">현재 요금 대비 결합 후 절감 금액을 구체적으로 보여드립니다.</div>
+          <div class="step-tip">💡 1회선인 경우 000원 / 2회선인 경우 000원 절감</div>
+        </div></div>
+      </div>
+      <div class="alert info"><span class="alert-icon">ℹ️</span><div>결합할인은 반드시 동일 명의 또는 가족 관계 증빙이 필요합니다.</div></div>
+    </div>
+  </div>
+
+  <!-- ② 가입 & 개통 절차 -->
+  <div class="section-title">② 가입 &amp; 개통 절차</div>
+  <div class="card-grid">
+    <div class="card" onclick="toggle('join-docs')">
+      <div class="card-header">
+        <div class="card-icon" style="background:rgba(245,158,11,0.15)">📄</div>
+        <div class="card-meta">
+          <div class="card-label" style="color:#fbbf24">필요서류</div>
+          <div class="card-title">가입 필요 서류 안내</div>
+          <div class="card-desc">신규·번호이동 가입별 필요 서류 및 인증 수단 정리</div>
+        </div>
+      </div>
+      <div class="card-footer"><div class="card-tags"><span class="tag">신분증</span><span class="tag">간편인증</span><span class="tag">안면인증</span></div><span class="chevron">›</span></div>
+    </div>
+    <div class="card" onclick="toggle('mnp-guide')">
+      <div class="card-header">
+        <div class="card-icon" style="background:rgba(239,68,68,0.15)">🔄</div>
+        <div class="card-meta">
+          <div class="card-label" style="color:#f87171">번호이동</div>
+          <div class="card-title">번호이동 절차 안내</div>
+          <div class="card-desc">사전동의 ARS 번호 포함 상세 절차 &amp; 오류 대응</div>
+        </div>
+      </div>
+      <div class="card-footer"><div class="card-tags"><span class="tag">MNP</span><span class="tag">ARS</span><span class="tag">사전동의</span></div><span class="chevron">›</span></div>
+    </div>
+    <div class="card" onclick="toggle('new-join')">
+      <div class="card-header">
+        <div class="card-icon" style="background:rgba(0,196,244,0.12)">✅</div>
+        <div class="card-meta">
+          <div class="card-label" style="color:var(--accent)">신규가입</div>
+          <div class="card-title">신규 개통 절차</div>
+          <div class="card-desc">처음 가입하는 고객의 개통 단계별 안내</div>
+        </div>
+      </div>
+      <div class="card-footer"><div class="card-tags"><span class="tag">본인인증</span><span class="tag">개통</span></div><span class="chevron">›</span></div>
+    </div>
+  </div>
+
+  <div class="detail-panel" id="detail-join-docs">
+    <div class="detail-inner">
+      <h3>📄 가입 유형별 필요 서류</h3>
+      <div class="checklist">
+        <div style="font-size:12px;font-weight:700;color:var(--accent);margin-bottom:4px;padding:0 4px">공통 필수</div>
+        <div class="check-item required"><span class="check-icon">🔴</span>
+          <div class="check-text"><strong>신분증 (필수)</strong><span>주민등록증, 운전면허증, 장애인등록증, 국가유공자증 중 1개 — 반드시 실물 확인</span></div></div>
+        <div class="check-item required"><span class="check-icon">🔴</span>
+          <div class="check-text"><strong>본인 명의 계좌 또는 카드</strong><span>자동이체·신용카드 결제 등록용 / 타 명의자의 납부 수단은 개통 후 고객센터에서 변경 가능</span></div></div>
+        <div class="check-item required"><span class="check-icon">🔴</span>
+          <div class="check-text"><strong>가입신청서 작성</strong><span>현장에서 작성</span></div></div>
+        <div class="check-item required"><span class="check-icon">🔴</span>
+          <div class="check-text"><strong>비대면 온라인 서식지 (필수)</strong><span>간편인증: 네이버, 카카오, PASS 인증서, 신용카드 중 택1</span></div></div>
+        <div class="check-item required"><span class="check-icon">🔴</span>
+          <div class="check-text"><strong>PASS 웹/앱 안면인증</strong><span>필수 처리 항목</span></div></div>
+
+        <div style="font-size:12px;font-weight:700;color:var(--gold);margin:12px 0 4px;padding:0 4px">번호이동 추가</div>
+        <div class="check-item recommended"><span class="check-icon">🟡</span>
+          <div class="check-text"><strong>현재 사용 중인 회선의 선불/후불 확인</strong><span>선불·후불 여부에 따라 번호이동 절차가 달라집니다</span></div></div>
+        <div class="check-item recommended"><span class="check-icon">🟡</span>
+          <div class="check-text"><strong>번호이동 인증 수단 확인 (택1)</strong><span>① 단말기 일련번호 &nbsp; ② 전 사업자 요금 납부 계좌번호 뒷 4자리 &nbsp; ③ 카드번호 뒷 4자리 &nbsp; ④ 지로 납부인 경우 지로 선택</span></div></div>
+      </div>
+      <div class="alert danger"><span class="alert-icon">🚨</span><div>타인 명의 대리 가입은 절대 불가합니다. 명의도용 가입 시 법적 처벌 대상이 됩니다.</div></div>
+    </div>
+  </div>
+
+  <div class="detail-panel" id="detail-mnp-guide">
+    <div class="detail-inner">
+      <h3>🔄 번호이동 절차 안내</h3>
+      <div class="steps">
+        <div class="step"><div class="step-num">1</div><div class="step-content">
+          <div class="step-title">기존 통신사 약정 잔여 기간 확인</div>
+          <div class="step-desc">위약금 발생 여부를 사전에 안내합니다. 고객 핸드폰에서 114 통화 시 해당 통신사 고객센터로 자동 연결됩니다.</div>
+        </div></div>
+        <div class="step"><div class="step-num">2</div><div class="step-content">
+          <div class="step-title">번호이동 사전동의 처리</div>
+          <div class="step-desc">번호이동 사전동의 요청 완료 후, 전 통신사 안내 문자 확인 후 동의합니다.<br>
+            문자에 "번호이동 사전동의" 내용이 없거나 문자가 없는 경우, 아래 <strong style="color:var(--accent)">사전동의 ARS 번호</strong>로 고객이 직접 전화하여 동의 처리합니다.</div>
+          <div class="step-tip">💡 전 통신사 문자에는 위약금·기존 혜택 내용만 있을 수 있음 — 그 경우 ARS로 직접 처리</div>
+          <table class="ars-table" style="margin-top:12px">
+            <thead><tr><th>통신사</th><th>사전동의 ARS 번호</th></tr></thead>
+            <tbody>
+              <tr><td>KT / KT 알뜰폰(MVNO)</td><td>1588-2935</td></tr>
+              <tr><td>SKT</td><td>1566-1509</td></tr>
+              <tr><td>SKT 알뜰폰(MVNO)</td><td>1599-0133</td></tr>
+              <tr><td>LGU+ 알뜰폰(MVNO)</td><td>1544-3553</td></tr>
+              <tr><td>세종텔레콤(스노우맨)</td><td>1688-9345</td></tr>
+              <tr><td>한국케이블텔레콤(KCT)</td><td>1877-9120</td></tr>
+            </tbody>
+          </table>
+          <div style="margin-top:12px;background:rgba(239,68,68,.06);border:1px solid rgba(239,68,68,.2);border-radius:8px;padding:12px 14px;">
+            <div style="font-size:12px;font-weight:700;color:#f87171;margin-bottom:8px">⚠️ ARS에서 "대상이 아닙니다" / "신청 내역 없음" 안내 시 대응</div>
+            <div class="sub-steps">
+              <div class="sub-step"><span class="sub-step-num">①</span><span>사전동의 요청 시 변경 전 사업자를 잘못 선택한 경우 → 올바르게 다시 선택 후 재요청</span></div>
+              <div class="sub-step"><span class="sub-step-num">②</span><span>고객이 현재 이용 통신사를 잘못 알고 있는 경우 → 고객 핸드폰에서 114 통화로 확인 후 재요청</span></div>
+              <div class="sub-step"><span class="sub-step-num">③</span><span>전산 연동 오처리된 경우 → 다시 사전동의 요청 (실시간 처리이나 간혹 연동 누락·지연 발생)</span></div>
+            </div>
+          </div>
+        </div></div>
+        <div class="step"><div class="step-num">3</div><div class="step-content">
+          <div class="step-title">개통 신청</div>
+          <div class="step-desc">고객/청구 정보, 요금제 선택, 인증 완료, 유심 번호 입력 후 개통 신청</div>
+          <div class="step-tip">💡 개통 오류 발생 시 — 안내 메시지에서 오류 항목을 확인하고 재입력</div>
+        </div></div>
+        <div class="step"><div class="step-num">4</div><div class="step-content">
+          <div class="step-title">개통 확인 &amp; 유심 삽입</div>
+          <div class="step-desc">개통 완료 메시지 확인 후, 단말기 유심 트레이(유심핀으로 추출)에 새 유심을 트레이 모양에 맞게 올려 삽입합니다.<br>
+            일반적으로 즉시 인식하지 못하므로 <strong>2~3번 전원을 껐다 켜기 반복</strong></div>
+          <div style="margin-top:8px;background:rgba(0,196,244,.05);border:1px solid rgba(0,196,244,.15);border-radius:8px;padding:10px 14px;">
+            <div style="font-size:12px;font-weight:700;color:var(--accent);margin-bottom:6px">🔍 유심 인식 불가 시 점검 항목</div>
+            <div class="sub-steps">
+              <div class="sub-step"><span class="sub-step-num">①</span><span>개통 이력이 없는 통신사향 전용 새 단말기 → 사용 불가</span></div>
+              <div class="sub-step"><span class="sub-step-num">②</span><span>구형(eSIM 미지원)에서 신형(eSIM 지원)으로 변경 시 → KAIT 정보제공 동의 필요 (1588-3002 요청)</span></div>
+              <div class="sub-step"><span class="sub-step-num">③</span><span>유심 또는 단말기 유심 트레이 불량</span></div>
+            </div>
+          </div>
+        </div></div>
+      </div>
+      <div class="alert warn"><span class="alert-icon">⚠️</span><div>번호이동 개통 시 즉시 기존 통신사 서비스가 종료됩니다. 유심을 바로 교체해 주셔야 사용 가능합니다.</div></div>
+    </div>
+  </div>
+
+  <div class="detail-panel" id="detail-new-join">
+    <div class="detail-inner">
+      <h3>✅ 신규 개통 절차</h3>
+      <div class="steps">
+        <div class="step"><div class="step-num">1</div><div class="step-content">
+          <div class="step-title">요금제 선택</div>
+          <div class="step-desc">고객 니즈에 맞는 요금제 확정. 영업 상황에 맞게 고객용·대리점용 구분 중 주요 요금제 리스트에서 선택.</div>
+        </div></div>
+        <div class="step"><div class="step-num">2</div><div class="step-content">
+          <div class="step-title">본인인증 &amp; 가입 신청</div>
+          <div class="step-desc">신분증 확인 후 개통 시스템에 가입 정보 입력. 간편인증(네이버·카카오·PASS·신용카드), 안면인증 및 동의 처리.</div>
+        </div></div>
+        <div class="step"><div class="step-num">3</div><div class="step-content">
+          <div class="step-title">개통 확인 &amp; 유심 삽입</div>
+          <div class="step-desc">개통 완료 메시지 확인 후, 단말기 유심 트레이(유심핀 사용)에 새 유심을 모양에 맞게 올려 삽입합니다.<br>
+            일반적으로 즉시 인식하지 못하므로 <strong>2~3번 전원을 껐다 켜기 반복</strong></div>
+          <div style="margin-top:8px;background:rgba(0,196,244,.05);border:1px solid rgba(0,196,244,.15);border-radius:8px;padding:10px 14px;">
+            <div style="font-size:12px;font-weight:700;color:var(--accent);margin-bottom:6px">🔍 유심 인식 불가 시 점검 항목</div>
+            <div class="sub-steps">
+              <div class="sub-step"><span class="sub-step-num">①</span><span>개통 이력이 없는 통신사향 전용 새 단말기 → 사용 불가</span></div>
+              <div class="sub-step"><span class="sub-step-num">②</span><span>구형(eSIM 미지원)에서 신형(eSIM 지원)으로 변경 시 → KAIT 정보제공 동의 필요 (1588-3002 요청)</span></div>
+              <div class="sub-step"><span class="sub-step-num">③</span><span>유심 또는 단말기 유심 트레이 불량</span></div>
+            </div>
+          </div>
+        </div></div>
+        <div class="step"><div class="step-num">4</div><div class="step-content">
+          <div class="step-title">개통 완료 확인</div>
+          <div class="step-desc">통화·문자·데이터 연결 테스트 완료. 이용 안내 SMS 수신 확인.</div>
+        </div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ③ 유심(USIM) 안내 -->
+  <div class="section-title">③ 유심(USIM) 안내</div>
+  <div class="card-grid">
+    <div class="card" onclick="toggle('usim-type')">
+      <div class="card-header">
+        <div class="card-icon" style="background:rgba(124,58,237,0.15)">💳</div>
+        <div class="card-meta">
+          <div class="card-label" style="color:#a78bfa">유심 종류</div>
+          <div class="card-title">유심 종류 &amp; 규격 안내</div>
+          <div class="card-desc">단말기에 맞는 유심 규격 확인 방법</div>
+        </div>
+      </div>
+      <div class="card-footer"><div class="card-tags"><span class="tag">나노유심</span><span class="tag">eSIM</span></div><span class="chevron">›</span></div>
+    </div>
+    <div class="card" onclick="toggle('usim-install')">
+      <div class="card-header">
+        <div class="card-icon" style="background:rgba(16,185,129,0.15)">🔧</div>
+        <div class="card-meta">
+          <div class="card-label" style="color:#34d399">유심 장착</div>
+          <div class="card-title">유심 장착 방법 &amp; 주의사항</div>
+          <div class="card-desc">단계별 유심 장착 가이드 및 주의사항</div>
+        </div>
+      </div>
+      <div class="card-footer"><div class="card-tags"><span class="tag">장착순서</span><span class="tag">주의</span></div><span class="chevron">›</span></div>
+    </div>
+    <div class="card" onclick="toggle('esim-guide')">
+      <div class="card-header">
+        <div class="card-icon" style="background:rgba(0,196,244,0.12)">📲</div>
+        <div class="card-meta">
+          <div class="card-label" style="color:var(--accent)">eSIM</div>
+          <div class="card-title">eSIM 개통 안내</div>
+          <div class="card-desc">물리 유심 없이 개통하는 eSIM 절차</div>
+        </div>
+      </div>
+      <div class="card-footer"><div class="card-tags"><span class="tag">QR코드</span><span class="tag">EID</span></div><span class="chevron">›</span></div>
+    </div>
+  </div>
+
+  <div class="detail-panel" id="detail-usim-type">
+    <div class="detail-inner">
+      <h3>💳 유심 종류 &amp; 규격</h3>
+      <table class="data-table">
+        <thead><tr><th>유심 종류</th><th>크기</th><th>주요 단말기</th><th>비고</th></tr></thead>
+        <tbody>
+          <tr><td><strong>나노 유심 (Nano SIM)</strong></td><td>12.3 × 8.8mm</td><td>아이폰 5 이상, 갤럭시 S/A 최신형</td><td><span class="badge badge-green">현재 표준</span></td></tr>
+          <tr><td><strong>마이크로 유심 (Micro SIM)</strong></td><td>15 × 12mm</td><td>구형 스마트폰 일부</td><td><span class="badge badge-gold">구형</span></td></tr>
+          <tr><td><strong>eSIM (내장형)</strong></td><td>물리 카드 없음</td><td>아이폰 XS 이상, 갤럭시 S20 이상</td><td><span class="badge badge-blue">QR 개통</span></td></tr>
+        </tbody>
+      </table>
+      <div class="alert info"><span class="alert-icon">ℹ️</span><div>단말기 측면 유심 트레이를 유심핀으로 눌러 추출하여 규격을 확인합니다.</div></div>
+    </div>
+  </div>
+
+  <div class="detail-panel" id="detail-usim-install">
+    <div class="detail-inner">
+      <h3>🔧 유심 장착 방법 &amp; 주의사항</h3>
+      <div class="steps">
+        <div class="step"><div class="step-num">1</div><div class="step-content">
+          <div class="step-title">단말기 전원 끄기</div>
+          <div class="step-desc">반드시 전원을 완전히 종료한 후 유심 교체를 진행합니다.</div>
+          <div class="step-tip">⚡ 전원 ON 상태에서 유심 교체 시 단말기 오류 발생 가능</div>
+        </div></div>
+        <div class="step"><div class="step-num">2</div><div class="step-content">
+          <div class="step-title">유심 트레이 꺼내기</div>
+          <div class="step-desc">유심 핀(이젝터 핀)을 유심 트레이 홀에 꽂아 트레이를 꺼냅니다. 핀이 없을 경우 클립 사용 가능.</div>
+        </div></div>
+        <div class="step"><div class="step-num">3</div><div class="step-content">
+          <div class="step-title">유심 방향 확인 후 장착</div>
+          <div class="step-desc">유심의 금색 칩이 아래를 향하도록, 모서리 잘린 방향 맞춰 트레이에 올려놓습니다.</div>
+          <div class="step-tip">💡 유심과 트레이의 모양(노치)을 맞추면 방향 실수를 줄일 수 있습니다</div>
+        </div></div>
+        <div class="step"><div class="step-num">4</div><div class="step-content">
+          <div class="step-title">트레이 삽입 &amp; 전원 ON</div>
+          <div class="step-desc">트레이를 부드럽게 밀어 넣고 전원을 켭니다. 화면 상단의 안테나 바가 표시되면 완료.</div>
+        </div></div>
+      </div>
+      <div class="alert danger"><span class="alert-icon">🚨</span><div>유심 핀 홀에 이물질이 들어가지 않도록 주의하세요. 무리한 힘으로 트레이를 삽입하면 단말기가 파손될 수 있습니다.</div></div>
+    </div>
+  </div>
+
+  <div class="detail-panel" id="detail-esim-guide">
+    <div class="detail-inner">
+      <h3>📲 eSIM 개통 안내</h3>
+      <div class="steps">
+        <div class="step"><div class="step-num">1</div><div class="step-content">
+          <div class="step-title">eSIM 지원 단말기 여부 확인</div>
+          <div class="step-desc">설정 → 일반 → 정보 → <strong>EID가 있는 경우</strong> eSIM 사용 가능. 또는 제조사 공식 스펙 확인.</div>
+        </div></div>
+        <div class="step"><div class="step-num">2</div><div class="step-content">
+          <div class="step-title">개통 시스템에서 eSIM 선택</div>
+          <div class="step-desc">IMEI1, IMEI2, EID 정보 입력 (최대 32자리 숫자로 구성)</div>
+          <div class="step-tip">💡 핸드폰에서 개통 시 숫자를 길게 눌러 복사 붙여넣기 처리 / PC 개통 시 입력 주의</div>
+        </div></div>
+        <div class="step"><div class="step-num">3</div><div class="step-content">
+          <div class="step-title">프로파일 다운로드</div>
+          <div class="step-desc">
+            <strong>방법 1.</strong> 휴대폰 기본 카메라 실행 → QR 코드 스캔 → 프로파일 자동 다운로드<br>
+            <strong>방법 2.</strong> 개통한 eSIM IMEI 기준으로 단말기에서 프로파일 설치 안내 메시지 수신 후 다운로드
+          </div>
+          <div class="step-tip">💡 Wi-Fi 연결 필수 — 프로파일 다운로드에 데이터 연결이 필요합니다</div>
+        </div></div>
+        <div class="step"><div class="step-num">4</div><div class="step-content">
+          <div class="step-title">개통 완료 확인</div>
+          <div class="step-desc">화면 상단의 안테나 바가 표시되면 완료.</div>
+        </div></div>
+      </div>
+      <div class="alert danger"><span class="alert-icon">🚨</span><div>단말기에서 eSIM과 유심 모두 사용하는 경우 <strong>동일 명의만 가능</strong>합니다. 다른 명의의 eSIM과 유심이 함께 있는 경우 자동 정지처리 됩니다.</div></div>
+    </div>
+  </div>
+
+  <!-- ④ 고객 설명 핵심 포인트 -->
+  <div class="section-title">④ 고객 설명 핵심 포인트</div>
+  <div class="card-grid">
+    <div class="card" onclick="toggle('faq-customer')">
+      <div class="card-header">
+        <div class="card-icon" style="background:rgba(245,158,11,0.15)">❓</div>
+        <div class="card-meta">
+          <div class="card-label" style="color:#fbbf24">고객 FAQ</div>
+          <div class="card-title">고객이 자주 묻는 질문</div>
+          <div class="card-desc">현장에서 자주 나오는 질문과 모범 답변</div>
+        </div>
+      </div>
+      <div class="card-footer"><div class="card-tags"><span class="tag">Q&amp;A</span><span class="tag">대응</span></div><span class="chevron">›</span></div>
+    </div>
+    <div class="card" onclick="toggle('caution-list')">
+      <div class="card-header">
+        <div class="card-icon" style="background:rgba(239,68,68,0.15)">⚠️</div>
+        <div class="card-meta">
+          <div class="card-label" style="color:#f87171">주의사항</div>
+          <div class="card-title">영업 시 주의 &amp; 금지사항</div>
+          <div class="card-desc">민원·법적 문제 예방을 위한 필수 주의사항</div>
+        </div>
+      </div>
+      <div class="card-footer"><div class="card-tags"><span class="tag">금지</span><span class="tag">필수</span></div><span class="chevron">›</span></div>
+    </div>
+    <div class="card" onclick="toggle('after-sales')">
+      <div class="card-header">
+        <div class="card-icon" style="background:rgba(16,185,129,0.15)">🔍</div>
+        <div class="card-meta">
+          <div class="card-label" style="color:#34d399">트러블슈팅</div>
+          <div class="card-title">개통 후 단말기 사용 불가 대응</div>
+          <div class="card-desc">유심 미인식, 통신사향 단말기 등 문제 발생 시 점검 가이드</div>
+        </div>
+      </div>
+      <div class="card-footer"><div class="card-tags"><span class="tag">유심</span><span class="tag">eSIM</span><span class="tag">KAIT</span></div><span class="chevron">›</span></div>
+    </div>
+  </div>
+
+  <div class="detail-panel" id="detail-faq-customer">
+    <div class="detail-inner">
+      <h3>❓ 고객 자주 묻는 질문 &amp; 답변</h3>
+      <div class="steps">
+        <div class="step"><div class="step-num">Q</div><div class="step-content">
+          <div class="step-title">"기존 폰 그대로 쓸 수 있나요?"</div>
+          <div class="step-desc"><strong>✅ 답변:</strong> 네, 현재 사용 중인 단말기에 유심만 교체하면 됩니다. 단, 기존 통신사에 단말기가 잠금(락)되어 있는 경우 해제가 필요합니다. 개통 전 확인해 드립니다.</div>
+        </div></div>
+        <div class="step"><div class="step-num">Q</div><div class="step-content">
+          <div class="step-title">"지금 위약금 있으면 어떻게 되나요?"</div>
+          <div class="step-desc"><strong>✅ 답변:</strong> 위약금은 기존 통신사에 고객님이 직접 납부하시는 부분입니다. 저희 요금제 절감액과 비교해서 결정하시면 됩니다. 고객센터(114)로 잔여 위약금 확인하시는 걸 도와드릴게요.</div>
+        </div></div>
+        <div class="step"><div class="step-num">Q</div><div class="step-content">
+          <div class="step-title">"데이터 다 쓰면 어떻게 되나요?"</div>
+          <div class="step-desc"><strong>✅ 답변:</strong> 기본 데이터 소진 후에는 속도가 줄어들거나(QoS) 데이터 차단이 됩니다. 요금제별로 다르며, 추가 데이터 구매도 가능합니다. 선택하신 요금제 기준으로 설명해 드릴게요.</div>
+        </div></div>
+        <div class="step"><div class="step-num">Q</div><div class="step-content">
+          <div class="step-title">"해외에서도 쓸 수 있나요?"</div>
+          <div class="step-desc"><strong>✅ 답변:</strong> 로밍 서비스를 신청하시면 해외에서도 사용 가능합니다. 요금제에 따라 기본 로밍 포함 여부가 다르니 확인해 드릴게요.</div>
+        </div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="detail-panel" id="detail-caution-list">
+    <div class="detail-inner">
+      <h3>⚠️ 영업 시 주의 &amp; 금지사항</h3>
+      <div class="checklist">
+        <div style="font-size:12px;font-weight:700;color:var(--red);margin-bottom:4px;padding:0 4px">🚫 금지사항</div>
+        <div class="check-item required"><span class="check-icon">🚫</span><div class="check-text"><strong>허위·과장 혜택 안내 금지</strong><span>실제 지원되지 않는 혜택을 약속하는 행위 — 소비자보호법 위반</span></div></div>
+        <div class="check-item required"><span class="check-icon">🚫</span><div class="check-text"><strong>타인 명의 대리 가입 절대 금지</strong><span>명의도용은 형사처벌 대상입니다</span></div></div>
+        <div class="check-item required"><span class="check-icon">🚫</span><div class="check-text"><strong>청약 철회 기간 안내 필수 (14일)</strong><span>가입 후 14일 이내 위약금 없이 철회 가능 — 반드시 고지</span></div></div>
+        <div class="check-item required"><span class="check-icon">🚫</span><div class="check-text"><strong>개인정보 관리 철저</strong><span>수집한 고객 정보는 가입 목적 외 사용 금지</span></div></div>
+        <div style="font-size:12px;font-weight:700;color:var(--gold);margin:12px 0 4px;padding:0 4px">⚠️ 주의사항</div>
+        <div class="check-item recommended"><span class="check-icon">⚠️</span><div class="check-text"><strong>약정 기간 및 위약금 조건 명확 안내</strong><span>구두 설명 후 서면(전자) 동의 필수</span></div></div>
+        <div class="check-item recommended"><span class="check-icon">⚠️</span><div class="check-text"><strong>요금제 변경 조건 안내</strong><span>일정 기간 내 요금제 변경 제한이 있을 수 있음</span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="detail-panel" id="detail-after-sales">
+    <div class="detail-inner">
+      <h3>🔍 개통 후 단말기 사용 불가 대응</h3>
+      <div class="steps">
+        <div class="step"><div class="step-num">1</div><div class="step-content">
+          <div class="step-title">유심 또는 eSIM 프로파일 설치 확인</div>
+          <div class="step-desc">유심 트레이에서 유심 장착 여부 확인 / 설정 → 셀룰러 → eSIM 확인<br>
+            간혹 유심 불량(0.1% 수준)이 발생하는 경우 유심 교체 필요</div>
+        </div></div>
+        <div class="step"><div class="step-num">2</div><div class="step-content">
+          <div class="step-title">통신사향 단말기 여부 확인</div>
+          <div class="step-desc">개통 이력이 없는 통신사향 새 단말기인 경우 사용 불가</div>
+          <div class="step-tip">💡 통신사향 단말기는 개통 이력이 있는 중고만 알뜰폰 사용 가능</div>
+        </div></div>
+        <div class="step"><div class="step-num">3</div><div class="step-content">
+          <div class="step-title">구형 → 신형 단말기 변경 시 (eSIM 미지원 → 지원)</div>
+          <div class="step-desc">KAIT에 정보제공 동의가 필요합니다. 동일 단말기 내 eSIM과 유심 명의 일치 확인을 위한 절차이며, KOS 전산에서 처리 가능합니다.</div>
+          <div class="step-tip">📞 고객센터 1588-3002로 요청</div>
+        </div></div>
+      </div>
+      <div class="alert info"><span class="alert-icon">ℹ️</span><div>고객이 사용하는 단말기의 컨디션을 알 수 없으므로, 자체 점검으로 확인하여 해결합니다.</div></div>
+    </div>
+  </div>
+
+</main>
+
+<footer>KT 스카이라이프 모바일 | 대리점·설치기사 전용 현장 영업 안내 가이드 | 내부 교육용 자료</footer>
+
+<script>
+  function toggle(id) {
+    const panel = document.getElementById('detail-' + id);
+    const targetCard = document.querySelector(`[onclick="toggle('${id}')"]`);
+    if (panel.classList.contains('open')) {
+      panel.classList.remove('open');
+      if (targetCard) targetCard.classList.remove('active');
+    } else {
+      document.querySelectorAll('.detail-panel.open').forEach(p => p.classList.remove('open'));
+      document.querySelectorAll('.card.active').forEach(c => c.classList.remove('active'));
+      panel.classList.add('open');
+      if (targetCard) targetCard.classList.add('active');
+      setTimeout(() => panel.scrollIntoView({ behavior:'smooth', block:'nearest' }), 100);
+    }
+  }
+  function switchTab(btn, tabId) {
+    const parent = btn.closest('.detail-inner');
+    parent.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    parent.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById(tabId).classList.add('active');
+  }
+</script>
+
+</body>
+</html>
