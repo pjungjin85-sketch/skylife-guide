@@ -106,6 +106,17 @@ main{max-width:1100px;margin:24px auto;padding:0 24px 60px;}
 .usim-table td{padding:7px 10px;border-bottom:1px solid var(--border);}
 .usim-table tr:nth-child(even) td{background:var(--bg2);}
 @media(max-width:600px){.doc-grid,.caution-grid{grid-template-columns:1fr;}.card-grid{grid-template-columns:1fr;}main{padding:0 16px 60px;}}
+.search-bar{background:var(--bg);border-bottom:1px solid var(--border);padding:12px 24px;}
+.search-bar-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;gap:10px;}
+.search-input-wrap{position:relative;flex:1;max-width:480px;}
+.search-input-wrap svg{position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--light);pointer-events:none;}
+#searchInput{width:100%;padding:9px 12px 9px 36px;border:1px solid var(--border);border-radius:5px;font-size:13px;font-family:inherit;outline:none;color:var(--dark);background:var(--bg2);transition:border-color .15s;}
+#searchInput:focus{border-color:var(--red);background:#fff;}
+#searchInput::placeholder{color:var(--light);}
+#searchClear{display:none;background:none;border:none;cursor:pointer;color:var(--light);font-size:16px;padding:0 4px;line-height:1;}
+#searchCount{font-size:12px;color:var(--mid);white-space:nowrap;}
+.search-no-result{display:none;text-align:center;padding:40px 0;font-size:13px;color:var(--light);}
+.search-highlight{background:#FFF3CD;color:var(--black);border-radius:2px;padding:0 1px;}
 </style>
 </head>
 <body>
@@ -123,6 +134,16 @@ main{max-width:1100px;margin:24px auto;padding:0 24px 60px;}
     <h1>모바일 <em>현장영업</em> 안내</h1>
     <p>모바일 가입 안내부터 유심 장착, 번호이동, 요금제 설명까지 — 현장에서 바로 꺼내 쓸 수 있는 실무 안내서입니다.</p>
     <div class="red-line"></div>
+  </div>
+</div>
+<div class="search-bar">
+  <div class="search-bar-inner">
+    <div class="search-input-wrap">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input type="text" id="searchInput" placeholder="키워드로 검색 (예: 번호이동, 유심, 결합)" oninput="doSearch(this.value)">
+    </div>
+    <button id="searchClear" onclick="clearSearch()">✕</button>
+    <span id="searchCount"></span>
   </div>
 </div>
 <main>
@@ -327,6 +348,61 @@ main{max-width:1100px;margin:24px auto;padding:0 24px 60px;}
 <script>
 function toggle(id){const panel=document.getElementById('detail-'+id);const card=document.querySelector('[onclick="toggle(\''+id+'\')"]');if(panel.classList.contains('open')){panel.classList.remove('open');if(card)card.classList.remove('active');}else{document.querySelectorAll('.detail-panel.open').forEach(p=>p.classList.remove('open'));document.querySelectorAll('.card.active').forEach(c=>c.classList.remove('active'));panel.classList.add('open');if(card)card.classList.add('active');}}
 function switchTab(e,tabId){e.stopPropagation();const panel=e.target.closest('.detail-panel');panel.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));panel.querySelectorAll('.tab-content').forEach(c=>c.classList.remove('active'));e.target.classList.add('active');panel.querySelector('#'+tabId).classList.add('active');}
+
+// 검색 기능
+let originalHTML={};
+function saveOriginals(){document.querySelectorAll('.card').forEach((card,i)=>{card.dataset.idx=i;originalHTML[i]=card.innerHTML;});}
+function getTextContent(html){const d=document.createElement('div');d.innerHTML=html;return d.textContent;}
+function escapeRegex(s){return s.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');}
+function doSearch(q){
+  const clearBtn=document.getElementById('searchClear');
+  const countEl=document.getElementById('searchCount');
+  q=q.trim();
+  clearBtn.style.display=q?'block':'none';
+  // 하이라이트 초기화
+  document.querySelectorAll('.card').forEach(card=>{
+    const i=card.dataset.idx;
+    card.innerHTML=originalHTML[i];
+    card.style.display='';
+  });
+  if(!q){countEl.textContent='';return;}
+  const re=new RegExp(escapeRegex(q),'gi');
+  let matched=0;
+  document.querySelectorAll('.card').forEach(card=>{
+    const text=getTextContent(originalHTML[card.dataset.idx]);
+    if(re.test(text)){
+      matched++;
+      // 텍스트 노드만 하이라이트
+      highlightNode(card,re);
+      // 검색 시 패널 자동 열기
+      const panel=card.querySelector('.detail-panel');
+      if(panel&&!panel.classList.contains('open')){panel.classList.add('open');card.classList.add('active');}
+    } else {
+      card.style.display='none';
+    }
+  });
+  countEl.textContent=matched?matched+'개 항목 일치':'결과 없음';
+}
+function highlightNode(node,re){
+  if(node.nodeType===3){
+    const val=node.nodeValue;
+    if(re.test(val)){
+      const span=document.createElement('span');
+      span.innerHTML=val.replace(re,m=>'<mark class="search-highlight">'+m+'</mark>');
+      node.parentNode.replaceChild(span,node);
+    }
+    re.lastIndex=0;
+  } else if(node.nodeType===1&&!['SCRIPT','STYLE'].includes(node.tagName)){
+    Array.from(node.childNodes).forEach(c=>highlightNode(c,re));
+  }
+}
+function clearSearch(){
+  const input=document.getElementById('searchInput');
+  input.value='';
+  doSearch('');
+  input.focus();
+}
+window.addEventListener('DOMContentLoaded',saveOriginals);
 </script>
 </body>
 </html>
