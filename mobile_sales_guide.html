@@ -390,9 +390,7 @@ section:last-child{margin-bottom:0;}
   <button class="mob-tab" data-sec="usim" onclick="switchMobTab('usim')"><span class="mob-tab-icon">💳</span><span class="mob-tab-label">유심</span></button>
   <button class="mob-tab" data-sec="customer" onclick="switchMobTab('customer')"><span class="mob-tab-icon">❓</span><span class="mob-tab-label">고객응대</span></button>
 </nav>
-<footer style="max-width:1100px;margin:0 auto;padding:16px 24px;text-align:left;">
-  <span style="font-size:11px;color:#AAAAAA;">Created by 박정진</span>
-</footer>
+<footer style="text-align:center;padding:24px 20px;font-size:11px;color:var(--light);border-top:1px solid var(--border);background:var(--bg);">Created by 박정진 &nbsp;|&nbsp; 모바일 현장영업 안내</footer>
 <script>
 function toggle(id){const panel=document.getElementById('detail-'+id);const card=document.querySelector('[onclick="toggle(\''+id+'\')"]');if(panel.classList.contains('open')){panel.classList.remove('open');if(card)card.classList.remove('active');}else{panel.classList.add('open');if(card)card.classList.add('active');}}
 function switchTab(e,tabId){e.stopPropagation();const panel=e.target.closest('.detail-panel');panel.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));panel.querySelectorAll('.tab-content').forEach(c=>c.classList.remove('active'));e.target.classList.add('active');panel.querySelector('#'+tabId).classList.add('active');}
