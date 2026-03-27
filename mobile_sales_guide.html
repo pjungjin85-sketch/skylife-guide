@@ -24,13 +24,6 @@ header{background:var(--bg);border-top:3px solid var(--red);border-bottom:1px so
 .hero p{font-size:13px;color:var(--mid);line-height:1.7;max-width:600px;}
 .red-line{width:48px;height:3px;background:var(--red);margin:16px 0 0;border-radius:2px;}
 main{max-width:1100px;margin:24px auto;padding:0 24px 60px;}
-.layout-wrap{display:flex;gap:20px;align-items:flex-start;}
-.sidebar{width:176px;flex-shrink:0;position:sticky;top:120px;background:var(--bg);border:1px solid var(--border);border-radius:6px;box-shadow:var(--shadow);padding:14px 0;}
-.sidebar-label{font-size:9px;font-weight:700;letter-spacing:.1em;color:var(--light);text-transform:uppercase;padding:0 14px 8px;display:block;}
-.sidebar-item{display:flex;align-items:center;gap:8px;padding:9px 14px;font-size:12px;font-weight:500;color:var(--mid);cursor:pointer;transition:all .15s;border-left:2px solid transparent;text-decoration:none;}
-.sidebar-item:hover{color:var(--dark);background:var(--bg2);}
-.sidebar-item.active{color:var(--red);font-weight:700;border-left-color:var(--red);background:var(--red-light);}
-.content{flex:1;min-width:0;}
 section{margin-bottom:32px;}
 section:last-child{margin-bottom:0;}
 .mobile-tab-bar{display:none;}
@@ -115,7 +108,7 @@ section:last-child{margin-bottom:0;}
 .usim-table th{background:var(--black);color:#fff;padding:7px 10px;font-size:11px;font-weight:700;}
 .usim-table td{padding:7px 10px;border-bottom:1px solid var(--border);}
 .usim-table tr:nth-child(even) td{background:var(--bg2);}
-@media(max-width:768px){.sidebar{display:none;}.layout-wrap{display:block;}main{padding:0 16px 80px;}.doc-grid,.caution-grid{grid-template-columns:1fr;}.card-grid{grid-template-columns:1fr;}.hero{padding:20px 16px 16px;}.quick-links{display:none;}.search-bar{padding:10px 16px;}section{display:none;}section.mob-active{display:block;}.mobile-tab-bar{display:flex;position:fixed;bottom:0;left:0;right:0;background:var(--bg);border-top:1px solid var(--border);box-shadow:0 -2px 12px rgba(0,0,0,.08);z-index:200;padding-bottom:env(safe-area-inset-bottom);}.mob-tab{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:9px 4px 8px;cursor:pointer;border:none;background:none;gap:3px;font-family:inherit;border-top:2px solid transparent;}.mob-tab-icon{font-size:18px;line-height:1;}.mob-tab-label{font-size:10px;font-weight:500;color:var(--mid);}.mob-tab.active{border-top-color:var(--red);}.mob-tab.active .mob-tab-label{color:var(--red);font-weight:700;}}
+@media(max-width:768px){main{padding:0 16px 80px;}.doc-grid,.caution-grid{grid-template-columns:1fr;}.card-grid{grid-template-columns:1fr;}.hero{padding:20px 16px 16px;}.quick-links{display:none;}.search-bar{padding:10px 16px;}section{display:none;}section.mob-active{display:block;}.mobile-tab-bar{display:flex;position:fixed;bottom:0;left:0;right:0;background:var(--bg);border-top:1px solid var(--border);box-shadow:0 -2px 12px rgba(0,0,0,.08);z-index:200;padding-bottom:env(safe-area-inset-bottom);}.mob-tab{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:9px 4px 8px;cursor:pointer;border:none;background:none;gap:3px;font-family:inherit;border-top:2px solid transparent;}.mob-tab-icon{font-size:18px;line-height:1;}.mob-tab-label{font-size:10px;font-weight:500;color:var(--mid);}.mob-tab.active{border-top-color:var(--red);}.mob-tab.active .mob-tab-label{color:var(--red);font-weight:700;}}
 .search-bar{background:var(--bg);border-bottom:1px solid var(--border);padding:12px 24px;}
 .search-bar-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;gap:10px;}
 .search-input-wrap{position:relative;flex:1;max-width:480px;}
@@ -177,15 +170,6 @@ section:last-child{margin-bottom:0;}
   </div>
 </div>
 <main>
-<div class="layout-wrap">
-<aside class="sidebar">
-  <span class="sidebar-label">목차</span>
-  <a class="sidebar-item" data-sec="sales" href="#sec-sales" onclick="scrollToSec('sales');return false;">🗣️ 영업 프로세스</a>
-  <a class="sidebar-item" data-sec="join" href="#sec-join" onclick="scrollToSec('join');return false;">📄 가입·개통</a>
-  <a class="sidebar-item" data-sec="usim" href="#sec-usim" onclick="scrollToSec('usim');return false;">💳 유심 안내</a>
-  <a class="sidebar-item" data-sec="customer" href="#sec-customer" onclick="scrollToSec('customer');return false;">❓ 고객 응대</a>
-</aside>
-<div class="content">
 <section id="sec-sales" data-sec="sales">
 <div class="section-title">① 현장 영업 프로세스</div>
 <div class="card-grid">
@@ -391,8 +375,6 @@ section:last-child{margin-bottom:0;}
   </div>
 </div>
 </section>
-</div>
-</div>
 </main>
 <nav class="mobile-tab-bar">
   <button class="mob-tab" data-sec="sales" onclick="switchMobTab('sales')"><span class="mob-tab-icon">🗣️</span><span class="mob-tab-label">영업</span></button>
@@ -469,28 +451,8 @@ function switchMobTab(sec){
   if(t)t.classList.add('active');
   window.scrollTo({top:0,behavior:'smooth'});
 }
-function scrollToSec(sec){
-  const el=document.querySelector('section[data-sec="'+sec+'"]');
-  if(!el)return;
-  const top=el.getBoundingClientRect().top+window.scrollY-130;
-  window.scrollTo({top,behavior:'smooth'});
-}
-function initSidebar(){
-  const items=document.querySelectorAll('.sidebar-item');
-  const sections=document.querySelectorAll('section[data-sec]');
-  const obs=new IntersectionObserver(entries=>{
-    entries.forEach(e=>{
-      if(e.isIntersecting){
-        const sec=e.target.dataset.sec;
-        items.forEach(i=>i.classList.toggle('active',i.dataset.sec===sec));
-      }
-    });
-  },{rootMargin:'-20% 0px -60% 0px'});
-  sections.forEach(s=>obs.observe(s));
-}
 window.addEventListener('DOMContentLoaded',()=>{
   saveOriginals();
-  initSidebar();
   if(window.innerWidth<=768)switchMobTab('sales');
 });
 </script>
