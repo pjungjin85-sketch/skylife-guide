@@ -1,6 +1,7 @@
 {
   "routes": [
-    { "src": "/", "dest": "/mobile_sales_guide.html" }
+    { "src": "/", "dest": "/mobile_sales_guide.html" },
+    { "src": "/inquiry", "dest": "/inquiry.html" }
   ],
   "headers": [
     {
