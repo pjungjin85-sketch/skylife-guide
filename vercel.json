@@ -1,4 +1,7 @@
 {
+  "routes": [
+    { "src": "/", "dest": "/mobile_sales_guide.html" }
+  ],
   "headers": [
     {
       "source": "/(.*)",
