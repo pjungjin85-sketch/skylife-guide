@@ -414,7 +414,7 @@ function doSearch(q){
     card.style.display='';
   });
   if(!q){countEl.textContent='';return;}
-  const re=new RegExp(escapeRegex(q),'gi');
+  const re=new RegExp(escapeRegex(q).replace(/\s+/g,'\\s*'),'gi');
   let matched=0;
   document.querySelectorAll('.card').forEach(card=>{
     const text=getTextContent(originalHTML[card.dataset.idx]);
