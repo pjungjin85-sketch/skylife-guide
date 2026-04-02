@@ -344,7 +344,7 @@
   window.adminLogin = async function() {
     const pw = document.getElementById('admin-pw').value;
     // 관리자 비밀번호: skylife0402
-    if (await sha256(pw) !== await sha256('skylife0402')) {
+    if (await sha256(pw) !== await sha256('20260306')) {
       return showAlert('admin-alert', '비밀번호가 올바르지 않습니다.');
     }
     document.getElementById('admin-login-area').style.display = 'none';
