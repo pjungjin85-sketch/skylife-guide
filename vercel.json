@@ -1,7 +1,14 @@
 {
   "routes": [
     { "src": "/", "dest": "/index.html" },
-    { "src": "/inquiry", "dest": "/inquiry.html" }
+    { "src": "/plans", "dest": "/plans.html" },
+    { "src": "/addons", "dest": "/addons.html" },
+    { "src": "/calculator", "dest": "/calculator.html" },
+    { "src": "/faq", "dest": "/faq.html" },
+    { "src": "/manual", "dest": "/manual.html" },
+    { "src": "/manual-detail", "dest": "/manual-detail.html" },
+    { "src": "/inquiry", "dest": "/inquiry.html" },
+    { "src": "/admin", "dest": "/admin.html" }
   ],
   "headers": [
     {

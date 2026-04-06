@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+<title>kt skylife 모바일 부가서비스 안내</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root{--red:#E60012;--red2:#CC0010;--red-light:#FFF5F5;--red-border:#FFCCCC;--black:#1A1A1A;--dark:#333333;--mid:#666666;--light:#999999;--bg:#FFFFFF;--bg2:#F7F7F7;--bg3:#FAFAFA;--border:#E8E8E8;--shadow:0 2px 12px rgba(0,0,0,0.08);--shadow-hover:0 8px 28px rgba(0,0,0,0.14);}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:var(--bg2);color:var(--dark);font-family:'Noto Sans KR',sans-serif;min-height:100vh;}
+
+/* HEADER */
+header{background:var(--bg);border-top:3px solid var(--red);border-bottom:1px solid var(--border);padding:0 20px;position:sticky;top:0;z-index:200;box-shadow:var(--shadow);}
+.header-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;height:56px;gap:12px;}
+.logo-text{font-size:18px;font-weight:900;color:var(--black);letter-spacing:-.02em;white-space:nowrap;}
+.logo-text span{color:var(--red);}
+.header-badge{background:var(--red);color:#fff;font-size:10px;font-weight:700;padding:3px 8px;border-radius:3px;letter-spacing:.04em;white-space:nowrap;}
+.header-title{font-size:15px;font-weight:700;color:var(--dark);}
+.header-count{font-size:12px;color:var(--light);margin-left:auto;white-space:nowrap;}
+
+/* CONTROLS */
+.controls-wrap{max-width:1200px;margin:0 auto;padding:20px 20px 0;}
+.controls-row{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:8px;}
+.search-wrap{position:relative;flex:1;min-width:220px;max-width:360px;}
+.search-wrap input{width:100%;background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:9px 12px 9px 36px;color:var(--dark);font-size:13px;font-family:inherit;outline:none;transition:border-color .2s;}
+.search-wrap input:focus{border-color:var(--red);}
+.search-icon{position:absolute;left:11px;top:50%;transform:translateY(-50%);color:var(--light);font-size:14px;}
+.reset-btn{padding:7px 14px;border-radius:4px;font-size:11px;font-weight:700;cursor:pointer;border:1px solid var(--red-border);background:var(--red-light);color:var(--red);font-family:inherit;transition:all .2s;white-space:nowrap;}
+.reset-btn:hover{background:rgba(230,0,18,.15);}
+.row-label{font-size:11px;font-weight:700;color:var(--mid);letter-spacing:.04em;white-space:nowrap;}
+.filter-btn{padding:7px 14px;border-radius:4px;font-size:12px;font-weight:600;cursor:pointer;border:1px solid var(--border);background:var(--bg);color:var(--mid);transition:all .2s;font-family:inherit;white-space:nowrap;}
+.filter-btn:hover{border-color:var(--red-border);color:var(--dark);}
+.filter-btn.active{background:var(--red);color:#fff;border-color:transparent;}
+
+/* STATS */
+.stats-bar{max-width:1200px;margin:12px auto 0;padding:0 20px;display:flex;gap:10px;flex-wrap:wrap;}
+.stat-chip{display:flex;align-items:center;gap:5px;background:var(--bg);border:1px solid var(--border);border-radius:4px;padding:6px 12px;font-size:12px;color:var(--mid);box-shadow:var(--shadow);}
+.stat-chip .num{font-weight:700;color:var(--red);}
+
+/* GRID */
+main{max-width:1200px;margin:20px auto;padding:0 20px 60px;}
+.section-head{display:flex;align-items:center;gap:10px;margin:28px 0 12px;padding-bottom:8px;border-bottom:2px solid var(--border);}
+.section-title{font-size:13px;font-weight:700;letter-spacing:.06em;color:var(--red);}
+.section-count{font-size:11px;color:var(--mid);background:var(--bg2);padding:2px 8px;border-radius:10px;}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px;}
+
+/* CARD */
+.card{background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:18px;box-shadow:var(--shadow);transition:transform .2s,box-shadow .2s,border-color .2s;position:relative;overflow:hidden;display:flex;flex-direction:column;gap:10px;cursor:pointer;}
+.card:hover{transform:translateY(-3px);box-shadow:var(--shadow-hover);border-color:var(--red-border);}
+.card.free::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#10b981,#34d399);}
+.card.paid::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--red2),var(--red));}
+.card.once::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#d97706,#fbbf24);}
+
+.card-head{display:flex;align-items:flex-start;justify-content:space-between;gap:8px;}
+.card-name{font-size:14px;font-weight:700;color:var(--black);line-height:1.4;}
+.price-badge{font-size:13px;font-weight:700;white-space:nowrap;text-align:right;flex-shrink:0;line-height:1.4;}
+.price-badge.free-price{color:#059669;}
+.price-badge.paid-price{color:var(--red);}
+.price-badge.once-price{color:#d97706;}
+
+.card-tags{display:flex;gap:5px;flex-wrap:wrap;}
+.tag{display:inline-block;font-size:10px;font-weight:700;padding:2px 8px;border-radius:10px;}
+.tag-cat{background:var(--red-light);color:var(--red);border:1px solid var(--red-border);}
+.tag-free{background:rgba(16,185,129,.1);color:#059669;border:1px solid rgba(16,185,129,.2);}
+.tag-paid{background:var(--red-light);color:var(--red);border:1px solid var(--red-border);}
+.tag-once{background:rgba(217,119,6,.1);color:#d97706;border:1px solid rgba(217,119,6,.2);}
+.tag-auto{background:rgba(99,102,241,.1);color:#6366f1;border:1px solid rgba(99,102,241,.2);}
+.tag-trial{background:rgba(16,185,129,.12);color:#059669;border:1px solid rgba(16,185,129,.25);}
+
+.card-desc{font-size:12px;color:var(--mid);line-height:1.6;}
+.card-note{font-size:11px;color:var(--light);line-height:1.5;}
+.detail-hint{display:flex;align-items:center;gap:4px;margin-top:4px;font-size:11px;color:var(--light);font-weight:500;}
+
+/* EMPTY */
+.empty{text-align:center;padding:80px 20px;color:var(--mid);}
+.empty-icon{font-size:48px;margin-bottom:14px;}
+.empty-text{font-size:15px;font-weight:600;margin-bottom:6px;}
+
+/* ─── MODAL ─── */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:1000;display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;pointer-events:none;transition:opacity .2s;}
+.modal-overlay.open{opacity:1;pointer-events:all;}
+.modal{background:var(--bg);border-radius:14px;width:100%;max-width:560px;max-height:90vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,.2);transform:translateY(20px);transition:transform .25s;position:relative;}
+.modal-overlay.open .modal{transform:translateY(0);}
+
+.modal-top{position:sticky;top:0;background:var(--bg);border-bottom:1px solid var(--border);padding:18px 20px 14px;z-index:2;border-radius:14px 14px 0 0;}
+.modal-top-row{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;}
+.modal-title{font-size:17px;font-weight:700;color:var(--black);line-height:1.35;}
+.modal-price{font-size:16px;font-weight:700;white-space:nowrap;flex-shrink:0;margin-top:2px;}
+.modal-price.free-price{color:#059669;}
+.modal-price.paid-price{color:var(--red);}
+.modal-price.once-price{color:#d97706;}
+.modal-tags{display:flex;gap:5px;flex-wrap:wrap;margin-top:8px;}
+
+.modal-body{padding:20px;}
+.modal-section{margin-bottom:20px;}
+.modal-section:last-child{margin-bottom:0;}
+.modal-section-title{font-size:11px;font-weight:700;color:var(--red);letter-spacing:.06em;text-transform:uppercase;margin-bottom:8px;display:flex;align-items:center;gap:6px;}
+.modal-section-title::after{content:'';flex:1;height:1px;background:var(--red-border);}
+
+.feature-list{display:flex;flex-direction:column;gap:6px;}
+.feature-item{display:flex;align-items:flex-start;gap:8px;font-size:13px;color:var(--dark);line-height:1.55;}
+.feature-dot{width:6px;height:6px;border-radius:50%;background:var(--red);flex-shrink:0;margin-top:6px;}
+
+.info-grid{display:grid;grid-template-columns:auto 1fr;gap:6px 12px;font-size:12px;}
+.info-label{color:var(--mid);font-weight:600;white-space:nowrap;}
+.info-val{color:var(--dark);line-height:1.55;}
+
+.warn-box{background:rgba(217,119,6,.06);border:1px solid rgba(217,119,6,.2);border-radius:6px;padding:10px 12px;font-size:12px;color:#92400e;line-height:1.6;}
+.trial-box{background:rgba(16,185,129,.06);border:1px solid rgba(16,185,129,.2);border-radius:6px;padding:10px 12px;font-size:12px;color:#065f46;line-height:1.6;}
+
+/* FOOTER */
+footer{text-align:center;padding:24px 20px;font-size:11px;color:var(--light);border-top:1px solid var(--border);background:var(--bg);}
+
+/* MOBILE */
+@media(max-width:767px){
+  .logo-text{font-size:15px;flex-shrink:0;}
+  .header-badge{font-size:9px;padding:2px 7px;}
+  .header-title{font-size:13px;}
+  .controls-row{flex-wrap:wrap;}
+  .search-wrap{max-width:100%;}
+  .grid{grid-template-columns:1fr;}
+  .stats-bar{gap:6px;}
+  .stat-chip{font-size:11px;padding:5px 10px;}
+  .modal{max-height:95vh;border-radius:14px 14px 0 0;margin-top:auto;}
+  .modal-overlay{align-items:flex-end;padding:0;}
+}
+/* 앱 공통 서브 네비게이션 */
+.app-subnav{background:var(--bg);border-bottom:2px solid var(--border);overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;position:sticky;top:56px;z-index:90;box-shadow:0 1px 4px rgba(0,0,0,.04);}
+.app-subnav::-webkit-scrollbar{display:none;}
+.app-subnav-inner{display:flex;min-width:max-content;padding:0 16px;}
+.app-subnav-item{display:flex;align-items:center;gap:5px;padding:10px 14px;font-size:12px;font-weight:600;color:var(--mid);text-decoration:none;white-space:nowrap;border-bottom:2px solid transparent;margin-bottom:-2px;transition:color .15s,border-color .15s;}
+.app-subnav-item:hover{color:var(--dark);}
+.app-subnav-item.active{color:var(--red);border-bottom-color:var(--red);font-weight:700;}
+.app-subnav-icon{font-size:14px;line-height:1;}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="logo-text">kt <span>skylife</span></div>
+    <span class="header-badge">MOBILE</span>
+    <span class="header-title">모바일 부가서비스 안내</span>
+    <span class="header-count" id="headerCount"></span>
+  </div>
+</header>
+<nav class="app-subnav"><div class="app-subnav-inner"><a href="index.html" class="app-subnav-item"><span class="app-subnav-icon">🏠</span>현장영업</a><a href="plans.html" class="app-subnav-item"><span class="app-subnav-icon">📋</span>요금제</a><a href="addons.html" class="app-subnav-item active"><span class="app-subnav-icon">➕</span>부가서비스</a><a href="calculator.html" class="app-subnav-item"><span class="app-subnav-icon">💰</span>수수료</a><a href="faq.html" class="app-subnav-item"><span class="app-subnav-icon">❓</span>FAQ</a><a href="manual.html" class="app-subnav-item"><span class="app-subnav-icon">📖</span>매뉴얼</a><a href="inquiry.html" class="app-subnav-item"><span class="app-subnav-icon">💬</span>문의</a></div></nav>
+
+<div class="controls-wrap">
+  <div class="controls-row">
+    <div class="search-wrap">
+      <span class="search-icon">🔍</span>
+      <input type="text" id="searchInput" placeholder="서비스명, 설명 검색…" oninput="applyFilters()">
+    </div>
+    <button class="reset-btn" onclick="resetFilters()">초기화</button>
+  </div>
+  <div class="controls-row">
+    <span class="row-label">카테고리</span>
+    <button class="filter-btn active" data-cat="전체" onclick="setCat(this)">전체</button>
+    <button class="filter-btn" data-cat="통화편의" onclick="setCat(this)">통화편의</button>
+    <button class="filter-btn" data-cat="차단/보안" onclick="setCat(this)">차단·보안</button>
+    <button class="filter-btn" data-cat="데이터" onclick="setCat(this)">데이터</button>
+    <button class="filter-btn" data-cat="로밍" onclick="setCat(this)">로밍</button>
+    <button class="filter-btn" data-cat="OTT/음악" onclick="setCat(this)">OTT·음악</button>
+    <button class="filter-btn" data-cat="알림" onclick="setCat(this)">알림</button>
+    <button class="filter-btn" data-cat="번호" onclick="setCat(this)">번호</button>
+    <button class="filter-btn" data-cat="안전/위치" onclick="setCat(this)">안전·위치</button>
+  </div>
+  <div class="controls-row">
+    <span class="row-label">요금 유형</span>
+    <button class="filter-btn active" data-price="전체" onclick="setPrice(this)">전체</button>
+    <button class="filter-btn" data-price="무료" onclick="setPrice(this)">무료</button>
+    <button class="filter-btn" data-price="유료" onclick="setPrice(this)">유료 (월정액)</button>
+    <button class="filter-btn" data-price="1회성" onclick="setPrice(this)">1회성</button>
+  </div>
+</div>
+
+<div class="stats-bar">
+  <div class="stat-chip">표시 <span class="num" id="statTotal">-</span>건</div>
+  <div class="stat-chip">무료 <span class="num" id="statFree">-</span></div>
+  <div class="stat-chip">월정액 유료 <span class="num" id="statPaid">-</span></div>
+  <div class="stat-chip">1회성 <span class="num" id="statOnce">-</span></div>
+</div>
+
+<main>
+  <div id="container"></div>
+</main>
+
+<footer>Created by 박정진 &nbsp;|&nbsp; 스카이라이프 모바일 부가서비스 안내</footer>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modalOverlay" onclick="closeModalBtn()">
+  <div class="modal" id="modal">
+    <div class="modal-top">
+      <div class="modal-top-row">
+        <div class="modal-title" id="modalTitle"></div>
+      </div>
+      <div class="modal-tags" id="modalTags"></div>
+    </div>
+    <div class="modal-body" id="modalBody"></div>
+  </div>
+</div>
+
+<script>
+/* ═══════════════════════════════════════════
+   DATA
+═══════════════════════════════════════════ */
+let ADDONS = [];
+
+/* ═══════════════════════════════════════════
+   STATE
+═══════════════════════════════════════════ */
+let activeCat   = '전체';
+let activePrice = '전체';
+
+function setCat(btn){
+  document.querySelectorAll('[data-cat]').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  activeCat = btn.dataset.cat;
+  applyFilters();
+}
+function setPrice(btn){
+  document.querySelectorAll('[data-price]').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  activePrice = btn.dataset.price;
+  applyFilters();
+}
+function resetFilters(){
+  document.getElementById('searchInput').value='';
+  document.querySelectorAll('[data-cat]').forEach(b=>b.classList.remove('active'));
+  document.querySelector('[data-cat="전체"]').classList.add('active');
+  document.querySelectorAll('[data-price]').forEach(b=>b.classList.remove('active'));
+  document.querySelector('[data-price="전체"]').classList.add('active');
+  activeCat='전체'; activePrice='전체';
+  applyFilters();
+}
+
+function applyFilters(){
+  const q = document.getElementById('searchInput').value.trim().toLowerCase().replace(/\s+/g,'');
+  const filtered = ADDONS.filter(a=>{
+    const norm = s => s.toLowerCase().replace(/\s+/g,'');
+    const matchCat   = activeCat==='전체' || a.cat===activeCat;
+    const matchPrice = activePrice==='전체' || a.priceType===activePrice;
+    const matchQ     = !q || norm(a.name).includes(q) || norm(a.desc||'').includes(q) || norm(a.cat).includes(q) || (a.features||[]).some(f=>norm(f).includes(q));
+    return matchCat && matchPrice && matchQ;
+  });
+  renderCards(filtered);
+  updateStats(filtered);
+}
+
+/* ═══════════════════════════════════════════
+   RENDER
+═══════════════════════════════════════════ */
+const CATS = ['통화편의','차단/보안','데이터','로밍','OTT/음악','알림','번호','안전/위치'];
+
+function renderCards(list){
+  const container = document.getElementById('container');
+  if(!list.length){
+    container.innerHTML=`<div class="empty"><div class="empty-icon">🔍</div><div class="empty-text">검색 결과가 없습니다</div></div>`;
+    document.getElementById('headerCount').textContent='';
+    return;
+  }
+  const groups = {};
+  CATS.forEach(c=>{groups[c]=[];});
+  list.forEach(a=>{ if(groups[a.cat]) groups[a.cat].push(a); });
+
+  let html='';
+  CATS.forEach(cat=>{
+    const items = groups[cat];
+    if(!items.length) return;
+    html += `<div class="section-head"><span class="section-title">${cat}</span><span class="section-count">${items.length}건</span></div>`;
+    html += '<div class="grid">';
+    items.forEach((a,i)=>{
+      const idx = ADDONS.indexOf(a);
+      const cls = a.priceType==='무료'?'free':a.priceType==='1회성'?'once':'paid';
+      const priceCls = a.priceType==='무료'?'free-price':a.priceType==='1회성'?'once-price':'paid-price';
+      const tagType  = a.priceType==='무료'?'tag-free':a.priceType==='1회성'?'tag-once':'tag-paid';
+      const hasDetail = (a.features&&a.features.length) || a.conditions || a.trial || a.warn;
+      html+=`
+      <div class="card ${cls}" onclick="openModal(${idx})">
+        <div class="card-head">
+          <div class="card-name">${a.name}</div>
+          <div class="price-badge ${priceCls}">${a.price}</div>
+        </div>
+        <div class="card-tags">
+          <span class="tag tag-cat">${a.cat}</span>
+          <span class="tag ${tagType}">${a.priceType==='무료'?'무료':a.priceType==='1회성'?'1회성':'월정액'}</span>
+          ${a.auto?'<span class="tag tag-auto">자동가입</span>':''}
+          ${a.trial?'<span class="tag tag-trial">무료체험</span>':''}
+        </div>
+        <div class="card-desc">${a.desc}</div>
+        ${hasDetail?'<div class="detail-hint"><span>📋</span> 상세 정보 보기</div>':''}
+      </div>`;
+    });
+    html += '</div>';
+  });
+  container.innerHTML = html;
+  document.getElementById('headerCount').textContent = `총 ${list.length}건`;
+}
+
+function updateStats(list){
+  document.getElementById('statTotal').textContent = list.length;
+  document.getElementById('statFree').textContent  = list.filter(a=>a.priceType==='무료').length+'건';
+  document.getElementById('statPaid').textContent  = list.filter(a=>a.priceType==='유료').length+'건';
+  document.getElementById('statOnce').textContent  = list.filter(a=>a.priceType==='1회성').length+'건';
+}
+
+/* ═══════════════════════════════════════════
+   MODAL
+═══════════════════════════════════════════ */
+function openModal(idx){
+  const a = ADDONS[idx];
+  const priceCls = a.priceType==='무료'?'free-price':a.priceType==='1회성'?'once-price':'paid-price';
+  const tagType  = a.priceType==='무료'?'tag-free':a.priceType==='1회성'?'tag-once':'tag-paid';
+
+  document.getElementById('modalTitle').textContent = a.name;
+
+  // tags
+  let tags = `<span class="tag tag-cat">${a.cat}</span>`;
+  tags += `<span class="tag ${tagType}">${a.priceType==='무료'?'무료':a.priceType==='1회성'?'1회성':'월정액'}</span>`;
+  if(a.auto)  tags += '<span class="tag tag-auto">자동가입</span>';
+  if(a.trial) tags += '<span class="tag tag-trial">무료체험</span>';
+  document.getElementById('modalTags').innerHTML = tags;
+
+  // body
+  let body = '';
+
+  if(a.features && a.features.length){
+    body += `<div class="modal-section">
+      <div class="modal-section-title">주요 기능 및 혜택</div>
+      <div class="feature-list">`;
+    a.features.forEach(f=>{
+      body += `<div class="feature-item"><span class="feature-dot"></span><span>${f}</span></div>`;
+    });
+    body += `</div></div>`;
+  }
+
+  const infoRows = [];
+  if(a.howTo)    infoRows.push(['이용 방법', a.howTo]);
+  if(a.conditions && a.conditions.length) infoRows.push(['가입 조건', a.conditions.join('<br>')]);
+  if(infoRows.length){
+    body += `<div class="modal-section"><div class="modal-section-title">이용 안내</div><div class="info-grid">`;
+    infoRows.forEach(([label,val])=>{
+      body += `<div class="info-label">${label}</div><div class="info-val">${val}</div>`;
+    });
+    body += `</div></div>`;
+  }
+
+  if(a.trial){
+    body += `<div class="modal-section"><div class="trial-box">🎁 ${a.trial}</div></div>`;
+  }
+  if(a.warn){
+    body += `<div class="modal-section"><div class="warn-box">⚠️ ${a.warn}</div></div>`;
+  }
+  if(a.note){
+    body += `<div class="modal-section"><div class="warn-box" style="background:rgba(99,102,241,.06);border-color:rgba(99,102,241,.2);color:#3730a3;">ℹ️ ${a.note}</div></div>`;
+  }
+
+  document.getElementById('modalBody').innerHTML = body;
+  document.getElementById('modalOverlay').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+
+function closeModalBtn(){
+  document.getElementById('modalOverlay').classList.remove('open');
+  document.body.style.overflow='';
+}
+document.addEventListener('keydown',e=>{ if(e.key==='Escape') closeModalBtn(); });
+
+/* ═══════════════════════════════════════════
+   INIT
+═══════════════════════════════════════════ */
+fetch('data/addons.json?t=' + Date.now())
+  .then(r => r.json())
+  .then(data => {
+    ADDONS = data;
+    applyFilters();
+  });
+</script>
+</body>
+</html>

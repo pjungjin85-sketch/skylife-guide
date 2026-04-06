@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+  <title>모바일 FAQ — KT 스카이라이프</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --red: #E60012;
+      --red2: #CC0010;
+      --red-light: #FFF5F5;
+      --red-border: #FFCCCC;
+      --black: #1A1A1A;
+      --dark: #333333;
+      --mid: #666666;
+      --light: #999999;
+      --bg: #FFFFFF;
+      --bg2: #F7F7F7;
+      --bg3: #FAFAFA;
+      --border: #E8E8E8;
+      --shadow: 0 2px 12px rgba(0,0,0,0.08);
+      --shadow-hover: 0 8px 28px rgba(0,0,0,0.14);
+      --text: #333333;
+      --sub: #666666;
+      --sidebar-w: 200px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Noto Sans KR', sans-serif;
+      background: var(--bg2);
+      color: var(--dark);
+      min-height: 100vh;
+    }
+
+    /* ── 헤더 ── */
+    header {
+      background: var(--bg);
+      border-top: 3px solid var(--red);
+      border-bottom: 1px solid var(--border);
+      padding: 0 20px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: var(--shadow);
+    }
+    .header-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      height: 56px;
+      gap: 12px;
+    }
+    .logo-text {
+      font-size: 18px;
+      font-weight: 900;
+      color: var(--black);
+      letter-spacing: -.02em;
+      white-space: nowrap;
+    }
+    .logo-text span { color: var(--red); }
+    .header-badge {
+      background: var(--red);
+      color: #fff;
+      font-size: 10px;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 3px;
+      letter-spacing: .04em;
+      white-space: nowrap;
+    }
+    .header-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--dark);
+    }
+
+    /* ── PC 레이아웃 컨테이너 ── */
+    .layout {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 20px 20px 80px;
+      display: flex;
+      gap: 20px;
+      align-items: flex-start;
+    }
+
+    /* ── PC 사이드바 (카테고리) ── */
+    .sidebar {
+      width: var(--sidebar-w);
+      flex-shrink: 0;
+      position: sticky;
+      top: 108px;
+    }
+    .sidebar-title {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--sub);
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      padding: 0 4px 8px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 8px;
+    }
+    .tabs {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .tab {
+      width: 100%;
+      text-align: left;
+      padding: 9px 12px;
+      border-radius: 8px;
+      border: none;
+      background: transparent;
+      font-size: 14px;
+      cursor: pointer;
+      color: var(--text);
+      transition: all 0.15s;
+    }
+    .tab:hover { background: var(--border); }
+    .tab.active {
+      background: var(--red);
+      color: #fff;
+      font-weight: 600;
+    }
+    .tab.fraud-tab {
+      color: #b45309;
+      font-weight: 600;
+    }
+    .tab.fraud-tab.active {
+      background: #b45309;
+      color: #fff;
+    }
+    .tab.fraud-tab:hover:not(.active) {
+      background: #fef3c7;
+    }
+
+    /* ── 메인 콘텐츠 ── */
+    .main {
+      flex: 1;
+      min-width: 0;
+    }
+
+    /* 검색창 */
+    .search-wrap {
+      margin-bottom: 16px;
+    }
+    .search-wrap input {
+      width: 100%;
+      padding: 12px 16px;
+      border: 1.5px solid var(--border);
+      border-radius: 10px;
+      font-size: 15px;
+      outline: none;
+      background: #fff;
+      transition: border-color 0.2s;
+    }
+    .search-wrap input:focus {
+      border-color: var(--red);
+    }
+
+    /* FAQ 리스트 */
+    .faq-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .faq-item {
+      background: #fff;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      overflow: hidden;
+      transition: box-shadow 0.15s;
+    }
+    .faq-item:hover {
+      box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+    }
+
+    .faq-question {
+      width: 100%;
+      background: none;
+      border: none;
+      text-align: left;
+      padding: 15px 16px;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text);
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+    }
+    .faq-question .q-badge {
+      color: var(--red);
+      font-size: 16px;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+    .faq-question .q-text {
+      flex: 1;
+      line-height: 1.4;
+    }
+    .faq-question .arrow {
+      flex-shrink: 0;
+      font-size: 12px;
+      color: var(--sub);
+      transition: transform 0.2s;
+    }
+    .faq-item.open .arrow { transform: rotate(180deg); }
+
+    .faq-answer {
+      display: none;
+      padding: 12px 16px 15px;
+      font-size: 13px;
+      color: var(--sub);
+      line-height: 1.8;
+      border-top: 1px solid var(--border);
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+    .faq-item.open .faq-answer { display: block; }
+
+    /* 검색 결과 없음 */
+    .no-result {
+      display: none;
+      text-align: center;
+      padding: 60px 20px;
+      color: var(--sub);
+      font-size: 14px;
+    }
+
+    /* 하이라이트 */
+    mark {
+      background: #fff3cd;
+      color: inherit;
+      border-radius: 2px;
+      padding: 0 1px;
+    }
+
+    /* ── 부정가입방지 섹션 ── */
+    .fraud-section { display: none; }
+    .fraud-section.active { display: block; }
+
+    .fraud-header {
+      background: #fff;
+      border-radius: 12px;
+      border: 1px solid #fde68a;
+      padding: 16px 20px;
+      margin-bottom: 16px;
+    }
+    .fraud-header h2 {
+      font-size: 15px;
+      font-weight: 700;
+      color: #92400e;
+      margin-bottom: 4px;
+    }
+    .fraud-header p {
+      font-size: 12px;
+      color: #b45309;
+    }
+
+    .fraud-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .fraud-item {
+      background: #fff;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      padding: 14px 16px;
+      display: grid;
+      grid-template-columns: 90px 1fr;
+      gap: 8px 14px;
+      align-items: start;
+    }
+    .fraud-item:hover {
+      box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+    }
+
+    .fraud-date {
+      font-size: 12px;
+      font-weight: 700;
+      color: #b45309;
+      padding-top: 1px;
+    }
+    .fraud-org {
+      font-size: 11px;
+      color: var(--sub);
+      margin-top: 3px;
+      grid-column: 1;
+    }
+    .fraud-body {
+      grid-column: 2;
+      grid-row: 1 / 3;
+    }
+    .fraud-content {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text);
+      line-height: 1.5;
+      margin-bottom: 4px;
+    }
+    .fraud-note {
+      font-size: 12px;
+      color: var(--sub);
+    }
+
+    /* 푸터 */
+    footer {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: #fff;
+      border-top: 1px solid var(--border);
+      text-align: center;
+      padding: 10px;
+      font-size: 11px;
+      color: var(--sub);
+      z-index: 50;
+    }
+
+    /* ── 모바일 (768px 이하) ── */
+    @media (max-width: 768px) {
+      .layout {
+        flex-direction: column;
+        padding: 0 0 80px;
+        gap: 0;
+      }
+
+      .sidebar {
+        width: 100%;
+        position: static;
+        padding: 8px 0 0;
+      }
+      .sidebar-title { display: none; }
+
+      .tabs {
+        flex-direction: row;
+        gap: 8px;
+        padding: 8px 16px 12px;
+        overflow-x: auto;
+        scrollbar-width: none;
+      }
+      .tabs::-webkit-scrollbar { display: none; }
+
+      .tab {
+        flex-shrink: 0;
+        width: auto;
+        padding: 6px 14px;
+        border-radius: 20px;
+        border: 1.5px solid var(--border);
+        background: #fff;
+        font-size: 13px;
+        color: var(--sub);
+      }
+      .tab:hover { background: #fff; }
+      .tab.active {
+        background: var(--red);
+        border-color: var(--red);
+        color: #fff;
+      }
+      .tab.fraud-tab {
+        border-color: #fde68a;
+        color: #b45309;
+      }
+      .tab.fraud-tab.active {
+        background: #b45309;
+        border-color: #b45309;
+        color: #fff;
+      }
+      .tab.fraud-tab:hover:not(.active) {
+        background: #fef3c7;
+      }
+
+      .main {
+        padding: 0 16px;
+      }
+
+      .search-wrap {
+        padding-top: 4px;
+        margin-bottom: 12px;
+      }
+
+      .fraud-item {
+        grid-template-columns: 1fr;
+      }
+      .fraud-body {
+        grid-column: 1;
+        grid-row: auto;
+      }
+      .fraud-org {
+        grid-column: 1;
+        grid-row: auto;
+      }
+    }
+  /* 앱 공통 서브 네비게이션 */
+.app-subnav{background:var(--bg);border-bottom:2px solid var(--border);overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;position:sticky;top:56px;z-index:90;box-shadow:0 1px 4px rgba(0,0,0,.04);}
+.app-subnav::-webkit-scrollbar{display:none;}
+.app-subnav-inner{display:flex;min-width:max-content;padding:0 16px;}
+.app-subnav-item{display:flex;align-items:center;gap:5px;padding:10px 14px;font-size:12px;font-weight:600;color:var(--mid);text-decoration:none;white-space:nowrap;border-bottom:2px solid transparent;margin-bottom:-2px;transition:color .15s,border-color .15s;}
+.app-subnav-item:hover{color:var(--dark);}
+.app-subnav-item.active{color:var(--red);border-bottom-color:var(--red);font-weight:700;}
+.app-subnav-icon{font-size:14px;line-height:1;}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <span class="logo-text">kt <span>skylife</span></span>
+    <span class="header-badge">MOBILE</span>
+    <span class="header-title">모바일 FAQ</span>
+  </div>
+</header>
+<nav class="app-subnav"><div class="app-subnav-inner"><a href="index.html" class="app-subnav-item"><span class="app-subnav-icon">🏠</span>현장영업</a><a href="plans.html" class="app-subnav-item"><span class="app-subnav-icon">📋</span>요금제</a><a href="addons.html" class="app-subnav-item"><span class="app-subnav-icon">➕</span>부가서비스</a><a href="calculator.html" class="app-subnav-item"><span class="app-subnav-icon">💰</span>수수료</a><a href="faq.html" class="app-subnav-item active"><span class="app-subnav-icon">❓</span>FAQ</a><a href="manual.html" class="app-subnav-item"><span class="app-subnav-icon">📖</span>매뉴얼</a><a href="inquiry.html" class="app-subnav-item"><span class="app-subnav-icon">💬</span>문의</a></div></nav>
+
+<div class="layout">
+  <!-- 사이드바 (PC: 세로 탭 / 모바일: 가로 스크롤 탭) -->
+  <aside class="sidebar">
+    <div class="sidebar-title">카테고리</div>
+    <div class="tabs" id="tabs"></div>
+  </aside>
+
+  <!-- 메인 콘텐츠 -->
+  <div class="main">
+    <div class="search-wrap" id="searchWrap">
+      <input type="text" id="searchInput" placeholder="질문 검색..." />
+    </div>
+    <div class="faq-list" id="faqList"></div>
+    <div class="no-result" id="noResult">검색 결과가 없습니다.</div>
+
+    <!-- 부정가입방지 섹션 -->
+    <div class="fraud-section" id="fraudSection">
+      <div class="fraud-header">
+        <h2>부정가입방지 조치내역</h2>
+        <p>시행일 순 정렬 — 전체 적용 완료</p>
+      </div>
+      <div class="fraud-list" id="fraudList"></div>
+    </div>
+  </div>
+</div>
+
+<footer>Created by 박정진 &nbsp;|&nbsp; 모바일 FAQ — KT 스카이라이프</footer>
+
+<script>
+  // ============================================================
+  // FAQ 데이터
+  // ============================================================
+  let FAQ_DATA = [];
+
+  // ============================================================
+  // 부정가입방지 조치내역 데이터
+  // ============================================================
+  let FRAUD_DATA = [];
+  // ============================================================
+
+  const FRAUD_CAT = "부정가입방지";
+  let currentCat = "전체";
+
+  function escapeHtml(str) {
+    return str.replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+  }
+
+  function highlight(text, keyword) {
+    if (!keyword) return escapeHtml(text);
+    const escaped = keyword.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    return escapeHtml(text).replace(new RegExp(escaped, 'gi'), m => `<mark>${m}</mark>`);
+  }
+
+  function buildTabs() {
+    const cats = ["전체", ...new Set(FAQ_DATA.map(d => d.category))];
+    const tabsEl = document.getElementById("tabs");
+    const faqTabsHtml = cats.map(c =>
+      `<button class="tab${c === "전체" ? " active" : ""}" data-cat="${c}">${c}</button>`
+    ).join("");
+    const fraudTabHtml = `<button class="tab fraud-tab" data-cat="${FRAUD_CAT}">부정가입방지</button>`;
+    tabsEl.innerHTML = faqTabsHtml + fraudTabHtml;
+
+    tabsEl.querySelectorAll(".tab").forEach(btn => {
+      btn.addEventListener("click", () => {
+        currentCat = btn.dataset.cat;
+        tabsEl.querySelectorAll(".tab").forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
+        render();
+      });
+    });
+  }
+
+  function buildFraudList() {
+    const list = document.getElementById("fraudList");
+    list.innerHTML = FRAUD_DATA.map(d => `
+      <div class="fraud-item">
+        <div class="fraud-date">${escapeHtml(d.date)}</div>
+        <div class="fraud-org">${escapeHtml(d.org)}</div>
+        <div class="fraud-body">
+          <div class="fraud-content">${escapeHtml(d.content)}</div>
+          ${d.note ? `<div class="fraud-note">※ ${escapeHtml(d.note)}</div>` : ''}
+        </div>
+      </div>
+    `).join("");
+  }
+
+  function render() {
+    const isFraud = currentCat === FRAUD_CAT;
+    const faqList = document.getElementById("faqList");
+    const noResult = document.getElementById("noResult");
+    const searchWrap = document.getElementById("searchWrap");
+    const fraudSection = document.getElementById("fraudSection");
+
+    if (isFraud) {
+      faqList.innerHTML = "";
+      noResult.style.display = "none";
+      searchWrap.style.display = "none";
+      fraudSection.classList.add("active");
+      return;
+    }
+
+    searchWrap.style.display = "";
+    fraudSection.classList.remove("active");
+
+    const keyword = document.getElementById("searchInput").value.trim().toLowerCase().replace(/\s+/g, '');
+
+    let items = FAQ_DATA;
+    const norm = s => s.toLowerCase().replace(/\s+/g, '');
+    if (currentCat !== "전체") items = items.filter(d => d.category === currentCat);
+    if (keyword) items = items.filter(d =>
+      norm(d.q).includes(keyword) || norm(d.a).includes(keyword)
+    );
+
+    if (items.length === 0) {
+      faqList.innerHTML = "";
+      noResult.style.display = "block";
+      return;
+    }
+
+    noResult.style.display = "none";
+    faqList.innerHTML = items.map((d, i) => `
+      <div class="faq-item" data-idx="${i}">
+        <button class="faq-question">
+          <span class="q-badge">Q</span>
+          <span class="q-text">${highlight(d.q, keyword)}</span>
+          <span class="arrow">▼</span>
+        </button>
+        <div class="faq-answer">${highlight(d.a, keyword)}</div>
+      </div>
+    `).join("");
+
+    faqList.querySelectorAll(".faq-item").forEach(item => {
+      item.querySelector(".faq-question").addEventListener("click", () => {
+        item.classList.toggle("open");
+      });
+    });
+  }
+
+  document.getElementById("searchInput").addEventListener("input", render);
+
+  fetch('data/faq.json?t=' + Date.now())
+    .then(r => r.json())
+    .then(data => {
+      FAQ_DATA = data.FAQ_DATA;
+      FRAUD_DATA = data.FRAUD_DATA;
+      buildTabs();
+      buildFraudList();
+      render();
+    });
+</script>
+</body>
+</html>
