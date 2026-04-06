@@ -187,7 +187,7 @@ section:last-child{margin-bottom:0;}
   </div>
 </div>
 <main>
-<section id="sec-sales" data-sec="sales">
+<section id="sec-sales" data-sec="sales" class="mob-active">
 <div class="section-title">① 현장 영업 프로세스</div>
 <div class="card-grid">
   <div class="card" onclick="toggle('sales-flow')">
@@ -394,7 +394,7 @@ section:last-child{margin-bottom:0;}
 </section>
 </main>
 <nav class="mobile-tab-bar">
-  <button class="mob-tab" data-sec="sales" onclick="switchMobTab('sales')"><span class="mob-tab-icon">🗣️</span><span class="mob-tab-label">영업</span></button>
+  <button class="mob-tab active" data-sec="sales" onclick="switchMobTab('sales')"><span class="mob-tab-icon">🗣️</span><span class="mob-tab-label">영업</span></button>
   <button class="mob-tab" data-sec="join" onclick="switchMobTab('join')"><span class="mob-tab-icon">📄</span><span class="mob-tab-label">가입</span></button>
   <button class="mob-tab" data-sec="usim" onclick="switchMobTab('usim')"><span class="mob-tab-icon">💳</span><span class="mob-tab-label">유심</span></button>
   <button class="mob-tab" data-sec="customer" onclick="switchMobTab('customer')"><span class="mob-tab-icon">❓</span><span class="mob-tab-label">고객응대</span></button>
@@ -468,7 +468,7 @@ function switchMobTab(sec){
 }
 window.addEventListener('DOMContentLoaded',()=>{
   saveOriginals();
-  if(window.innerWidth<=768)switchMobTab('sales');
+  switchMobTab('sales');
 });
 </script>
 </body>
