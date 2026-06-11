@@ -424,6 +424,7 @@ function doSearch(q){
   document.querySelectorAll('.card').forEach(card=>{
     const text=getTextContent(originalHTML[card.dataset.idx]);
     if(re.test(text)){
+      re.lastIndex=0;
       matched++;
       // 텍스트 노드만 하이라이트
       highlightNode(card,re);
@@ -440,6 +441,7 @@ function highlightNode(node,re){
   if(node.nodeType===3){
     const val=node.nodeValue;
     if(re.test(val)){
+      re.lastIndex=0;
       const span=document.createElement('span');
       span.innerHTML=val.replace(re,m=>'<mark class="search-highlight">'+m+'</mark>');
       node.parentNode.replaceChild(span,node);
