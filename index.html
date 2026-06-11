@@ -76,10 +76,11 @@ section:last-child{margin-bottom:0;}
 .info-box li{font-size:12px;color:var(--mid);padding-left:12px;position:relative;}
 .info-box li::before{content:'·';position:absolute;left:0;color:var(--red);font-weight:700;}
 .ars-table{width:100%;border-collapse:collapse;font-size:12px;margin-top:10px;}
-.ars-table th{background:var(--black);color:#fff;padding:7px 12px;font-size:11px;font-weight:700;text-align:left;}
+.ars-table th{background:var(--black);color:#fff;padding:7px 12px;font-size:11px;font-weight:700;text-align:center;}
 .ars-table td{padding:8px 12px;border-bottom:1px solid var(--border);}
 .ars-table tr:nth-child(even) td{background:var(--bg2);}
-.ars-num{font-weight:700;color:var(--red);font-size:13px;}
+.ars-num{font-weight:700;color:var(--red);font-size:13px;text-align:center;}
+.ars-dash{text-align:center;color:var(--light);}
 .doc-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px;}
 .doc-card{background:var(--bg);border:1px solid var(--border);border-radius:4px;padding:12px 14px;}
 .doc-card-title{font-size:11px;font-weight:700;color:var(--red);margin-bottom:8px;letter-spacing:.04em;}
@@ -277,13 +278,19 @@ section:last-child{margin-bottom:0;}
         <div class="step"><div class="step-num">1</div><div class="step-body"><div class="step-title">기존 통신사 약정 잔여 기간 확인</div><div class="step-desc">위약금 발생 여부를 사전에 안내합니다. 고객 핸드폰에서 114 통화 시 해당 통신사 고객센터로 자동 연결됩니다.</div></div></div>
         <div class="step"><div class="step-num">2</div><div class="step-body"><div class="step-title">번호이동 사전동의 처리</div><div class="step-desc">번호이동 사전동의 요청 완료 후, 전 통신사 안내 문자 확인 후 동의합니다.</div><div class="step-tip">💡 전 통신사 문자에 위약금·기존 혜택 내용만 있을 수 있음 — 그 경우 ARS로 직접 처리</div></div></div>
       </div>
-      <table class="ars-table"><thead><tr><th>통신사</th><th>사전동의 ARS 번호</th></tr></thead><tbody>
-        <tr><td>KT / KT 알뜰폰(MVNO)</td><td class="ars-num">1588-2935</td></tr>
-        <tr><td>SKT</td><td class="ars-num">1566-1509</td></tr>
-        <tr><td>SKT 알뜰폰(MVNO)</td><td class="ars-num">1599-0133</td></tr>
-        <tr><td>LGU+ 알뜰폰(MVNO)</td><td class="ars-num">1544-3553</td></tr>
-        <tr><td>세종텔레콤(스노우맨)</td><td class="ars-num">1688-9345</td></tr>
-        <tr><td>한국케이블텔레콤(KCT)</td><td class="ars-num">1877-9120</td></tr>
+      <table class="ars-table"><thead>
+        <tr><th rowspan="2">통신사 / 통신망</th><th colspan="3">ARS 번호</th></tr>
+        <tr><th>SKT 망</th><th>KT 망</th><th>LGU+ 망</th></tr>
+      </thead><tbody>
+        <tr><td>SKT</td><td class="ars-num">1566-1509</td><td class="ars-dash">-</td><td class="ars-dash">-</td></tr>
+        <tr><td>SKT 알뜰폰</td><td class="ars-num">1599-0133</td><td class="ars-dash">-</td><td class="ars-dash">-</td></tr>
+        <tr><td>KCT SKT망</td><td class="ars-num">1877-9120</td><td class="ars-dash">-</td><td class="ars-dash">-</td></tr>
+        <tr><td>KT</td><td class="ars-dash">-</td><td class="ars-num">1588-2935</td><td class="ars-dash">-</td></tr>
+        <tr><td>KT 알뜰폰</td><td class="ars-dash">-</td><td class="ars-num">1588-2935</td><td class="ars-dash">-</td></tr>
+        <tr><td>헬로모바일 KT망</td><td class="ars-dash">-</td><td class="ars-num">070-7336-7766</td><td class="ars-dash">-</td></tr>
+        <tr><td>스노우맨 KT망</td><td class="ars-dash">-</td><td class="ars-num">1688-9345</td><td class="ars-dash">-</td></tr>
+        <tr><td>LGU+</td><td class="ars-dash">-</td><td class="ars-dash">-</td><td class="ars-num">1544-3553</td></tr>
+        <tr><td>LGU+ 알뜰폰</td><td class="ars-dash">-</td><td class="ars-dash">-</td><td class="ars-num">1544-3553</td></tr>
       </tbody></table>
       <div class="warn-box" style="margin-top:12px;">⚠️ ARS에서 "대상이 아닙니다" / "신청 내역 없음" 안내 시 대응<br>① 전 사업자 잘못 선택 → 올바르게 다시 선택 후 재요청<br>② 고객이 현재 통신사를 잘못 알고 있는 경우 → 114로 확인 후 재요청<br>③ 전산 연동 오처리 → 다시 사전동의 요청</div>
       <div class="steps" style="margin-top:12px;">
