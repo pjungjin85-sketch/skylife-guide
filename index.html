@@ -524,7 +524,7 @@ async function afterLogin(session){
   }
   if(profile.status === 'rejected'){
     await sb.auth.signOut();
-    showPending('가입이 반려되었습니다', '대리점 정보 확인이 필요합니다.\n담당자에게 문의해주세요.');
+    showPending('이용이 제한된 계정입니다', '자세한 내용은 담당자에게 문의해주세요.');
     return;
   }
   unlockGuide(session.access_token);
