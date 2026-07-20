@@ -253,7 +253,7 @@ section:last-child{margin-bottom:0;}
         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
         FAQ
       </a>
-      <a href="https://skylife-inquiry.vercel.app/" data-base="https://skylife-inquiry.vercel.app/" target="_blank" class="quick-link calc">
+      <a href="https://skylife-inquiry.vercel.app/" target="_blank" class="quick-link calc">
         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M13.73 21a2 2 0 0 1-3.46 0"/><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/></svg>
         공지사항
       </a>
@@ -539,7 +539,7 @@ async function afterLogin(session){
     showPending('이용이 제한된 계정입니다', '자세한 내용은 담당자에게 문의해주세요.');
     return;
   }
-  unlockGuide(session.access_token);
+  unlockGuide();
 }
 
 async function handleSignup(e){
@@ -574,15 +574,24 @@ async function handleSignup(e){
   return false;
 }
 
-function unlockGuide(accessToken){
+function unlockGuide(){
   document.getElementById('lock-overlay').classList.add('hidden');
   document.getElementById('logout-btn').style.display = '';
-  applySsoToLinks(accessToken);
 }
 
-function applySsoToLinks(accessToken){
+/* 퀵링크 href엔 토큰을 미리 심어두지 않고, 클릭하는 순간에만 최신 토큰을
+   붙여서 이동한다 — "링크 주소 복사"로 로그인 토큰이 그대로 노출되는 것을 막기 위함.
+   currentAccessToken은 onAuthStateChange로 항상 최신 상태 유지(자동 갱신 포함). */
+let currentAccessToken = null;
+sb.auth.onAuthStateChange((event, session) => {
+  currentAccessToken = session ? session.access_token : null;
+});
+
+function applySsoToLinks(){
   document.querySelectorAll('.quick-link[data-base]').forEach(a => {
-    a.href = a.dataset.base + '#sso=' + encodeURIComponent(accessToken);
+    a.addEventListener('click', () => {
+      a.href = a.dataset.base + (currentAccessToken ? '#sso=' + encodeURIComponent(currentAccessToken) : '');
+    });
   });
 }
 
@@ -667,6 +676,7 @@ function switchMobTab(sec){
 window.addEventListener('DOMContentLoaded',()=>{
   saveOriginals();
   switchMobTab('sales');
+  applySsoToLinks();
   checkExistingSession();
 });
 </script>
