@@ -5,7 +5,7 @@
 ## 이 페이지 정보
 - **용도**: 스카이라이프 모바일 현장영업 안내 (개통 절차, 유심/eSIM 등)
 - **파일**: `index.html`
-- **GitHub Pages URL**: https://jpjpjpjpjp21.github.io/skylife-guide/
+- **GitHub Pages URL**: https://pjungjin85-sketch.github.io/skylife-guide/
 
 ## 기능 구조
 - 영업 단계별 카드 목록
