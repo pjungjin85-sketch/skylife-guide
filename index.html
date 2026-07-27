@@ -181,6 +181,13 @@ section:last-child{margin-bottom:0;}
 .auth-pending-box .icon{font-size:36px;margin-bottom:12px;display:block;}
 .auth-pending-box .title{font-size:15px;font-weight:800;color:var(--black);margin-bottom:6px;}
 .auth-pending-box .desc{font-size:12px;color:var(--mid);line-height:1.6;white-space:pre-line;}
+.agency-inquiry-wrap{margin-top:20px;padding-top:20px;border-top:1px solid var(--border);}
+.agency-inquiry-btn{display:block;width:100%;text-align:center;padding:13px;background:#22C55E;color:#fff;border:none;border-radius:8px;font-size:13px;font-weight:800;font-family:inherit;cursor:pointer;text-decoration:none;transition:background .15s;}
+.agency-inquiry-btn:hover{background:#16A34A;}
+.info-modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:9999;align-items:center;justify-content:center;padding:20px;}
+.info-modal-overlay.open{display:flex;}
+.info-modal{background:#fff;border-radius:14px;max-width:320px;width:100%;padding:28px 24px 22px;box-shadow:var(--shadow-hover);text-align:center;}
+.info-modal p{font-size:14px;color:var(--dark);line-height:1.6;margin-bottom:18px;}
 @media(max-width:768px){.search-bar{padding:10px 16px;}.search-bar-inner{flex-wrap:wrap;gap:8px;}.search-input-wrap{max-width:100%;}.quick-links{display:grid;grid-template-columns:repeat(3,1fr);width:100%;margin-left:0;gap:6px;}.quick-link{width:100%;flex:none;justify-content:center;font-size:11px;padding:6px 8px;}}
 </style>
 </head>
@@ -222,6 +229,16 @@ section:last-child{margin-bottom:0;}
       <div class="desc" id="auth-pending-desc">관리자 승인 후 이용하실 수 있습니다.</div>
       <button type="button" class="auth-submit-btn" style="margin-top:16px" onclick="backToLogin()">다시 로그인</button>
     </div>
+
+    <div class="agency-inquiry-wrap">
+      <a href="#" class="agency-inquiry-btn" onclick="showInfoModal('웹페이지 개발중입니다.');return false;">스카이라이프 모바일 대리점 개설 문의 접수</a>
+    </div>
+  </div>
+</div>
+<div class="info-modal-overlay" id="infoModalOverlay">
+  <div class="info-modal">
+    <p id="infoModalMsg"></p>
+    <button type="button" class="auth-submit-btn" onclick="closeInfoModal()">확인</button>
   </div>
 </div>
 <header>
@@ -725,6 +742,13 @@ function closeApplyModal(){
 function confirmApply(){
   if(pendingApplyUrl)window.open(pendingApplyUrl,'_blank','noopener');
   closeApplyModal();
+}
+function showInfoModal(msg){
+  document.getElementById('infoModalMsg').textContent=msg;
+  document.getElementById('infoModalOverlay').classList.add('open');
+}
+function closeInfoModal(){
+  document.getElementById('infoModalOverlay').classList.remove('open');
 }
 </script>
 </body>
