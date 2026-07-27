@@ -415,3 +415,54 @@ CSS 파일 내 미디어쿼리가 중간에 위치하고, 검색바·퀵링크 �
 ### 배포
 - 커밋 `f2ea86e` — "요금제 설명&비교 추천 요금제 리스트 갱신"
 - `git push` → Vercel Git 연동 자동배포([[feedback_tps_deploy]] 참고)로 반영
+
+---
+
+## 2026-07-27 — 히어로 영역 셀프개통 아웃링크 버튼 추가
+
+### 1. 버튼 추가
+- 히어로 타이틀 우측(스크린샷상 빈 원형 장식 자리)에 아웃링크 버튼 신설
+- 대상 URL: `https://shop.skylife.co.kr/mvno/appinfo?code=12Xh1W`
+- 최초 문구 "온라인 신청하기" → 이후 "개통하기"로 변경
+- 스타일: 배경 `#22C55E`(hover `#16A34A`), 흰 글씨 — skylife-addons 등 서브페이지의 `.guide-home-btn`(돌아가기 버튼) 색상 그대로 참고
+- `.hero-inner`를 flex로 바꿔 텍스트 블록과 버튼을 양쪽 정렬, 모바일(`@media max-width:768px`)에서는 세로 스택 + 버튼 전체폭
+- 커밋: `b6c8661`
+
+### 2. 클릭 시 확인 팝업 추가
+- 버튼 클릭 즉시 새 창 이동 대신, 커스텀 모달(`#applyModalOverlay`)을 먼저 노출
+- 안내 문구: "대리점 전용 셀프개통 페이지로 연결됩니다. 개통하시려는 유심 시리얼이 대리점 코드와 맵핑된게 맞는지 확인해주세요."
+- 경고 문구(작은 글씨 + 빨간색 `var(--red)`): "*맵핑 처리되지 않았다면 대리점 실적으로 처리되지 않습니다."
+- "확인하고 이동" 클릭 시에만 `window.open(url, '_blank', 'noopener')` 실행, "취소"는 팝업만 닫음
+- `applySsoToLinks()`는 `.quick-link[data-base]`만 대상이라 이 버튼과는 무관함을 확인
+- 커밋: `7e93f7b`
+
+### 배포
+- 두 커밋 모두 `git push` → Vercel Git 연동 자동배포로 반영
+
+---
+
+## 2026-07-27 — 아웃링크 5개 same-tab 전환 + 대상 사이트 "돌아가기" 버튼 추가
+
+### 1. 검색바 퀵링크 5개 새 창 열기 제거
+- 대상: 결합계산기(TPS)/요금제 리스트/부가서비스/FAQ/공지사항 — 전부 `target="_blank"` 제거
+- SSO 토큰을 클릭 시점에 붙여주는 `applySsoToLinks()` 로직은 `target` 속성과 무관하게 동작 확인 후 안전하게 제거
+- 커밋: `5677e40`
+
+### 2. 로그인 세션 유지 구조 조사 (코드 변경 없음)
+- Supabase Auth 클라이언트가 `storage: window.sessionStorage`로 설정돼 있으나, 기본값인 `autoRefreshToken: true`가 꺼지지 않아 refresh token으로 계속 자동 갱신됨
+- "다음날에도 로그인 유지"는 날짜 문제가 아니라 브라우저 탭(sessionStorage)이 실제로 종료되지 않았기 때문 — 모바일 브라우저가 탭 프로세스를 잘 안 죽이는 특성상 더 두드러짐
+- 강제 만료 방법 검토: (a) Supabase 대시보드 JWT/refresh 만료 설정(전역), (b) 이 코드에서 `autoRefreshToken:false` 또는 로그인/활동 시각 기반 커스텀 타임아웃 추가(앱 단에서 세밀 제어 가능, 대시보드 권한 불필요) — 사용자는 현재 동작에 문제없다고 판단, 미적용
+- 모바일 뷰는 별도 배포/코드가 아니라 동일 `index.html`의 반응형 CSS(`@media(max-width:768px)`)일 뿐이라 인증 로직은 PC/모바일 100% 동일함을 확인
+
+### 3. 아웃링크 5개 사이트에 "돌아가기" 버튼 추가 (skylife-guide 외부, 각 프로젝트에 반영)
+- 대상: TPS, skylife-plans, skylife-addons, skylife-mobile-faq, skylife-inquiry — 헤더(`.header-inner`) 우측 끝에 `.guide-home-btn` 공통 클래스로 추가, href는 `https://skylife-guide-jyac.vercel.app/` 고정
+- TPS는 작업 중 발견된 기존 미커밋 변경(결합할인 항목 표시 로직 `comboPolicyLabel` 등)이 있어 사용자 확인 후 같이 커밋
+- 1차 커밋: TPS `29de231`, plans `11a28df`, addons `2b20ffb`, faq `7ea9ca0`, inquiry `4f1c109`
+
+### 4. 버튼 디자인 수정 — 초록 배경 + 흰 글자, 헤더 카운트와 간격 정리
+- 회색 테두리 버전 → `background:#22C55E;color:#fff;font-weight:700`(hover `#16A34A`)로 변경
+- plans/addons/inquiry는 헤더의 요금제 개수 등 카운트 문구(`header-count`)에 이미 `margin-left:auto`가 있는데 버튼에도 똑같이 넣어서, flexbox가 두 auto-margin 사이 공간을 벌려 카운트와 버튼이 부자연스럽게 떨어져 보이는 문제 발견 → 버튼 쪽 `margin-left:auto` 제거(단, plans는 모바일에서 `header-count`가 `display:none`되므로 그 브레이크포인트에서만 버튼에 `margin-left:auto` 조건부 유지)
+- 2차 커밋: TPS, plans, addons, faq, inquiry 전부 "돌아가기 버튼 초록색 디자인 변경" 커밋 후 push
+
+### 메모리 기록
+- `project_skylife.md`에 `.guide-home-btn` 컨벤션(고정 href, 색상, auto-margin 중복 주의사항) 기록 — 다음에 새 아웃링크 도구 추가 시 참고
