@@ -466,3 +466,15 @@ CSS 파일 내 미디어쿼리가 중간에 위치하고, 검색바·퀵링크 �
 
 ### 메모리 기록
 - `project_skylife.md`에 `.guide-home-btn` 컨벤션(고정 href, 색상, auto-margin 중복 주의사항) 기록 — 다음에 새 아웃링크 도구 추가 시 참고
+
+---
+
+## 2026-07-27 — 로그인 화면 하단 "대리점 개설 문의" 버튼 추가 (링크 미정)
+
+### 내용
+- 로그인/회원가입 박스(`.lock-box`) 하단, `auth-pending-box` 아래에 구분선(`.agency-inquiry-wrap`) + 버튼 신설
+- 문구: "스카이라이프 모바일 대리점 개설 문의 접수"
+- 스타일: 히어로 개통하기 버튼과 동일한 초록 계열(`#22C55E`, hover `#16A34A`, 흰 글씨), `auth-submit-btn`처럼 박스 전체폭
+- 링크는 아직 미정 — `href="#"` + `onclick`으로 임시 처리, 실제 URL 정해지면 `.agency-inquiry-btn`의 `href`/`onclick`만 교체하면 됨
+- 클릭 시 이동 대신 안내 팝업(`#infoModalOverlay`, `showInfoModal()`/`closeInfoModal()`)에 "웹페이지 개발중입니다." 노출 — 개통하기 버튼의 확인 모달과 별개로, 재사용 가능한 범용 info 모달로 신설
+- 커밋: `8389dbf`, `git push` → Vercel 자동배포로 반영
