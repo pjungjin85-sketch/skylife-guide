@@ -478,3 +478,24 @@ CSS 파일 내 미디어쿼리가 중간에 위치하고, 검색바·퀵링크 �
 - 링크는 아직 미정 — `href="#"` + `onclick`으로 임시 처리, 실제 URL 정해지면 `.agency-inquiry-btn`의 `href`/`onclick`만 교체하면 됨
 - 클릭 시 이동 대신 안내 팝업(`#infoModalOverlay`, `showInfoModal()`/`closeInfoModal()`)에 "웹페이지 개발중입니다." 노출 — 개통하기 버튼의 확인 모달과 별개로, 재사용 가능한 범용 info 모달로 신설
 - 커밋: `8389dbf`, `git push` → Vercel 자동배포로 반영
+
+---
+
+## 2026-07-27 — 네트워크 구조·보안 검토 보고서 작성 + 세션 재검증 버그 수정
+
+### 1. 구조·운영·업데이트·보안 검토 보고서 작성 (Artifact)
+- 로컬 코드뿐 아니라 배포된 실제 URL 6개(허브·TPS·요금제·부가서비스·FAQ·공지사항)를 직접 fetch해 교차검증, 로컬 코드만 보고 정리했던 이전 링크 구조 분석과 실제가 달랐던 부분을 전면 재작성
+  - 히어로 "개통하기" 버튼(KT 공식몰 `shop.skylife.co.kr` 아웃링크) 반영 — 이전 분석엔 없던 링크
+  - 5개 스포크 전부가 헤더 "돌아가기"로 허브에 역링크하는 완전 양방향 구조로 정정 (이전엔 요금제 1곳만 확인됐던 상태)
+  - 공지사항을 제외한 4개 스포크가 각자 독립 로그인 게이트를 갖고, 로그인 시점마다 서버에서 승인 상태를 재확인하는 이중 검증 구조임을 확인
+- RLS 정책(`schema_accounts.sql`, `schema_notices.sql`) 검토 — profiles/notices 테이블 접근 제어는 최소권한 원칙에 맞게 설계돼 있음을 확인
+- 페이지별 정보 등록·수정 방법(코드 하드코딩 vs JSON), admin.html 분석, 운영관리 포인트, 보안 리스크 표까지 포함해 Artifact로 발행
+
+### 2. 발견 — 세션 revocation 지연 (중간 심각도)
+- admin.html에서 계정을 `rejected`로 바꿔도, 4개 스포크(TPS/요금제/부가서비스/FAQ)는 최초 로그인 성공 시 남긴 `sessionStorage` 캐시 플래그(`skylife_sso_ok`)만 보고 서버 재확인을 생략해 이미 로그인된 탭이 탭 종료 전까지 계속 접근 가능했음
+- 원인은 2026-07-20에 다른 버그(SSO 토큰 경로 재확인 실패)를 고치려고 도입한 캐시 플래그의 부작용이었음
+
+### 3. 수정 — 4개 스포크 + admin.html (skylife-guide 자체는 이번엔 코드 변경 없음)
+- 4개 스포크: 캐시 플래그 제거, 매 로드마다 `profiles.status`를 서버에서 재확인하도록 변경 — 상세는 각 프로젝트 로그 참고(skylife-plans, skylife-addons, skylife-mobile-faq, TPS)
+- admin.html: 같은 점검 과정에서 새로고침할 때마다 로그인 화면이 잠깐 보였다 사라지는 깜빡임도 발견해 수정 (다른 사이트처럼 로딩 스피너 우선 노출 방식 적용) — 상세는 skylife-inquiry 로그 참고
+- 커밋 요약: skylife-plans `789b30e`, skylife-addons `8ac403d`, skylife-mobile-faq `c7e7895`, TPS `2c55927`, skylife-inquiry(admin.html) `4b5ebc2` — 전부 git push로 자동배포 반영
