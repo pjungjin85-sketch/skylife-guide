@@ -10,191 +10,41 @@
 <meta http-equiv="Expires" content="0">
 <title>kt skylife 모바일 현장영업 통합 가이드</title>
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj48cmVjdCB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgZmlsbD0id2hpdGUiLz48cmVjdCB3aWR0aD0iMTAwIiBoZWlnaHQ9IjciIGZpbGw9IiNFNjAwMTIiLz48dGV4dCB4PSI1MCIgeT0iNTIiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtZmFtaWx5PSJBcmlhbCBCbGFjayxBcmlhbCxzYW5zLXNlcmlmIiBmb250LXdlaWdodD0iOTAwIiBmb250LXNpemU9IjMwIiBmaWxsPSIjMUExQTFBIj5rdDwvdGV4dD48dGV4dCB4PSI1MCIgeT0iODAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtZmFtaWx5PSJBcmlhbCBCbGFjayxBcmlhbCxzYW5zLXNlcmlmIiBmb250LXdlaWdodD0iOTAwIiBmb250LXNpemU9IjIwIiBmaWxsPSIjRTYwMDEyIj5za3lsaWZlPC90ZXh0Pjwvc3ZnPg==">
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.css">
+<link rel="stylesheet" href="style.css">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js" integrity="sha384-0w2KAL2YHP6wKOkUDzkCDGgVvfmHnj02DHeQ6XcHOgTfFsGyonKOpShMH1x6nk9o" crossorigin="anonymous"></script>
-<style>
-:root{--red:#E60012;--red2:#CC0010;--red-light:#FFF5F5;--red-border:#FFCCCC;--black:#1A1A1A;--dark:#333333;--mid:#666666;--light:#999999;--bg:#FFFFFF;--bg2:#F7F7F7;--bg3:#FAFAFA;--border:#E8E8E8;--shadow:0 2px 12px rgba(0,0,0,0.08);--shadow-hover:0 6px 24px rgba(0,0,0,0.12);}
-*{margin:0;padding:0;box-sizing:border-box;}
-body{background:var(--bg2);color:var(--dark);font-family:'Noto Sans KR',sans-serif;min-height:100vh;overflow-x:hidden;}
-header{background:var(--bg);border-top:3px solid var(--red);border-bottom:1px solid var(--border);padding:0 24px;position:sticky;top:0;z-index:100;box-shadow:var(--shadow);}
-.header-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;height:56px;gap:16px;}
-.logo-text{font-size:18px;font-weight:900;color:var(--black);letter-spacing:-.02em;}
-.logo-text span{color:var(--red);}
-.header-badge{background:var(--red);color:#fff;font-size:10px;font-weight:700;padding:3px 8px;border-radius:3px;letter-spacing:.04em;}
-.header-sub{font-size:12px;color:var(--light);}
-.logout-btn{padding:6px 14px;border:1px solid var(--border);border-radius:6px;font-size:12px;color:var(--mid);background:var(--bg);cursor:pointer;font-family:inherit;white-space:nowrap;}
-.logout-btn:hover{border-color:var(--red);color:var(--red);}
-.hero{background:var(--bg);border-bottom:1px solid var(--border);padding:36px 24px 28px;position:relative;overflow:hidden;}
-.hero::after{content:'';position:absolute;right:-80px;bottom:-80px;width:320px;height:320px;border-radius:50%;background:radial-gradient(circle,rgba(230,0,18,.06) 0%,transparent 70%);pointer-events:none;}
-.hero-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:24px;position:relative;z-index:1;}
-.hero-tag{display:inline-flex;align-items:center;gap:6px;background:var(--red-light);border:1px solid var(--red-border);color:var(--red);font-size:11px;font-weight:700;padding:4px 12px;border-radius:3px;margin-bottom:14px;letter-spacing:.04em;}
-.hero h1{font-size:clamp(22px,3.5vw,32px);font-weight:900;color:var(--black);line-height:1.3;margin-bottom:8px;}
-.hero h1 em{color:var(--red);font-style:normal;}
-.hero p{font-size:13px;color:var(--mid);line-height:1.7;max-width:600px;}
-.red-line{width:48px;height:3px;background:var(--red);margin:16px 0 0;border-radius:2px;}
-.hero-outlink-btn{display:inline-flex;align-items:center;gap:8px;flex-shrink:0;background:#22C55E;color:#fff;font-size:14px;font-weight:700;padding:13px 22px;border-radius:8px;text-decoration:none;white-space:nowrap;box-shadow:0 4px 14px rgba(34,197,94,.28);transition:background .2s,transform .2s;}
-.hero-outlink-btn:hover{background:#16A34A;transform:translateY(-1px);}
-@media(max-width:768px){.hero-inner{flex-direction:column;align-items:flex-start;}.hero-outlink-btn{width:100%;justify-content:center;}}
-.apply-modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:999;align-items:center;justify-content:center;padding:20px;}
-.apply-modal-overlay.open{display:flex;}
-.apply-modal{background:#fff;border-radius:14px;max-width:420px;width:100%;padding:28px 24px 22px;box-shadow:var(--shadow-hover);}
-.apply-modal h3{font-size:16px;font-weight:900;color:var(--black);margin-bottom:14px;}
-.apply-modal p{font-size:13px;color:var(--dark);line-height:1.7;}
-.apply-modal .warn{font-size:11px;color:var(--red);line-height:1.6;margin-top:12px;}
-.apply-modal-actions{display:flex;gap:8px;margin-top:22px;}
-.apply-modal-actions button{flex:1;padding:11px;border-radius:8px;font-size:13px;font-weight:700;font-family:inherit;cursor:pointer;border:none;}
-.apply-modal-cancel{background:var(--bg2);color:var(--mid);}
-.apply-modal-cancel:hover{background:var(--border);}
-.apply-modal-confirm{background:#22C55E;color:#fff;}
-.apply-modal-confirm:hover{background:#16A34A;}
-main{max-width:1100px;margin:24px auto;padding:0 24px 60px;}
-section{margin-bottom:32px;}
-section:last-child{margin-bottom:0;}
-.mobile-tab-bar{display:none;}
-.section-title{font-size:10px;font-weight:700;letter-spacing:.12em;color:var(--red);text-transform:uppercase;margin-bottom:16px;padding-bottom:8px;border-bottom:1px solid var(--border);}
-.card-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px;margin-bottom:6px;}
-.card{background:var(--bg);border:1px solid var(--border);border-radius:6px;overflow:hidden;cursor:pointer;transition:all .2s;box-shadow:var(--shadow);}
-.card:hover{transform:translateY(-2px);border-color:var(--red-border);box-shadow:var(--shadow-hover);}
-.card.active{border-color:var(--red);border-left:3px solid var(--red);}
-.card-header{padding:18px 18px 14px;display:flex;align-items:flex-start;gap:12px;}
-.card-icon{width:40px;height:40px;border-radius:4px;background:var(--red-light);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;}
-.card-meta{flex:1;}
-.card-label{font-size:9px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--red);margin-bottom:4px;}
-.card-title{font-size:14px;font-weight:700;color:var(--black);line-height:1.3;}
-.card-desc{font-size:11px;color:var(--mid);margin-top:3px;line-height:1.5;}
-.card-footer{padding:0 18px 14px;display:flex;align-items:center;justify-content:space-between;}
-.card-tags{display:flex;gap:5px;flex-wrap:wrap;}
-.tag{font-size:10px;padding:2px 8px;border-radius:3px;background:var(--bg2);color:var(--mid);border:1px solid var(--border);}
-.chevron{color:var(--red);font-size:14px;transition:transform .2s;}
-.card.active .chevron{transform:rotate(90deg);}
-.detail-panel{display:none;border-top:1px solid var(--border);background:var(--bg3);padding:20px 20px 24px;}
-.detail-panel.open{display:block;}
-.steps{display:flex;flex-direction:column;gap:10px;}
-.step{display:flex;gap:12px;align-items:flex-start;padding:12px 14px;background:var(--bg);border:1px solid var(--border);border-radius:4px;}
-.step-num{width:26px;height:26px;border-radius:50%;background:var(--red);color:#fff;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
-.step-body{flex:1;}
-.step-title{font-size:13px;font-weight:700;color:var(--black);margin-bottom:3px;}
-.step-desc{font-size:12px;color:var(--mid);line-height:1.6;}
-.step-tip{margin-top:5px;font-size:11px;color:var(--red);background:var(--red-light);border-left:2px solid var(--red);padding:4px 8px;border-radius:0 3px 3px 0;}
-.warn-box{background:var(--red-light);border:1px solid var(--red-border);border-left:3px solid var(--red);border-radius:4px;padding:10px 14px;font-size:12px;color:var(--dark);margin-top:12px;}
-.tabs{display:flex;gap:0;margin-bottom:0;border-bottom:2px solid var(--border);}
-.tab-btn{padding:9px 18px;font-size:12px;font-weight:700;color:var(--mid);border:none;background:none;cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-2px;transition:all .15s;font-family:inherit;}
-.tab-btn.active{color:var(--red);border-bottom-color:var(--red);}
-.tab-content{display:none;padding-top:16px;}
-.tab-content.active{display:block;}
-.plan-table{width:100%;border-collapse:collapse;font-size:12px;}
-.plan-table th{background:var(--black);color:#fff;padding:8px 10px;text-align:left;font-size:11px;font-weight:700;}
-.plan-table td{padding:8px 10px;border-bottom:1px solid var(--border);color:var(--dark);}
-.plan-table tr:nth-child(even) td{background:var(--bg2);}
-.plan-table tr:hover td{background:var(--red-light);}
-.price-tag{font-weight:700;color:var(--red);}
-.plan-badge{display:inline-block;font-size:9px;font-weight:700;padding:1px 5px;border-radius:3px;margin-left:5px;vertical-align:middle;letter-spacing:.02em;white-space:nowrap;}
-.plan-badge.new{background:var(--red);color:#fff;}
-.plan-badge.no-dealer{background:var(--bg2);color:var(--mid);border:1px solid var(--border);}
-.info-box{background:var(--bg);border:1px solid var(--border);border-left:3px solid var(--red);border-radius:4px;padding:14px 16px;margin-top:14px;}
-.info-box-title{font-size:12px;font-weight:700;color:var(--black);margin-bottom:8px;}
-.info-box ul{list-style:none;display:flex;flex-direction:column;gap:5px;}
-.info-box li{font-size:12px;color:var(--mid);padding-left:12px;position:relative;}
-.info-box li::before{content:'·';position:absolute;left:0;color:var(--red);font-weight:700;}
-.ars-table{width:100%;border-collapse:collapse;font-size:12px;margin-top:10px;}
-.ars-table th{background:var(--black);color:#fff;padding:7px 12px;font-size:11px;font-weight:700;text-align:left;}
-.ars-table td{padding:8px 12px;border-bottom:1px solid var(--border);}
-.ars-table tr:nth-child(even) td{background:var(--bg2);}
-.ars-num{font-weight:700;color:var(--red);font-size:13px;}
-.doc-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px;}
-.doc-card{background:var(--bg);border:1px solid var(--border);border-radius:4px;padding:12px 14px;}
-.doc-card-title{font-size:11px;font-weight:700;color:var(--red);margin-bottom:8px;letter-spacing:.04em;}
-.doc-item{display:flex;align-items:flex-start;gap:6px;font-size:11px;color:var(--dark);padding:4px 0;border-bottom:1px solid var(--border);}
-.doc-item:last-child{border-bottom:none;}
-.doc-dot{width:6px;height:6px;border-radius:50%;background:var(--red);flex-shrink:0;margin-top:4px;}
-.doc-dot.yellow{background:#F59E0B;}
-.faq-list{display:flex;flex-direction:column;gap:8px;}
-.faq-item{background:var(--bg);border:1px solid var(--border);border-radius:4px;overflow:hidden;}
-.faq-q{display:flex;align-items:flex-start;gap:10px;padding:12px 14px;}
-.faq-badge{background:var(--red);color:#fff;font-size:10px;font-weight:700;padding:2px 7px;border-radius:3px;flex-shrink:0;margin-top:1px;}
-.faq-q-text{font-size:13px;font-weight:700;color:var(--black);}
-.faq-a{padding:0 14px 12px 46px;font-size:12px;color:var(--mid);line-height:1.7;}
-.faq-a-badge{background:var(--bg2);color:var(--mid);font-size:10px;font-weight:700;padding:2px 7px;border-radius:3px;display:inline-block;margin-right:4px;}
-.caution-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
-.caution-card{border-radius:4px;padding:12px 14px;}
-.caution-card.danger{background:var(--red-light);border:1px solid var(--red-border);}
-.caution-card.normal{background:var(--bg);border:1px solid var(--border);}
-.caution-title{font-size:12px;font-weight:700;color:var(--black);margin-bottom:6px;display:flex;gap:6px;align-items:center;}
-.caution-badge{font-size:9px;font-weight:700;padding:1px 6px;border-radius:3px;}
-.caution-badge.ban{background:var(--red);color:#fff;}
-.caution-badge.must{background:var(--black);color:#fff;}
-.caution-list{display:flex;flex-direction:column;gap:4px;}
-.caution-item{font-size:11px;color:var(--dark);padding-left:14px;position:relative;}
-.caution-item::before{content:'→';position:absolute;left:0;color:var(--red);font-size:10px;}
-.trouble-list{display:flex;flex-direction:column;gap:8px;}
-.trouble-item{background:var(--bg);border:1px solid var(--border);border-radius:4px;padding:12px 14px;display:flex;gap:12px;}
-.trouble-num{width:22px;height:22px;border-radius:50%;background:var(--mid);color:#fff;font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
-.trouble-title{font-size:13px;font-weight:700;color:var(--black);margin-bottom:3px;}
-.trouble-desc{font-size:12px;color:var(--mid);}
-.usim-table{width:100%;border-collapse:collapse;font-size:12px;margin-top:10px;}
-.usim-table th{background:var(--black);color:#fff;padding:7px 10px;font-size:11px;font-weight:700;}
-.usim-table td{padding:7px 10px;border-bottom:1px solid var(--border);}
-.usim-table tr:nth-child(even) td{background:var(--bg2);}
-@media(max-width:768px){main{padding:0 16px 80px;}footer{display:none;}.doc-grid,.caution-grid{grid-template-columns:1fr;}.card-grid{grid-template-columns:1fr;}.hero{padding:20px 16px 16px;}section{display:none;}section.mob-active{display:block;}.mobile-tab-bar{display:flex;position:fixed;bottom:0;left:0;right:0;background:var(--bg);border-top:1px solid var(--border);box-shadow:0 -2px 12px rgba(0,0,0,.08);z-index:200;padding-bottom:env(safe-area-inset-bottom);}.mob-tab{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:9px 4px 8px;cursor:pointer;border:none;background:none;gap:3px;font-family:inherit;border-top:2px solid transparent;}.mob-tab-icon{font-size:18px;line-height:1;}.mob-tab-label{font-size:10px;font-weight:500;color:var(--mid);}.mob-tab.active{border-top-color:var(--red);}.mob-tab.active .mob-tab-label{color:var(--red);font-weight:700;}}
-.search-bar{background:var(--bg);border-bottom:1px solid var(--border);padding:12px 24px;}
-.search-bar-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;gap:10px;}
-.search-input-wrap{position:relative;flex:1;max-width:480px;}
-.search-input-wrap svg{position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--light);pointer-events:none;}
-#searchInput{width:100%;padding:9px 12px 9px 36px;border:1px solid var(--border);border-radius:5px;font-size:13px;font-family:inherit;outline:none;color:var(--dark);background:var(--bg2);transition:border-color .15s;}
-#searchInput:focus{border-color:var(--red);background:#fff;}
-#searchInput::placeholder{color:var(--light);}
-#searchClear{display:none;background:none;border:none;cursor:pointer;color:var(--light);font-size:16px;padding:0 4px;line-height:1;}
-#searchCount{font-size:12px;color:var(--mid);white-space:nowrap;}
-.search-no-result{display:none;text-align:center;padding:40px 0;font-size:13px;color:var(--light);}
-.quick-links{display:flex;gap:8px;margin-left:auto;flex-shrink:0;}
-.quick-link{display:inline-flex;align-items:center;gap:5px;padding:7px 14px;border-radius:5px;font-size:12px;font-weight:700;text-decoration:none;transition:all .15s;white-space:nowrap;}
-.quick-link.plans{background:var(--red);border:1px solid var(--red);color:#fff;}
-.quick-link.plans:hover{background:var(--red2);border-color:var(--red2);}
-.quick-link.calc{background:var(--red);border:1px solid var(--red);color:#fff;}
-.quick-link.calc:hover{background:var(--red2);border-color:var(--red2);}
-.quick-link svg{flex-shrink:0;}
-.search-highlight{background:#FFF3CD;color:var(--black);border-radius:2px;padding:0 1px;}
-/* ── 잠금 화면 ── */
-#lock-overlay{position:fixed;inset:0;z-index:9999;background:var(--bg2);display:flex;align-items:center;justify-content:center;padding:20px;}
-#lock-overlay.hidden{display:none;}
-.lock-box{background:var(--bg);border:1px solid var(--border);border-top:3px solid var(--red);border-radius:16px;padding:40px 36px 32px;width:100%;max-width:380px;box-shadow:var(--shadow-hover);}
-.lock-logo{font-size:20px;font-weight:900;color:var(--black);text-align:center;margin-bottom:4px;}
-.lock-logo span{color:var(--red);}
-.lock-sub{font-size:12px;color:var(--light);text-align:center;margin-bottom:24px;line-height:1.5;}
-.lock-loading{display:flex;justify-content:center;padding:24px 0;}
-.spinner{width:28px;height:28px;border:3px solid var(--border);border-top-color:var(--red);border-radius:50%;animation:lock-spin .7s linear infinite;}
-@keyframes lock-spin{to{transform:rotate(360deg);}}
-.auth-area{display:none;}
-.auth-area.show{display:block;}
-.auth-tabs{display:flex;gap:0;margin-bottom:20px;border-bottom:1px solid var(--border);}
-.auth-tab-btn{flex:1;padding:10px;font-size:13px;font-weight:700;color:var(--mid);border:none;background:none;cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;font-family:inherit;}
-.auth-tab-btn.active{color:var(--red);border-bottom-color:var(--red);}
-.auth-form{display:none;flex-direction:column;gap:10px;}
-.auth-form.active{display:flex;}
-.auth-field label{font-size:11px;font-weight:700;color:var(--dark);margin-bottom:4px;display:block;}
-.auth-field input{width:100%;padding:11px 12px;border:1.5px solid var(--border);border-radius:8px;font-size:13px;font-family:inherit;outline:none;color:var(--black);transition:border-color .15s;}
-.auth-field input:focus{border-color:var(--red);}
-.auth-submit-btn{width:100%;padding:13px;background:var(--red);color:#fff;border:none;border-radius:8px;font-size:14px;font-weight:800;font-family:inherit;cursor:pointer;margin-top:4px;transition:background .15s;}
-.auth-submit-btn:hover{background:var(--red2);}
-.auth-submit-btn:disabled{background:var(--light);cursor:not-allowed;}
-.auth-msg{font-size:12px;margin-top:10px;min-height:16px;text-align:center;}
-.auth-msg.error{color:var(--red);}
-.auth-msg.ok{color:#16a34a;}
-.auth-pending-box{display:none;text-align:center;padding:8px 0;}
-.auth-pending-box .icon{font-size:36px;margin-bottom:12px;display:block;}
-.auth-pending-box .title{font-size:15px;font-weight:800;color:var(--black);margin-bottom:6px;}
-.auth-pending-box .desc{font-size:12px;color:var(--mid);line-height:1.6;white-space:pre-line;}
-.agency-inquiry-wrap{margin-top:20px;padding-top:20px;border-top:1px solid var(--border);}
-.agency-inquiry-btn{display:block;width:100%;text-align:center;padding:13px;background:#22C55E;color:#fff;border:none;border-radius:8px;font-size:13px;font-weight:800;font-family:inherit;cursor:pointer;text-decoration:none;transition:background .15s;}
-.agency-inquiry-btn:hover{background:#16A34A;}
-.info-modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:9999;align-items:center;justify-content:center;padding:20px;}
-.info-modal-overlay.open{display:flex;}
-.info-modal{background:#fff;border-radius:14px;max-width:320px;width:100%;padding:28px 24px 22px;box-shadow:var(--shadow-hover);text-align:center;}
-.info-modal p{font-size:14px;color:var(--dark);line-height:1.6;margin-bottom:18px;}
-@media(max-width:768px){.search-bar{padding:10px 16px;}.search-bar-inner{flex-wrap:wrap;gap:8px;}.search-input-wrap{max-width:100%;}.quick-links{display:grid;grid-template-columns:repeat(3,1fr);width:100%;margin-left:0;gap:6px;}.quick-link{width:100%;flex:none;justify-content:center;font-size:11px;padding:6px 8px;}}
-</style>
 </head>
 <body>
+
+<!-- 아이콘 스프라이트 -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs>
+<symbol id="i-talk" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M8 10.5h6M8 14h4"/><path d="M3.5 7.5A2.5 2.5 0 0 1 6 5h12a2.5 2.5 0 0 1 2.5 2.5v8A2.5 2.5 0 0 1 18 18h-5l-4.5 3.2V18H6a2.5 2.5 0 0 1-2.5-2.5z"/></symbol>
+<symbol id="i-plan" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2.5"/><path d="M3 9.5h18M9.5 9.5V20"/></symbol>
+<symbol id="i-bundle" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9.5 14.5 14.5 9.5"/><path d="M11 6.5 12.6 5a4.3 4.3 0 0 1 6.1 6.1L17.2 12.6"/><path d="M12.8 17.4 11.2 19a4.3 4.3 0 0 1-6.1-6.1l1.5-1.5"/></symbol>
+<symbol id="i-doc" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h4"/></symbol>
+<symbol id="i-swap" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h13l-3.2-3.2M20 16H7l3.2 3.2"/></symbol>
+<symbol id="i-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="m8.5 12.2 2.4 2.4 4.6-4.9"/></symbol>
+<symbol id="i-sim" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5 5.8A1.8 1.8 0 0 1 6.8 4h7L19 9.2v9a1.8 1.8 0 0 1-1.8 1.8H6.8A1.8 1.8 0 0 1 5 18.2z"/><rect x="8.5" y="11" width="7" height="6" rx="1.2"/><path d="M12 11v6"/></symbol>
+<symbol id="i-tool" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="2.5" width="12" height="19" rx="2.5"/><rect x="9" y="7" width="6" height="5" rx="1"/><path d="M10.5 18.5h3"/></symbol>
+<symbol id="i-qr" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="3.5" width="6.5" height="6.5" rx="1.2"/><rect x="14" y="3.5" width="6.5" height="6.5" rx="1.2"/><rect x="3.5" y="14" width="6.5" height="6.5" rx="1.2"/><path d="M14 14h3v3h-3zM20.5 14v3M17.5 20.5h3"/></symbol>
+<symbol id="i-help" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M9.6 9.4a2.5 2.5 0 0 1 4.8.8c0 1.7-2.4 2.3-2.4 3.8"/><path d="M12 17.2h.01"/></symbol>
+<symbol id="i-alert" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M10.3 3.9 2.6 17.2A2 2 0 0 0 4.3 20.2h15.4a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/><path d="M12 9.5v4M12 17h.01"/></symbol>
+<symbol id="i-diagnose" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m15.3 15.3 4.4 4.4"/><path d="M8 10.5h5M10.5 8v5"/></symbol>
+<symbol id="i-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9.5 6 6 6-6"/></symbol>
+<symbol id="i-search" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7.5"/><path d="m16.5 16.5 4 4"/></symbol>
+<symbol id="i-external" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13.5V19a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h5.5"/><path d="M15 3h6v6M21 3l-9 9"/></symbol>
+<symbol id="i-info" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 11v5.5M12 7.8h.01"/></symbol>
+<symbol id="i-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5.3l3.3 2"/></symbol>
+<symbol id="i-ban" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="m5.6 5.6 12.8 12.8"/></symbol>
+<symbol id="i-shield" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.8 4.5 6v6c0 4.6 3.1 8 7.5 9.2 4.4-1.2 7.5-4.6 7.5-9.2V6z"/><path d="m8.8 12 2.2 2.2 4.2-4.4"/></symbol>
+<symbol id="i-calc" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2.5" width="16" height="19" rx="2.5"/><path d="M8 7h8M8.5 12h.01M12 12h.01M15.5 12h.01M8.5 16.5h.01M12 16.5h.01M15.5 16.5h.01"/></symbol>
+<symbol id="i-grid" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="3.5" width="17" height="17" rx="2.5"/><path d="M3.5 9.5h17M9.5 9.5v11"/></symbol>
+<symbol id="i-service" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M18.4 5.6a9 9 0 0 1 0 12.8M5.6 5.6a9 9 0 0 0 0 12.8"/></symbol>
+<symbol id="i-bell" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13.7 20.3a2 2 0 0 1-3.4 0"/><path d="M18 8.5a6 6 0 0 0-12 0c0 6.5-2.5 8.3-2.5 8.3h17S18 15 18 8.5z"/></symbol>
+</defs></svg>
+
+<!-- 잠금 화면 -->
 <div id="lock-overlay">
   <div class="lock-box">
     <div class="lock-logo">kt <span>skylife</span></div>
@@ -209,25 +59,25 @@ section:last-child{margin-bottom:0;}
       </div>
 
       <form class="auth-form active" id="login-form" onsubmit="return handleLogin(event)">
-        <div class="auth-field"><label>아이디</label><input type="text" id="login-username" autocomplete="username" required></div>
-        <div class="auth-field"><label>비밀번호</label><input type="password" id="login-password" autocomplete="current-password" required></div>
+        <div class="auth-field"><label for="login-username">아이디</label><input type="text" id="login-username" autocomplete="username" required></div>
+        <div class="auth-field"><label for="login-password">비밀번호</label><input type="password" id="login-password" autocomplete="current-password" required></div>
         <button type="submit" class="auth-submit-btn" id="login-btn">로그인</button>
         <div class="auth-msg" id="login-msg"></div>
       </form>
 
       <form class="auth-form" id="signup-form" onsubmit="return handleSignup(event)">
-        <div class="auth-field"><label>이름</label><input type="text" id="signup-name" required></div>
-        <div class="auth-field"><label>대리점명</label><input type="text" id="signup-agency-name" required></div>
-        <div class="auth-field"><label>대리점코드</label><input type="text" id="signup-agency-code" required></div>
-        <div class="auth-field"><label>아이디</label><input type="text" id="signup-username" placeholder="영문/숫자 4~20자" autocomplete="username" required></div>
-        <div class="auth-field"><label>비밀번호</label><input type="password" id="signup-password" placeholder="6자 이상" autocomplete="new-password" required></div>
+        <div class="auth-field"><label for="signup-name">이름</label><input type="text" id="signup-name" required></div>
+        <div class="auth-field"><label for="signup-agency-name">대리점명</label><input type="text" id="signup-agency-name" required></div>
+        <div class="auth-field"><label for="signup-agency-code">대리점코드</label><input type="text" id="signup-agency-code" required></div>
+        <div class="auth-field"><label for="signup-username">아이디</label><input type="text" id="signup-username" placeholder="영문/숫자 4~20자" autocomplete="username" required></div>
+        <div class="auth-field"><label for="signup-password">비밀번호</label><input type="password" id="signup-password" placeholder="6자 이상" autocomplete="new-password" required></div>
         <button type="submit" class="auth-submit-btn" id="signup-btn">가입 신청</button>
         <div class="auth-msg" id="signup-msg"></div>
       </form>
     </div>
 
     <div class="auth-pending-box" id="auth-pending-box">
-      <span class="icon">⏳</span>
+      <svg><use href="#i-clock"></use></svg>
       <div class="title" id="auth-pending-title">승인 대기 중입니다</div>
       <div class="desc" id="auth-pending-desc">관리자 승인 후 이용하실 수 있습니다.</div>
       <button type="button" class="auth-submit-btn" style="margin-top:16px" onclick="backToLogin()">다시 로그인</button>
@@ -238,98 +88,121 @@ section:last-child{margin-bottom:0;}
     </div>
   </div>
 </div>
-<div class="info-modal-overlay" id="infoModalOverlay">
-  <div class="info-modal">
+
+<div class="modal-overlay" id="infoModalOverlay">
+  <div class="modal narrow">
     <p id="infoModalMsg"></p>
     <button type="button" class="auth-submit-btn" onclick="closeInfoModal()">확인</button>
   </div>
 </div>
+
 <header>
   <div class="header-inner">
     <div class="logo-text">kt <span>skylife</span></div>
-    <span class="header-badge">MOBILE</span>
-    <span style="font-size:14px;font-weight:700;color:var(--dark);">현장영업 안내</span>
-    <div style="display:flex;align-items:center;gap:10px;margin-left:auto;">
-      <div class="header-sub">스카이라이프 모바일 대리점 전용 v2.0</div>
+    <span class="header-badge">대리점 전용</span>
+    <span class="header-title">현장영업 안내</span>
+    <div class="header-right">
+      <span class="header-sub">v2.0</span>
       <button id="logout-btn" class="logout-btn" onclick="handleLogout()" style="display:none">로그아웃</button>
     </div>
   </div>
 </header>
+
 <div class="hero">
   <div class="hero-inner">
     <div>
-      <div class="hero-tag">● 현장 실무 참고자료</div>
-      <h1>모바일 <em>현장영업</em> 통합 가이드</h1>
-      <p>모바일 가입 안내부터 유심 장착, 번호이동, 요금제 설명까지 — 현장에서 바로 꺼내 쓸 수 있는 실무 안내서입니다.</p>
-      <div class="red-line"></div>
+      <div class="hero-eyebrow">현장 실무 참고자료</div>
+      <h1>모바일 현장영업 통합 가이드</h1>
+      <p>가입 안내부터 유심 장착, 번호이동, 요금제 설명까지. 현장에서 바로 꺼내 쓰는 실무 안내서입니다.</p>
+      <div class="hero-actions">
+        <a href="https://shop.skylife.co.kr/mvno/appinfo?code=12Xh1W" onclick="return openApplyModal(event)" class="btn btn-primary"><svg><use href="#i-external"></use></svg>개통하기</a>
+        <a href="#sec-sales" class="btn btn-quiet">가이드 보기</a>
+      </div>
     </div>
-    <a href="https://shop.skylife.co.kr/mvno/appinfo?code=12Xh1W" onclick="return openApplyModal(event)" class="hero-outlink-btn">
-      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-      개통하기
-    </a>
+    <svg class="hero-art" viewBox="0 0 200 150" fill="none" role="img" aria-label="나노 유심 카드 도면">
+      <path class="sim-body" data-draw pathLength="1" d="M26 16h108l34 34v84a8 8 0 0 1-8 8H26a8 8 0 0 1-8-8V24a8 8 0 0 1 8-8z" stroke-width="2" stroke-linejoin="round"/>
+      <rect class="sim-pad" data-draw pathLength="1" x="46" y="56" width="92" height="56" rx="6" stroke-width="1.5"/>
+      <path class="sim-pad" data-draw pathLength="1" d="M92 56v56M46 74.7h92M46 93.3h92" stroke-width="1.5"/>
+    </svg>
   </div>
 </div>
-<div class="search-bar">
-  <div class="search-bar-inner">
-    <div class="search-input-wrap">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-      <input type="text" id="searchInput" placeholder="키워드로 검색 (예: 번호이동, 유심, 결합)" oninput="doSearch(this.value)">
+
+<div class="toolbar">
+  <div class="toolbar-inner">
+    <div class="search-wrap">
+      <svg><use href="#i-search"></use></svg>
+      <input type="text" id="searchInput" placeholder="키워드로 검색 (예: 번호이동, 유심, 결합)" oninput="doSearch(this.value)" aria-label="가이드 내용 검색">
     </div>
-    <button id="searchClear" onclick="clearSearch()" style="display:none">✕</button>
-    <span id="searchCount"></span>
+    <button id="searchClear" onclick="clearSearch()" style="display:none" aria-label="검색어 지우기">✕</button>
+    <span id="searchCount" aria-live="polite"></span>
     <div class="quick-links">
-      <a href="https://skylife-tps.vercel.app/" data-base="https://skylife-tps.vercel.app/" class="quick-link plans">
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
-        결합계산기
-      </a>
-      <a href="https://skylife-plans-bec2.vercel.app/" data-base="https://skylife-plans-bec2.vercel.app/" class="quick-link plans">
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>
-        요금제 리스트
-      </a>
-      <a href="https://skylife-addons-ejol.vercel.app/" data-base="https://skylife-addons-ejol.vercel.app/" class="quick-link calc">
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/></svg>
-        부가서비스
-      </a>
-      <a href="https://skylife-mobile-faq-um3h.vercel.app/" data-base="https://skylife-mobile-faq-um3h.vercel.app/" class="quick-link calc">
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-        FAQ
-      </a>
-      <a href="https://skylife-inquiry.vercel.app/" class="quick-link calc">
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M13.73 21a2 2 0 0 1-3.46 0"/><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/></svg>
-        공지사항
-      </a>
+      <a href="https://skylife-tps.vercel.app/" data-base="https://skylife-tps.vercel.app/" class="quick-link"><svg><use href="#i-calc"></use></svg>결합계산기</a>
+      <a href="https://skylife-plans-bec2.vercel.app/" data-base="https://skylife-plans-bec2.vercel.app/" class="quick-link"><svg><use href="#i-grid"></use></svg>요금제 리스트</a>
+      <a href="https://skylife-addons-ejol.vercel.app/" data-base="https://skylife-addons-ejol.vercel.app/" class="quick-link"><svg><use href="#i-service"></use></svg>부가서비스</a>
+      <a href="https://skylife-mobile-faq-um3h.vercel.app/" data-base="https://skylife-mobile-faq-um3h.vercel.app/" class="quick-link"><svg><use href="#i-help"></use></svg>FAQ</a>
+      <a href="https://skylife-inquiry.vercel.app/" class="quick-link"><svg><use href="#i-bell"></use></svg>공지사항</a>
     </div>
   </div>
 </div>
+
+<nav class="section-nav" aria-label="섹션 바로가기">
+  <div class="section-nav-inner">
+    <a href="#sec-sales" data-nav="sales">현장 영업 프로세스</a>
+    <a href="#sec-join" data-nav="join">가입 &amp; 개통 절차</a>
+    <a href="#sec-usim" data-nav="usim">유심 안내</a>
+    <a href="#sec-customer" data-nav="customer">고객 설명 핵심</a>
+  </div>
+</nav>
+
 <main>
+
 <section id="sec-sales" data-sec="sales" class="mob-active">
-<div class="section-title">① 현장 영업 프로세스</div>
+<div class="section-head">
+  <span class="section-num">01</span>
+  <h2>현장 영업 프로세스</h2>
+  <span class="section-note">접근부터 개통 안내까지</span>
+</div>
 <div class="card-grid">
+
   <div class="card" onclick="toggle('sales-flow')">
-    <div class="card-header"><div class="card-icon">🗣️</div><div class="card-meta"><div class="card-label">영업 기본</div><div class="card-title">고객 접근 &amp; 첫 대화</div><div class="card-desc">고객과의 첫 접점에서 신뢰를 쌓는 대화 흐름</div></div></div>
-    <div class="card-footer"><div class="card-tags"><span class="tag">인사</span><span class="tag">니즈파악</span></div><span class="chevron">›</span></div>
-    <div class="detail-panel" id="detail-sales-flow">
+    <div class="card-header">
+      <div class="card-icon"><svg><use href="#i-talk"></use></svg></div>
+      <div class="card-meta">
+        <div class="card-title">고객 접근 &amp; 첫 대화</div>
+        <div class="card-desc">고객과의 첫 접점에서 신뢰를 쌓는 대화 흐름</div>
+      </div>
+    </div>
+    <div class="card-footer"><div class="card-tags"><span class="tag">인사</span><span class="tag">니즈파악</span></div><span class="chevron"><svg><use href="#i-chevron"></use></svg></span></div>
+    <div class="detail-panel" id="detail-sales-flow"><div class="detail-inner"><div class="detail-body">
       <div class="steps">
         <div class="step"><div class="step-num">1</div><div class="step-body"><div class="step-title">자연스러운 인사 &amp; 소속 안내</div><div class="step-desc">"안녕하세요, kt skylife OOO대리점 소속 OOO입니다." — 소속을 명확히 밝혀 신뢰감 형성</div></div></div>
-        <div class="step"><div class="step-num">2</div><div class="step-body"><div class="step-title">현재 이용 통신사 &amp; 요금 파악</div><div class="step-desc">현재 쓰시는 통신사, 월 요금, 데이터 사용량을 자연스럽게 확인합니다.</div><div class="step-tip">💡 "혹시 한 달에 데이터 얼마나 쓰세요?" — 부담 없는 질문으로 시작</div></div></div>
+        <div class="step"><div class="step-num">2</div><div class="step-body"><div class="step-title">현재 이용 통신사 &amp; 요금 파악</div><div class="step-desc">현재 쓰시는 통신사, 월 요금, 데이터 사용량을 자연스럽게 확인합니다.</div><div class="step-tip">"혹시 한 달에 데이터 얼마나 쓰세요?" — 부담 없는 질문으로 시작</div></div></div>
         <div class="step"><div class="step-num">3</div><div class="step-body"><div class="step-title">불만족 포인트 파악</div><div class="step-desc">요금이 비싸다 / 속도가 느리다 / 혜택이 없다 등 고객의 불편 사항을 경청합니다.</div></div></div>
-        <div class="step"><div class="step-num">4</div><div class="step-body"><div class="step-title">맞춤 솔루션 제시</div><div class="step-desc">파악한 니즈를 바탕으로 요금제 또는 결합상품을 제안합니다.</div><div class="step-tip">💡 "지금 요금보다 월 OO원 절감 가능합니다" — 숫자로 임팩트</div></div></div>
+        <div class="step"><div class="step-num">4</div><div class="step-body"><div class="step-title">맞춤 솔루션 제시</div><div class="step-desc">파악한 니즈를 바탕으로 요금제 또는 결합상품을 제안합니다.</div><div class="step-tip">"지금 요금보다 월 OO원 절감 가능합니다" — 숫자로 임팩트</div></div></div>
         <div class="step"><div class="step-num">5</div><div class="step-body"><div class="step-title">가입 진행 &amp; 개통 안내</div><div class="step-desc">고객 동의 후 필요 서류 안내 및 가입 절차를 설명합니다.</div></div></div>
       </div>
-      <div class="warn-box">⚠️ 과도한 혜택 과장은 민원으로 이어질 수 있습니다. 정확한 조건과 혜택을 안내하세요.</div>
-    </div>
+      <div class="note note-alert"><svg><use href="#i-alert"></use></svg><span>과도한 혜택 과장은 민원으로 이어질 수 있습니다. 정확한 조건과 혜택을 안내하세요.</span></div>
+    </div></div></div>
   </div>
-  <div class="card" onclick="toggle('plan-intro')">
-    <div class="card-header"><div class="card-icon">📋</div><div class="card-meta"><div class="card-label">요금제 안내</div><div class="card-title">요금제 설명 &amp; 비교</div><div class="card-desc">고객용·대리점용 요금제 탭 전환 비교</div></div></div>
-    <div class="card-footer"><div class="card-tags"><span class="tag">고객용</span><span class="tag">대리점용</span></div><span class="chevron">›</span></div>
-    <div class="detail-panel" id="detail-plan-intro">
+
+  <div class="card wide" onclick="toggle('plan-intro')">
+    <div class="card-header">
+      <div class="card-icon"><svg><use href="#i-plan"></use></svg></div>
+      <div class="card-meta">
+        <div class="card-title">요금제 설명 &amp; 비교</div>
+        <div class="card-desc">고객용·대리점용 요금제 탭 전환 비교</div>
+      </div>
+    </div>
+    <div class="card-footer"><div class="card-tags"><span class="tag">고객용</span><span class="tag">대리점용</span></div><span class="chevron"><svg><use href="#i-chevron"></use></svg></span></div>
+    <div class="detail-panel" id="detail-plan-intro"><div class="detail-inner"><div class="detail-body">
       <div class="tabs">
-        <button class="tab-btn active" onclick="switchTab(event,'tab-customer')">👤 고객용 요금제</button>
-        <button class="tab-btn" onclick="switchTab(event,'tab-dealer')">🏪 대리점용 요금제</button>
+        <button class="tab-btn active" onclick="switchTab(event,'tab-customer')">고객용 요금제</button>
+        <button class="tab-btn" onclick="switchTab(event,'tab-dealer')">대리점용 요금제</button>
       </div>
       <div class="tab-content active" id="tab-customer">
-        <p style="font-size:11px;color:var(--mid);margin-bottom:8px;">ℹ️ 저렴한 가격으로 스펙 좋은 요금제 — 고객 설득용<br>판매가는 <strong>2026.10.01 기준</strong> (VAT 포함)</p>
-        <table class="plan-table"><thead><tr><th>상품명</th><th>판매가</th><th>데이터/통화</th><th>제휴혜택</th></tr></thead><tbody>
+        <p class="tab-note">저렴한 가격으로 스펙 좋은 요금제 — 고객 설득용<br>판매가는 <strong>2026.10.01 기준</strong> (VAT 포함)</p>
+        <div class="table-scroll">
+        <table class="data-table"><thead><tr><th>상품명</th><th>판매가</th><th>데이터/통화</th><th>제휴혜택</th></tr></thead><tbody>
           <tr><td>슬림 1GB/100분<span class="plan-badge no-dealer">대리점 개통 불가</span></td><td class="price-tag">2,900원</td><td>1GB / 100분</td><td>-</td></tr>
           <tr><td>통화 충분 1.5GB</td><td class="price-tag">6,600원</td><td>1.5GB / 통화 무제한</td><td>-</td></tr>
           <tr><td>데이터 충분 2.2GB+/100분</td><td class="price-tag">11,700원</td><td>2.2GB+ / 이후 1Mbps / 100분</td><td>-</td></tr>
@@ -338,197 +211,374 @@ section:last-child{margin-bottom:0;}
           <tr><td>5G 모두 충분 안심 6GB+<span class="plan-badge new">신규</span></td><td class="price-tag">15,900원</td><td>6GB+ / 이후 400Kbps / 통화 무제한</td><td>-</td></tr>
           <tr><td>5G 모두 충분 안심 10GB+<span class="plan-badge new">신규</span></td><td class="price-tag">18,900원</td><td>10GB+ / 이후 400Kbps / 통화 무제한</td><td>-</td></tr>
         </tbody></table>
-        <div class="info-box"><div class="info-box-title">📌 설명 순서</div><ul><li>① 현재 요금과 비교</li><li>② 절감 금액 강조</li><li>③ 데이터·통화 조건</li><li>④ 부가 혜택 설명</li></ul></div>
+        </div>
+        <div class="info-box"><div class="info-box-title">설명 순서</div><ol><li>현재 요금과 비교</li><li>절감 금액 강조</li><li>데이터·통화 조건</li><li>부가 혜택 설명</li></ol></div>
       </div>
       <div class="tab-content" id="tab-dealer">
-        <p style="font-size:11px;color:var(--red);margin-bottom:8px;">⚠️ 수수료 우수 요금제 — 대리점 내부 참고용<br>판매가는 <strong>2026.10.01 기준</strong> (VAT 포함)</p>
-        <table class="plan-table"><thead><tr><th>상품명</th><th>판매가</th><th>데이터/통화</th><th>제휴혜택</th></tr></thead><tbody>
+        <p class="tab-note">수수료 우수 요금제 — 대리점 내부 참고용<br>판매가는 <strong>2026.10.01 기준</strong> (VAT 포함)</p>
+        <div class="table-scroll">
+        <table class="data-table"><thead><tr><th>상품명</th><th>판매가</th><th>데이터/통화</th><th>제휴혜택</th></tr></thead><tbody>
           <tr><td>SKY 데이터 충분 2.2GB+/100분</td><td class="price-tag">14,100원</td><td>2.2GB+ / 이후 1Mbps / 100분</td><td>-</td></tr>
           <tr><td>SKY 모두 충분 7GB+(밀리의서재)</td><td class="price-tag">18,400원</td><td>7GB+ / 이후 1Mbps / 통화 무제한</td><td>밀리의서재 이용권</td></tr>
           <tr><td>SKY 모두 충분 10GB+(밀리의서재)</td><td class="price-tag">20,300원</td><td>10GB+ / 이후 1Mbps / 통화 무제한</td><td>밀리의서재 이용권</td></tr>
           <tr><td>SKY 모두 충분 11GB+(밀리의서재)</td><td class="price-tag">35,200원</td><td>11GB+일2GB / 이후 3Mbps / 통화 무제한</td><td>밀리의서재 이용권</td></tr>
           <tr><td>SKY 모두 충분 100GB+(밀리의서재)</td><td class="price-tag">41,100원</td><td>100GB+ / 이후 5Mbps / 통화 무제한</td><td>밀리의서재 이용권</td></tr>
         </tbody></table>
+        </div>
+      </div>
+    </div></div></div>
+  </div>
+
+  <div class="card" onclick="toggle('bundle-sales')">
+    <div class="card-header">
+      <div class="card-icon"><svg><use href="#i-bundle"></use></svg></div>
+      <div class="card-meta">
+        <div class="card-title">인터넷·TV 결합 안내</div>
+        <div class="card-desc">기존 kt skylife 이용 고객 결합 혜택</div>
       </div>
     </div>
-  </div>
-  <div class="card" onclick="toggle('bundle-sales')">
-    <div class="card-header"><div class="card-icon">🎁</div><div class="card-meta"><div class="card-label">결합 영업</div><div class="card-title">인터넷·TV 결합 안내</div><div class="card-desc">기존 kt skylife 이용 고객 결합 혜택</div></div></div>
-    <div class="card-footer"><div class="card-tags"><span class="tag">결합할인</span><span class="tag">가족결합</span></div><span class="chevron">›</span></div>
-    <div class="detail-panel" id="detail-bundle-sales">
+    <div class="card-footer"><div class="card-tags"><span class="tag">결합할인</span><span class="tag">가족결합</span></div><span class="chevron"><svg><use href="#i-chevron"></use></svg></span></div>
+    <div class="detail-panel" id="detail-bundle-sales"><div class="detail-inner"><div class="detail-body">
       <div class="steps">
         <div class="step"><div class="step-num">1</div><div class="step-body"><div class="step-title">기존 kt skylife 이용 확인</div><div class="step-desc">인터넷, IPTV, 위성방송 등 기존 이용 서비스를 확인합니다.</div></div></div>
         <div class="step"><div class="step-num">2</div><div class="step-body"><div class="step-title">결합 가능 회선 수 확인</div><div class="step-desc">세대 내 kt skylife 모바일 회선 수를 파악하여 최대 결합 혜택 안내</div></div></div>
-        <div class="step"><div class="step-num">3</div><div class="step-body"><div class="step-title">월 절감액 계산 &amp; 제시</div><div class="step-desc">현재 요금 대비 결합 후 절감 금액을 구체적으로 보여드립니다.</div><div class="step-tip">💡 1회선인 경우 000원 / 2회선인 경우 000원 절감</div></div></div>
+        <div class="step"><div class="step-num">3</div><div class="step-body"><div class="step-title">월 절감액 계산 &amp; 제시</div><div class="step-desc">현재 요금 대비 결합 후 절감 금액을 구체적으로 보여드립니다.</div><div class="step-tip">1회선인 경우 000원 / 2회선인 경우 000원 절감</div></div></div>
       </div>
-      <div class="warn-box">ℹ️ 결합할인은 반드시 동일 명의 또는 가족 관계 증빙이 필요합니다.</div>
-    </div>
+      <div class="note note-info"><svg><use href="#i-info"></use></svg><span>결합할인은 반드시 동일 명의 또는 가족 관계 증빙이 필요합니다.</span></div>
+    </div></div></div>
   </div>
+
 </div>
 </section>
+
 <section id="sec-join" data-sec="join">
-<div class="section-title">② 가입 &amp; 개통 절차</div>
+<div class="section-head">
+  <span class="section-num">02</span>
+  <h2>가입 &amp; 개통 절차</h2>
+  <span class="section-note">서류 · 번호이동 · 신규</span>
+</div>
 <div class="card-grid">
+
   <div class="card" onclick="toggle('join-docs')">
-    <div class="card-header"><div class="card-icon">📄</div><div class="card-meta"><div class="card-label">필요서류</div><div class="card-title">가입 필요 서류 안내</div><div class="card-desc">신규·번호이동 가입별 필요 서류 및 인증 수단 정리</div></div></div>
-    <div class="card-footer"><div class="card-tags"><span class="tag">신분증</span><span class="tag">간편인증</span><span class="tag">안면인증</span></div><span class="chevron">›</span></div>
-    <div class="detail-panel" id="detail-join-docs">
-      <div class="doc-grid">
-        <div class="doc-card"><div class="doc-card-title">🔴 공통 필수</div>
+    <div class="card-header">
+      <div class="card-icon"><svg><use href="#i-doc"></use></svg></div>
+      <div class="card-meta">
+        <div class="card-title">가입 필요 서류 안내</div>
+        <div class="card-desc">신규·번호이동 가입별 필요 서류 및 인증 수단 정리</div>
+      </div>
+    </div>
+    <div class="card-footer"><div class="card-tags"><span class="tag">신분증</span><span class="tag">간편인증</span><span class="tag">안면인증</span></div><span class="chevron"><svg><use href="#i-chevron"></use></svg></span></div>
+    <div class="detail-panel" id="detail-join-docs"><div class="detail-inner"><div class="detail-body">
+      <div class="split-grid" style="margin-top:0">
+        <div class="doc-card"><div class="doc-card-title">공통 필수</div>
           <div class="doc-item"><span class="doc-dot"></span><span>신분증 (주민등록증·운전면허증 등 실물 확인)</span></div>
           <div class="doc-item"><span class="doc-dot"></span><span>본인 명의 계좌 또는 카드</span></div>
           <div class="doc-item"><span class="doc-dot"></span><span>가입신청서 (현장 작성)</span></div>
           <div class="doc-item"><span class="doc-dot"></span><span>비대면 온라인 서식지 (간편인증: 네이버·카카오·PASS·신용카드 중 택1)</span></div>
           <div class="doc-item"><span class="doc-dot"></span><span>PASS 웹/앱 안면인증 필수 처리</span></div>
         </div>
-        <div class="doc-card"><div class="doc-card-title">🟡 번호이동 추가</div>
-          <div class="doc-item"><span class="doc-dot yellow"></span><span>현재 사용 중인 회선 선불/후불 확인</span></div>
-          <div class="doc-item"><span class="doc-dot yellow"></span><span>번호이동 인증 수단 (택1)<br>① 단말기 일련번호<br>② 전 통신사 요금 납부 계좌번호 뒤 4자리<br>③ 카드번호 뒤 4자리<br>④ 지로 납부 시 지로 선택</span></div>
+        <div class="doc-card"><div class="doc-card-title">번호이동 추가</div>
+          <div class="doc-item"><span class="doc-dot warn"></span><span>현재 사용 중인 회선 선불/후불 확인</span></div>
+          <div class="doc-item"><span class="doc-dot warn"></span><span>번호이동 인증 수단 (택1)<br>① 단말기 일련번호<br>② 전 통신사 요금 납부 계좌번호 뒤 4자리<br>③ 카드번호 뒤 4자리<br>④ 지로 납부 시 지로 선택</span></div>
         </div>
       </div>
-      <div class="warn-box">🚨 타인 명의 대리 가입은 절대 불가합니다. 명의도용 가입 시 법적 처벌 대상이 됩니다.</div>
-    </div>
+      <div class="note note-alert"><svg><use href="#i-alert"></use></svg><span>타인 명의 대리 가입은 절대 불가합니다. 명의도용 가입 시 법적 처벌 대상이 됩니다.</span></div>
+    </div></div></div>
   </div>
+
   <div class="card" onclick="toggle('mnp-guide')">
-    <div class="card-header"><div class="card-icon">🔄</div><div class="card-meta"><div class="card-label">번호이동</div><div class="card-title">번호이동 절차 안내</div><div class="card-desc">사전동의 ARS 번호 포함 상세 절차 &amp; 오류 대응</div></div></div>
-    <div class="card-footer"><div class="card-tags"><span class="tag">MNP</span><span class="tag">ARS</span><span class="tag">사전동의</span></div><span class="chevron">›</span></div>
-    <div class="detail-panel" id="detail-mnp-guide">
+    <div class="card-header">
+      <div class="card-icon"><svg><use href="#i-swap"></use></svg></div>
+      <div class="card-meta">
+        <div class="card-title">번호이동 절차 안내</div>
+        <div class="card-desc">사전동의 ARS 번호 포함 상세 절차 &amp; 오류 대응</div>
+      </div>
+    </div>
+    <div class="card-footer"><div class="card-tags"><span class="tag">MNP</span><span class="tag">ARS</span><span class="tag">사전동의</span></div><span class="chevron"><svg><use href="#i-chevron"></use></svg></span></div>
+    <div class="detail-panel" id="detail-mnp-guide"><div class="detail-inner"><div class="detail-body">
       <div class="steps">
         <div class="step"><div class="step-num">1</div><div class="step-body"><div class="step-title">기존 통신사 약정 잔여 기간 확인</div><div class="step-desc">위약금 발생 여부를 사전에 안내합니다. 고객 핸드폰에서 114 통화 시 해당 통신사 고객센터로 자동 연결됩니다.</div></div></div>
-        <div class="step"><div class="step-num">2</div><div class="step-body"><div class="step-title">번호이동 사전동의 처리</div><div class="step-desc">번호이동 사전동의 요청 완료 후, 전 통신사 안내 문자 확인 후 동의합니다.</div><div class="step-tip">💡 전 통신사 문자에 위약금·기존 혜택 내용만 있을 수 있음 — 그 경우 ARS로 직접 처리</div></div></div>
+        <div class="step"><div class="step-num">2</div><div class="step-body"><div class="step-title">번호이동 사전동의 처리</div><div class="step-desc">번호이동 사전동의 요청 완료 후, 전 통신사 안내 문자 확인 후 동의합니다.</div><div class="step-tip">전 통신사 문자에 위약금·기존 혜택 내용만 있을 수 있음 — 그 경우 ARS로 직접 처리</div></div></div>
       </div>
-      <table class="ars-table"><thead><tr><th>통신사 / 통신망</th><th>사전동의 ARS 번호</th></tr></thead><tbody>
-        <tr><td>SKT</td><td class="ars-num">1566-1509</td></tr>
-        <tr><td>SKT 알뜰폰</td><td class="ars-num">1599-0133</td></tr>
-        <tr><td>KCT SKT망</td><td class="ars-num">1877-9120</td></tr>
-        <tr><td>KT / KT 알뜰폰</td><td class="ars-num">1588-2935</td></tr>
-        <tr><td>헬로모바일 KT망</td><td class="ars-num">070-7336-7766</td></tr>
-        <tr><td>스노우맨 KT망</td><td class="ars-num">1688-9345</td></tr>
-        <tr><td>LGU+ / LGU+ 알뜰폰</td><td class="ars-num">1544-3553</td></tr>
+      <div class="table-scroll" style="margin-top:12px">
+      <table class="data-table"><thead><tr><th>통신사 / 통신망</th><th>사전동의 ARS 번호</th></tr></thead><tbody>
+        <tr><td>SKT</td><td class="num-strong">1566-1509</td></tr>
+        <tr><td>SKT 알뜰폰</td><td class="num-strong">1599-0133</td></tr>
+        <tr><td>KCT SKT망</td><td class="num-strong">1877-9120</td></tr>
+        <tr><td>KT / KT 알뜰폰</td><td class="num-strong">1588-2935</td></tr>
+        <tr><td>헬로모바일 KT망</td><td class="num-strong">070-7336-7766</td></tr>
+        <tr><td>스노우맨 KT망</td><td class="num-strong">1688-9345</td></tr>
+        <tr><td>LGU+ / LGU+ 알뜰폰</td><td class="num-strong">1544-3553</td></tr>
       </tbody></table>
-      <div class="warn-box" style="margin-top:12px;">⚠️ ARS에서 "대상이 아닙니다" / "신청 내역 없음" 안내 시 대응<br>① 전 사업자 잘못 선택 → 올바르게 다시 선택 후 재요청<br>② 고객이 현재 통신사를 잘못 알고 있는 경우 → 114로 확인 후 재요청<br>③ 전산 연동 오처리 → 다시 사전동의 요청</div>
-      <div class="steps" style="margin-top:12px;">
-        <div class="step"><div class="step-num">3</div><div class="step-body"><div class="step-title">개통 신청</div><div class="step-desc">고객/청구 정보, 요금제 선택, 인증 완료, 유심 번호 입력 후 개통 신청</div><div class="step-tip">💡 개통 오류 발생 시 — 안내 메시지에서 오류 항목 확인 후 재입력</div></div></div>
+      </div>
+      <div class="note note-info"><svg><use href="#i-info"></use></svg><span>ARS에서 "대상이 아닙니다" / "신청 내역 없음" 안내 시 대응<br>① 전 사업자 잘못 선택 → 올바르게 다시 선택 후 재요청<br>② 고객이 현재 통신사를 잘못 알고 있는 경우 → 114로 확인 후 재요청<br>③ 전산 연동 오처리 → 다시 사전동의 요청</span></div>
+      <div class="steps" style="margin-top:12px">
+        <div class="step"><div class="step-num">3</div><div class="step-body"><div class="step-title">개통 신청</div><div class="step-desc">고객/청구 정보, 요금제 선택, 인증 완료, 유심 번호 입력 후 개통 신청</div><div class="step-tip">개통 오류 발생 시 — 안내 메시지에서 오류 항목 확인 후 재입력</div></div></div>
         <div class="step"><div class="step-num">4</div><div class="step-body"><div class="step-title">개통 확인 &amp; 유심 삽입</div><div class="step-desc">개통 완료 메시지 확인 후, 단말기 유심 트레이(유심핀으로 추출)에 새 유심을 트레이 모양에 맞게 삽입합니다. 일반적으로 즉시 인식하지 못하므로 2~3번 전원을 껐다 켜기 반복</div></div></div>
       </div>
-      <div class="warn-box">⚠️ 번호이동 개통 시 즉시 기존 통신사 서비스가 종료됩니다. 유심을 바로 교체해 주셔야 사용 가능합니다.</div>
-    </div>
+      <div class="note note-alert"><svg><use href="#i-alert"></use></svg><span>번호이동 개통 시 즉시 기존 통신사 서비스가 종료됩니다. 유심을 바로 교체해 주셔야 사용 가능합니다.</span></div>
+    </div></div></div>
   </div>
+
   <div class="card" onclick="toggle('new-join')">
-    <div class="card-header"><div class="card-icon">✅</div><div class="card-meta"><div class="card-label">신규가입</div><div class="card-title">신규 개통 절차</div><div class="card-desc">처음 가입하는 고객의 개통 단계별 안내</div></div></div>
-    <div class="card-footer"><div class="card-tags"><span class="tag">본인인증</span><span class="tag">개통</span></div><span class="chevron">›</span></div>
-    <div class="detail-panel" id="detail-new-join">
+    <div class="card-header">
+      <div class="card-icon"><svg><use href="#i-check"></use></svg></div>
+      <div class="card-meta">
+        <div class="card-title">신규 개통 절차</div>
+        <div class="card-desc">처음 가입하는 고객의 개통 단계별 안내</div>
+      </div>
+    </div>
+    <div class="card-footer"><div class="card-tags"><span class="tag">본인인증</span><span class="tag">개통</span></div><span class="chevron"><svg><use href="#i-chevron"></use></svg></span></div>
+    <div class="detail-panel" id="detail-new-join"><div class="detail-inner"><div class="detail-body">
       <div class="steps">
         <div class="step"><div class="step-num">1</div><div class="step-body"><div class="step-title">요금제 선택</div><div class="step-desc">고객 니즈에 맞는 요금제 확정. 고객용·대리점용 구분 중 주요 요금제 리스트에서 선택.</div></div></div>
         <div class="step"><div class="step-num">2</div><div class="step-body"><div class="step-title">본인인증 &amp; 가입 신청</div><div class="step-desc">신분증 확인 후 개통 시스템에 가입 정보 입력. 간편인증(네이버·카카오·PASS·신용카드), 안면인증 및 동의 처리.</div></div></div>
         <div class="step"><div class="step-num">3</div><div class="step-body"><div class="step-title">개통 확인 &amp; 유심 삽입</div><div class="step-desc">개통 완료 메시지 확인 후, 단말기 유심 트레이(유심핀 사용)에 새 유심을 모양에 맞게 삽입합니다. 일반적으로 즉시 인식하지 못하므로 2~3번 전원을 껐다 켜기 반복</div></div></div>
         <div class="step"><div class="step-num">4</div><div class="step-body"><div class="step-title">개통 완료 확인</div><div class="step-desc">통화·문자·데이터 연결 테스트 완료. 이용 안내 SMS 수신 확인.</div></div></div>
       </div>
-    </div>
+    </div></div></div>
   </div>
+
 </div>
 </section>
+
 <section id="sec-usim" data-sec="usim">
-<div class="section-title">③ 유심(USIM) 안내</div>
+<div class="section-head">
+  <span class="section-num">03</span>
+  <h2>유심(USIM) 안내</h2>
+  <span class="section-note">규격 · 장착 · eSIM</span>
+</div>
 <div class="card-grid">
-  <div class="card" onclick="toggle('usim-type')">
-    <div class="card-header"><div class="card-icon">💳</div><div class="card-meta"><div class="card-label">유심 종류</div><div class="card-title">유심 종류 &amp; 규격 안내</div><div class="card-desc">단말기에 맞는 유심 규격 확인 방법</div></div></div>
-    <div class="card-footer"><div class="card-tags"><span class="tag">나노유심</span><span class="tag">eSIM</span></div><span class="chevron">›</span></div>
-    <div class="detail-panel" id="detail-usim-type">
-      <table class="usim-table"><thead><tr><th>유심 종류</th><th>크기</th><th>주요 단말기</th><th>비고</th></tr></thead><tbody>
+
+  <div class="card wide" onclick="toggle('usim-type')">
+    <div class="card-header">
+      <div class="card-icon"><svg><use href="#i-sim"></use></svg></div>
+      <div class="card-meta">
+        <div class="card-title">유심 종류 &amp; 규격 안내</div>
+        <div class="card-desc">단말기에 맞는 유심 규격 확인 방법</div>
+      </div>
+    </div>
+    <div class="card-footer"><div class="card-tags"><span class="tag">나노유심</span><span class="tag">eSIM</span></div><span class="chevron"><svg><use href="#i-chevron"></use></svg></span></div>
+    <div class="detail-panel" id="detail-usim-type"><div class="detail-inner"><div class="detail-body">
+
+      <div class="diagram">
+        <svg viewBox="0 0 440 150" role="img" aria-label="마이크로 유심, 나노 유심, eSIM 크기 비교도">
+          <path class="dg-fill" d="M35 33h66l19 19v48a5 5 0 0 1-5 5H35a5 5 0 0 1-5-5V38a5 5 0 0 1 5-5z"/>
+          <path class="dg-line" d="M35 33h66l19 19v48a5 5 0 0 1-5 5H35a5 5 0 0 1-5-5V38a5 5 0 0 1 5-5z"/>
+          <rect class="dg-thin" x="48" y="52" width="54" height="34" rx="3"/>
+          <path class="dg-thin" d="M75 52v34M48 63.3h54M48 74.7h54"/>
+          <text class="dg-label" x="75" y="126" text-anchor="middle">마이크로 유심</text>
+          <text class="dg-dim" x="75" y="141" text-anchor="middle">15 × 12mm · 구형</text>
+
+          <path class="dg-fill-accent" d="M194 43h54l16 16v33a4 4 0 0 1-4 4h-66a4 4 0 0 1-4-4V47a4 4 0 0 1 4-4z"/>
+          <path class="dg-accent" d="M194 43h54l16 16v33a4 4 0 0 1-4 4h-66a4 4 0 0 1-4-4V47a4 4 0 0 1 4-4z"/>
+          <rect class="dg-thin" x="204" y="57" width="46" height="26" rx="2.5"/>
+          <path class="dg-thin" d="M227 57v26M204 65.7h46M204 74.3h46"/>
+          <text class="dg-accent-label" x="227" y="126" text-anchor="middle">나노 유심 — 현재 표준</text>
+          <text class="dg-dim" x="227" y="141" text-anchor="middle">12.3 × 8.8mm</text>
+
+          <rect class="dg-fill" x="345" y="25" width="54" height="90" rx="8"/>
+          <rect class="dg-line" x="345" y="25" width="54" height="90" rx="8"/>
+          <path class="dg-thin" d="M364 32h16"/>
+          <rect class="dg-accent" x="360" y="58" width="24" height="24" rx="3"/>
+          <path class="dg-thin" d="M372 58v24M360 70h24"/>
+          <text class="dg-label" x="372" y="126" text-anchor="middle">eSIM</text>
+          <text class="dg-dim" x="372" y="141" text-anchor="middle">단말기 내장 · QR 개통</text>
+        </svg>
+        <div class="diagram-caption">실제 비율로 그린 크기 비교입니다. 단말기 측면 유심 트레이를 유심핀으로 꺼내 규격을 확인하세요.</div>
+      </div>
+
+      <div class="table-scroll" style="margin-top:12px">
+      <table class="data-table"><thead><tr><th>유심 종류</th><th>크기</th><th>주요 단말기</th><th>비고</th></tr></thead><tbody>
         <tr><td><strong>나노 유심</strong> (Nano SIM)</td><td>12.3×8.8mm</td><td>아이폰5↑, 갤S/A 최신형</td><td>현재 표준</td></tr>
         <tr><td><strong>마이크로 유심</strong> (Micro SIM)</td><td>15×12mm</td><td>구형 스마트폰 일부</td><td>구형</td></tr>
         <tr><td><strong>eSIM</strong> (내장형)</td><td>물리카드 없음</td><td>아이폰XS↑, 갤S20↑</td><td>QR 개통</td></tr>
       </tbody></table>
-      <div class="warn-box" style="margin-top:10px;">ℹ️ 단말기 측면 유심 트레이를 유심핀으로 눌러 추출하여 규격을 확인합니다.</div>
-    </div>
+      </div>
+    </div></div></div>
   </div>
-  <div class="card" onclick="toggle('usim-install')">
-    <div class="card-header"><div class="card-icon">🔧</div><div class="card-meta"><div class="card-label">유심 장착</div><div class="card-title">유심 장착 방법 &amp; 주의사항</div><div class="card-desc">단계별 유심 장착 가이드 및 주의사항</div></div></div>
-    <div class="card-footer"><div class="card-tags"><span class="tag">장착순서</span><span class="tag">주의</span></div><span class="chevron">›</span></div>
-    <div class="detail-panel" id="detail-usim-install">
-      <div class="steps">
-        <div class="step"><div class="step-num">1</div><div class="step-body"><div class="step-title">단말기 전원 끄기</div><div class="step-desc">반드시 전원을 완전히 종료한 후 유심 교체를 진행합니다.</div><div class="step-tip">⚡ 전원 ON 상태에서 유심 교체 시 단말기 오류 발생 가능</div></div></div>
+
+  <div class="card wide" onclick="toggle('usim-install')">
+    <div class="card-header">
+      <div class="card-icon"><svg><use href="#i-tool"></use></svg></div>
+      <div class="card-meta">
+        <div class="card-title">유심 장착 방법 &amp; 주의사항</div>
+        <div class="card-desc">단계별 유심 장착 가이드 및 주의사항</div>
+      </div>
+    </div>
+    <div class="card-footer"><div class="card-tags"><span class="tag">장착순서</span><span class="tag">주의</span></div><span class="chevron"><svg><use href="#i-chevron"></use></svg></span></div>
+    <div class="detail-panel" id="detail-usim-install"><div class="detail-inner"><div class="detail-body">
+
+      <div class="diagram">
+        <svg viewBox="0 0 440 150" role="img" aria-label="유심 트레이 장착 방향 설명도">
+          <text class="dg-dim" x="125" y="20" text-anchor="middle">유심 트레이</text>
+          <rect class="dg-fill" x="30" y="32" width="190" height="82" rx="6"/>
+          <rect class="dg-line" x="30" y="32" width="190" height="82" rx="6"/>
+
+          <path class="dg-fill-accent" d="M58 50h86l16 16v32H58z"/>
+          <path class="dg-accent" d="M60 50h84l16 16v30a2 2 0 0 1-2 2H60a2 2 0 0 1-2-2V52a2 2 0 0 1 2-2z"/>
+          <path class="dg-thin" d="M144 50v16h16"/>
+          <rect class="dg-thin" x="72" y="62" width="44" height="24" rx="2"/>
+          <path class="dg-thin" d="M94 62v24M72 70h44M72 78h44"/>
+
+          <path class="dg-thin" d="M160 66 196 44 244 44"/>
+          <circle class="dg-thin" cx="160" cy="66" r="2.5"/>
+          <text class="dg-label" x="250" y="40">잘린 모서리를</text>
+          <text class="dg-label" x="250" y="56">트레이 모양에 맞춥니다</text>
+
+          <path class="dg-thin" d="M94 86 94 132 244 132"/>
+          <circle class="dg-thin" cx="94" cy="86" r="2.5"/>
+          <text class="dg-accent-label" x="250" y="136">금색 접점이 아래를 향하게</text>
+        </svg>
+        <div class="diagram-caption">현장에서 가장 자주 틀리는 두 가지입니다. 잘린 모서리 방향과 접점 면을 먼저 확인하세요.</div>
+      </div>
+
+      <div class="steps" style="margin-top:12px">
+        <div class="step"><div class="step-num">1</div><div class="step-body"><div class="step-title">단말기 전원 끄기</div><div class="step-desc">반드시 전원을 완전히 종료한 후 유심 교체를 진행합니다.</div><div class="step-tip">전원 ON 상태에서 유심 교체 시 단말기 오류 발생 가능</div></div></div>
         <div class="step"><div class="step-num">2</div><div class="step-body"><div class="step-title">유심 트레이 꺼내기</div><div class="step-desc">유심 핀(이젝터 핀)을 유심 트레이 홀에 꽂아 트레이를 꺼냅니다. 핀이 없을 경우 클립 사용 가능.</div></div></div>
-        <div class="step"><div class="step-num">3</div><div class="step-body"><div class="step-title">유심 방향 확인 후 장착</div><div class="step-desc">유심의 금색 칩이 아래를 향하도록, 모서리 잘린 방향 맞춰 트레이에 올려놓습니다.</div><div class="step-tip">💡 유심과 트레이의 모양(노치)을 맞추면 방향 실수를 줄일 수 있습니다</div></div></div>
+        <div class="step"><div class="step-num">3</div><div class="step-body"><div class="step-title">유심 방향 확인 후 장착</div><div class="step-desc">유심의 금색 칩이 아래를 향하도록, 모서리 잘린 방향 맞춰 트레이에 올려놓습니다.</div><div class="step-tip">유심과 트레이의 모양(노치)을 맞추면 방향 실수를 줄일 수 있습니다</div></div></div>
         <div class="step"><div class="step-num">4</div><div class="step-body"><div class="step-title">트레이 삽입 &amp; 전원 ON</div><div class="step-desc">트레이를 부드럽게 밀어 넣고 전원을 켭니다. 화면 상단의 안테나 바가 표시되면 완료.</div></div></div>
       </div>
-      <div class="warn-box">🚨 유심 핀 홀에 이물질이 들어가지 않도록 주의하세요. 무리한 힘으로 트레이를 삽입하면 단말기가 파손될 수 있습니다.</div>
-    </div>
+      <div class="note note-alert"><svg><use href="#i-alert"></use></svg><span>유심 핀 홀에 이물질이 들어가지 않도록 주의하세요. 무리한 힘으로 트레이를 삽입하면 단말기가 파손될 수 있습니다.</span></div>
+    </div></div></div>
   </div>
+
   <div class="card" onclick="toggle('esim-guide')">
-    <div class="card-header"><div class="card-icon">📲</div><div class="card-meta"><div class="card-label">eSIM</div><div class="card-title">eSIM 개통 안내</div><div class="card-desc">물리 유심 없이 개통하는 eSIM 절차</div></div></div>
-    <div class="card-footer"><div class="card-tags"><span class="tag">QR코드</span><span class="tag">EID</span></div><span class="chevron">›</span></div>
-    <div class="detail-panel" id="detail-esim-guide">
+    <div class="card-header">
+      <div class="card-icon"><svg><use href="#i-qr"></use></svg></div>
+      <div class="card-meta">
+        <div class="card-title">eSIM 개통 안내</div>
+        <div class="card-desc">물리 유심 없이 개통하는 eSIM 절차</div>
+      </div>
+    </div>
+    <div class="card-footer"><div class="card-tags"><span class="tag">QR코드</span><span class="tag">EID</span></div><span class="chevron"><svg><use href="#i-chevron"></use></svg></span></div>
+    <div class="detail-panel" id="detail-esim-guide"><div class="detail-inner"><div class="detail-body">
       <div class="steps">
         <div class="step"><div class="step-num">1</div><div class="step-body"><div class="step-title">eSIM 지원 단말기 여부 확인</div><div class="step-desc">설정 → 일반 → 정보 → EID가 있는 경우 eSIM 사용 가능. 또는 제조사 공식 스펙 확인.</div></div></div>
-        <div class="step"><div class="step-num">2</div><div class="step-body"><div class="step-title">개통 시스템에서 eSIM 선택</div><div class="step-desc">IMEI1, IMEI2, EID 정보 입력 (최대 32자리 숫자로 구성)</div><div class="step-tip">💡 핸드폰에서 개통 시 숫자를 길게 눌러 복사 붙여넣기 처리 / PC 개통 시 입력 주의</div></div></div>
-        <div class="step"><div class="step-num">3</div><div class="step-body"><div class="step-title">프로파일 다운로드</div><div class="step-desc">방법1: 휴대폰 기본 카메라 실행 → QR 코드 스캔 → 프로파일 자동 다운로드<br>방법2: 개통한 eSIM IMEI 기준으로 단말기에서 프로파일 설치 안내 메시지 수신 후 다운로드</div><div class="step-tip">💡 Wi-Fi 연결 필수 — 프로파일 다운로드에 데이터 연결이 필요합니다</div></div></div>
+        <div class="step"><div class="step-num">2</div><div class="step-body"><div class="step-title">개통 시스템에서 eSIM 선택</div><div class="step-desc">IMEI1, IMEI2, EID 정보 입력 (최대 32자리 숫자로 구성)</div><div class="step-tip">핸드폰에서 개통 시 숫자를 길게 눌러 복사 붙여넣기 처리 / PC 개통 시 입력 주의</div></div></div>
+        <div class="step"><div class="step-num">3</div><div class="step-body"><div class="step-title">프로파일 다운로드</div><div class="step-desc">방법1: 휴대폰 기본 카메라 실행 → QR 코드 스캔 → 프로파일 자동 다운로드<br>방법2: 개통한 eSIM IMEI 기준으로 단말기에서 프로파일 설치 안내 메시지 수신 후 다운로드</div><div class="step-tip">Wi-Fi 연결 필수 — 프로파일 다운로드에 데이터 연결이 필요합니다</div></div></div>
         <div class="step"><div class="step-num">4</div><div class="step-body"><div class="step-title">개통 완료 확인</div><div class="step-desc">화면 상단의 안테나 바가 표시되면 완료.</div></div></div>
       </div>
-      <div class="warn-box">🚨 단말기에서 eSIM과 유심 모두 사용하는 경우 동일 명의만 가능합니다. 다른 명의의 eSIM과 유심이 함께 있는 경우 자동 정지처리 됩니다.</div>
-    </div>
+      <div class="note note-alert"><svg><use href="#i-alert"></use></svg><span>단말기에서 eSIM과 유심 모두 사용하는 경우 동일 명의만 가능합니다. 다른 명의의 eSIM과 유심이 함께 있는 경우 자동 정지처리 됩니다.</span></div>
+    </div></div></div>
   </div>
+
 </div>
 </section>
+
 <section id="sec-customer" data-sec="customer">
-<div class="section-title">④ 고객 설명 핵심 포인트</div>
+<div class="section-head">
+  <span class="section-num">04</span>
+  <h2>고객 설명 핵심 포인트</h2>
+  <span class="section-note">FAQ · 주의사항 · 문제 대응</span>
+</div>
 <div class="card-grid">
+
   <div class="card" onclick="toggle('faq-customer')">
-    <div class="card-header"><div class="card-icon">❓</div><div class="card-meta"><div class="card-label">고객 FAQ</div><div class="card-title">고객이 자주 묻는 질문</div><div class="card-desc">현장에서 자주 나오는 질문과 모범 답변</div></div></div>
-    <div class="card-footer"><div class="card-tags"><span class="tag">Q&amp;A</span><span class="tag">대응</span></div><span class="chevron">›</span></div>
-    <div class="detail-panel" id="detail-faq-customer">
+    <div class="card-header">
+      <div class="card-icon"><svg><use href="#i-help"></use></svg></div>
+      <div class="card-meta">
+        <div class="card-title">고객이 자주 묻는 질문</div>
+        <div class="card-desc">현장에서 자주 나오는 질문과 모범 답변</div>
+      </div>
+    </div>
+    <div class="card-footer"><div class="card-tags"><span class="tag">Q&amp;A</span><span class="tag">대응</span></div><span class="chevron"><svg><use href="#i-chevron"></use></svg></span></div>
+    <div class="detail-panel" id="detail-faq-customer"><div class="detail-inner"><div class="detail-body">
       <div class="faq-list">
-        <div class="faq-item"><div class="faq-q"><span class="faq-badge">Q</span><span class="faq-q-text">기존 폰 그대로 쓸 수 있나요?</span></div><div class="faq-a"><span class="faq-a-badge">A</span> 네, 현재 사용 중인 단말기에 유심만 교체하면 됩니다. 단, 기존 통신사에 단말기가 잠금(락)되어 있는 경우 해제가 필요합니다.</div></div>
-        <div class="faq-item"><div class="faq-q"><span class="faq-badge">Q</span><span class="faq-q-text">지금 위약금 있으면 어떻게 되나요?</span></div><div class="faq-a"><span class="faq-a-badge">A</span> 위약금은 기존 통신사에 고객님이 직접 납부하시는 부분입니다. 저희 요금제 절감액과 비교해서 결정하시면 됩니다. 고객센터(114)로 잔여 위약금 확인 도움드릴게요.</div></div>
-        <div class="faq-item"><div class="faq-q"><span class="faq-badge">Q</span><span class="faq-q-text">데이터 다 쓰면 어떻게 되나요?</span></div><div class="faq-a"><span class="faq-a-badge">A</span> 기본 데이터 소진 후에는 속도가 줄어들거나(QoS) 데이터 차단이 됩니다. 요금제별로 다르며, 추가 데이터 구매도 가능합니다.</div></div>
-        <div class="faq-item"><div class="faq-q"><span class="faq-badge">Q</span><span class="faq-q-text">해외에서도 쓸 수 있나요?</span></div><div class="faq-a"><span class="faq-a-badge">A</span> 로밍 서비스는 별도 신청이 필요합니다. 고객센터를 통해 로밍 요금제 안내를 받으시도록 안내해 드립니다.</div></div>
-        <div class="faq-item"><div class="faq-q"><span class="faq-badge">Q</span><span class="faq-q-text">약정이 있나요?</span></div><div class="faq-a"><span class="faq-a-badge">A</span> 약정 및 위약금이 없습니다. 언제든지 자유롭게 변경 또는 해지 가능합니다.</div></div>
+        <div class="faq-item"><div class="faq-q">기존 폰 그대로 쓸 수 있나요?</div><div class="faq-a">네, 현재 사용 중인 단말기에 유심만 교체하면 됩니다. 단, 기존 통신사에 단말기가 잠금(락)되어 있는 경우 해제가 필요합니다.</div></div>
+        <div class="faq-item"><div class="faq-q">지금 위약금 있으면 어떻게 되나요?</div><div class="faq-a">위약금은 기존 통신사에 고객님이 직접 납부하시는 부분입니다. 저희 요금제 절감액과 비교해서 결정하시면 됩니다. 고객센터(114)로 잔여 위약금 확인 도움드릴게요.</div></div>
+        <div class="faq-item"><div class="faq-q">데이터 다 쓰면 어떻게 되나요?</div><div class="faq-a">기본 데이터 소진 후에는 속도가 줄어들거나(QoS) 데이터 차단이 됩니다. 요금제별로 다르며, 추가 데이터 구매도 가능합니다.</div></div>
+        <div class="faq-item"><div class="faq-q">해외에서도 쓸 수 있나요?</div><div class="faq-a">로밍 서비스는 별도 신청이 필요합니다. 고객센터를 통해 로밍 요금제 안내를 받으시도록 안내해 드립니다.</div></div>
+        <div class="faq-item"><div class="faq-q">약정이 있나요?</div><div class="faq-a">약정 및 위약금이 없습니다. 언제든지 자유롭게 변경 또는 해지 가능합니다.</div></div>
       </div>
-    </div>
+    </div></div></div>
   </div>
+
   <div class="card" onclick="toggle('caution-list')">
-    <div class="card-header"><div class="card-icon">⚠️</div><div class="card-meta"><div class="card-label">주의사항</div><div class="card-title">영업 시 주의 &amp; 금지사항</div><div class="card-desc">민원·법적 문제 예방을 위한 필수 주의사항</div></div></div>
-    <div class="card-footer"><div class="card-tags"><span class="tag">금지</span><span class="tag">필수</span></div><span class="chevron">›</span></div>
-    <div class="detail-panel" id="detail-caution-list">
-      <div class="caution-grid">
-        <div class="caution-card danger"><div class="caution-title"><span class="caution-badge ban">절대 금지</span></div><div class="caution-list"><div class="caution-item">타인 명의 대리 가입 (법적 처벌 대상)</div><div class="caution-item">과도한 혜택 과장 (민원·법적 문제 직결)</div><div class="caution-item">허위 정보 제공</div><div class="caution-item">가입신청서 고객 미서명 처리</div><div class="caution-item">위약금 대납 약속</div></div></div>
-        <div class="caution-card normal"><div class="caution-title"><span class="caution-badge must">반드시 준수</span></div><div class="caution-list"><div class="caution-item">정확한 요금·조건 안내</div><div class="caution-item">약정 및 위약금 없음 안내</div><div class="caution-item">요금제별 제휴 혜택 안내</div><div class="caution-item">고객 직접 서명 확인</div><div class="caution-item">소속 및 신분 명확히 고지</div></div></div>
+    <div class="card-header">
+      <div class="card-icon"><svg><use href="#i-alert"></use></svg></div>
+      <div class="card-meta">
+        <div class="card-title">영업 시 주의 &amp; 금지사항</div>
+        <div class="card-desc">민원·법적 문제 예방을 위한 필수 주의사항</div>
       </div>
     </div>
+    <div class="card-footer"><div class="card-tags"><span class="tag">금지</span><span class="tag">필수</span></div><span class="chevron"><svg><use href="#i-chevron"></use></svg></span></div>
+    <div class="detail-panel" id="detail-caution-list"><div class="detail-inner"><div class="detail-body">
+      <div class="split-grid" style="margin-top:0">
+        <div class="rule-card ban">
+          <div class="rule-title"><svg><use href="#i-ban"></use></svg>절대 금지</div>
+          <div class="rule-list">
+            <div class="rule-item">타인 명의 대리 가입 (법적 처벌 대상)</div>
+            <div class="rule-item">과도한 혜택 과장 (민원·법적 문제 직결)</div>
+            <div class="rule-item">허위 정보 제공</div>
+            <div class="rule-item">가입신청서 고객 미서명 처리</div>
+            <div class="rule-item">위약금 대납 약속</div>
+          </div>
+        </div>
+        <div class="rule-card must">
+          <div class="rule-title"><svg><use href="#i-shield"></use></svg>반드시 준수</div>
+          <div class="rule-list">
+            <div class="rule-item">정확한 요금·조건 안내</div>
+            <div class="rule-item">약정 및 위약금 없음 안내</div>
+            <div class="rule-item">요금제별 제휴 혜택 안내</div>
+            <div class="rule-item">고객 직접 서명 확인</div>
+            <div class="rule-item">소속 및 신분 명확히 고지</div>
+          </div>
+        </div>
+      </div>
+    </div></div></div>
   </div>
+
   <div class="card" onclick="toggle('after-sales')">
-    <div class="card-header"><div class="card-icon">🔍</div><div class="card-meta"><div class="card-label">트러블슈팅</div><div class="card-title">개통 후 단말기 사용 불가 대응</div><div class="card-desc">유심 미인식, 통신사향 단말기 등 문제 발생 시 점검 가이드</div></div></div>
-    <div class="card-footer"><div class="card-tags"><span class="tag">유심</span><span class="tag">eSIM</span><span class="tag">KAIT</span></div><span class="chevron">›</span></div>
-    <div class="detail-panel" id="detail-after-sales">
-      <div class="trouble-list">
-        <div class="trouble-item"><div class="trouble-num">①</div><div><div class="trouble-title">개통 이력이 없는 통신사향 전용 새 단말기</div><div class="trouble-desc">해당 통신사 전용 단말기는 타 통신사 유심 사용 불가 → 사용 불가 안내</div></div></div>
-        <div class="trouble-item"><div class="trouble-num">②</div><div><div class="trouble-title">구형(eSIM 미지원)에서 신형(eSIM 지원)으로 변경 시</div><div class="trouble-desc">KAIT 정보제공 동의 필요 → ☎ 1588-3002 요청</div></div></div>
-        <div class="trouble-item"><div class="trouble-num">③</div><div><div class="trouble-title">유심 또는 단말기 유심 트레이 불량</div><div class="trouble-desc">유심 교체 또는 단말기 점검 필요. 트레이 손상 여부 육안 확인.</div></div></div>
+    <div class="card-header">
+      <div class="card-icon"><svg><use href="#i-diagnose"></use></svg></div>
+      <div class="card-meta">
+        <div class="card-title">개통 후 단말기 사용 불가 대응</div>
+        <div class="card-desc">유심 미인식, 통신사향 단말기 등 문제 발생 시 점검 가이드</div>
       </div>
     </div>
+    <div class="card-footer"><div class="card-tags"><span class="tag">유심</span><span class="tag">eSIM</span><span class="tag">KAIT</span></div><span class="chevron"><svg><use href="#i-chevron"></use></svg></span></div>
+    <div class="detail-panel" id="detail-after-sales"><div class="detail-inner"><div class="detail-body">
+      <div class="case-list">
+        <div class="case-item"><div class="case-title">개통 이력이 없는 통신사향 전용 새 단말기</div><div class="case-desc">해당 통신사 전용 단말기는 타 통신사 유심 사용 불가 → 사용 불가 안내</div></div>
+        <div class="case-item"><div class="case-title">구형(eSIM 미지원)에서 신형(eSIM 지원)으로 변경 시</div><div class="case-desc">KAIT 정보제공 동의 필요 → 1588-3002 요청</div></div>
+        <div class="case-item"><div class="case-title">유심 또는 단말기 유심 트레이 불량</div><div class="case-desc">유심 교체 또는 단말기 점검 필요. 트레이 손상 여부 육안 확인.</div></div>
+      </div>
+    </div></div></div>
   </div>
+
 </div>
 </section>
+
+<div class="search-empty" id="searchEmpty">
+  <svg><use href="#i-search"></use></svg>
+  <p>일치하는 내용이 없습니다.</p>
+  <p class="hint">번호이동, 유심, eSIM, 결합 같은 키워드로 찾아보세요.</p>
+</div>
+
 </main>
-<nav class="mobile-tab-bar">
-  <button class="mob-tab active" data-sec="sales" onclick="switchMobTab('sales')"><span class="mob-tab-icon">🗣️</span><span class="mob-tab-label">영업</span></button>
-  <button class="mob-tab" data-sec="join" onclick="switchMobTab('join')"><span class="mob-tab-icon">📄</span><span class="mob-tab-label">가입</span></button>
-  <button class="mob-tab" data-sec="usim" onclick="switchMobTab('usim')"><span class="mob-tab-icon">💳</span><span class="mob-tab-label">유심</span></button>
-  <button class="mob-tab" data-sec="customer" onclick="switchMobTab('customer')"><span class="mob-tab-icon">❓</span><span class="mob-tab-label">고객응대</span></button>
+
+<nav class="mobile-tab-bar" aria-label="섹션 전환">
+  <button class="mob-tab active" data-sec="sales" onclick="switchMobTab('sales')"><svg><use href="#i-talk"></use></svg><span class="mob-tab-label">영업</span></button>
+  <button class="mob-tab" data-sec="join" onclick="switchMobTab('join')"><svg><use href="#i-doc"></use></svg><span class="mob-tab-label">가입</span></button>
+  <button class="mob-tab" data-sec="usim" onclick="switchMobTab('usim')"><svg><use href="#i-sim"></use></svg><span class="mob-tab-label">유심</span></button>
+  <button class="mob-tab" data-sec="customer" onclick="switchMobTab('customer')"><svg><use href="#i-help"></use></svg><span class="mob-tab-label">고객응대</span></button>
 </nav>
-<footer style="position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1px solid var(--border);text-align:center;padding:10px;font-size:11px;color:#666666;z-index:50;">Created by 박정진 &nbsp;|&nbsp; 모바일 현장영업 통합 가이드</footer>
-<div class="apply-modal-overlay" id="applyModalOverlay">
-  <div class="apply-modal">
-    <h3>대리점 전용 셀프개통 페이지 이동</h3>
-    <p>대리점 전용 셀프개통 페이지로 연결됩니다.<br>개통하시려는 유심 시리얼이 대리점 코드와 맵핑된게 맞는지 확인해주세요.</p>
-    <p class="warn">*맵핑 처리되지 않았다면 대리점 실적으로 처리되지 않습니다.</p>
-    <div class="apply-modal-actions">
-      <button class="apply-modal-cancel" onclick="closeApplyModal()">취소</button>
-      <button class="apply-modal-confirm" onclick="confirmApply()">확인하고 이동</button>
+
+<footer>Created by 박정진 &nbsp;|&nbsp; 모바일 현장영업 통합 가이드</footer>
+
+<div class="modal-overlay" id="applyModalOverlay">
+  <div class="modal">
+    <h3>대리점 전용 셀프개통 페이지로 이동합니다</h3>
+    <p>개통하시려는 유심 시리얼이 대리점 코드와 맵핑된게 맞는지 확인해주세요.</p>
+    <p class="warn">맵핑 처리되지 않았다면 대리점 실적으로 처리되지 않습니다.</p>
+    <div class="modal-actions">
+      <button class="modal-cancel" onclick="closeApplyModal()">취소</button>
+      <button class="modal-confirm" onclick="confirmApply()">확인하고 이동</button>
     </div>
   </div>
 </div>
+
 <script>
 /* ── 인증 (Supabase Auth + 관리자 승인) ── */
 const SUPABASE_URL = 'https://qvzlwhwxspmofrwdvgdd.supabase.co';
@@ -619,12 +669,9 @@ async function handleSignup(e){
     id: data.user.id, name, agency_name: agencyName, agency_code: agencyCode
   });
   btn.disabled = false; btn.textContent = '가입 신청';
-  if(profileError){
-    setMsg('signup-msg','error','가입에 실패했습니다. 다시 시도해주세요');
-    return false;
-  }
+  if(profileError){ setMsg('signup-msg','error','가입 정보 저장에 실패했습니다. 담당자에게 문의해주세요'); return false; }
   await sb.auth.signOut();
-  showPending('가입 신청이 완료되었습니다', '관리자 승인 후 로그인하실 수 있습니다.\n승인은 대리점코드 확인 후 처리됩니다.');
+  showPending('가입 신청이 접수되었습니다', '관리자 승인 후 로그인하실 수 있습니다.\n승인은 대리점코드 확인 후 처리됩니다.');
   return false;
 }
 
@@ -633,25 +680,9 @@ function unlockGuide(){
   document.getElementById('logout-btn').style.display = '';
 }
 
-/* 퀵링크 href엔 토큰을 미리 심어두지 않고, 클릭하는 순간에만 최신 토큰을
-   붙여서 이동한다 — "링크 주소 복사"로 로그인 토큰이 그대로 노출되는 것을 막기 위함.
-   currentAccessToken은 onAuthStateChange로 항상 최신 상태 유지(자동 갱신 포함). */
-let currentAccessToken = null;
-sb.auth.onAuthStateChange((event, session) => {
-  currentAccessToken = session ? session.access_token : null;
-});
-
-function applySsoToLinks(){
-  document.querySelectorAll('.quick-link[data-base]').forEach(a => {
-    a.addEventListener('click', () => {
-      a.href = a.dataset.base + (currentAccessToken ? '#sso=' + encodeURIComponent(currentAccessToken) : '');
-    });
-  });
-}
-
 async function checkExistingSession(){
   const { data } = await sb.auth.getSession();
-  if(data.session){ await afterLogin(data.session); }
+  if(data.session) await afterLogin(data.session);
   else { switchAuthTab('login'); }
 }
 
@@ -660,101 +691,172 @@ async function handleLogout(){
   location.reload();
 }
 
-function toggle(id){const panel=document.getElementById('detail-'+id);if(!panel)return;const card=panel.parentElement;if(panel.classList.contains('open')){panel.classList.remove('open');if(card)card.classList.remove('active');}else{panel.classList.add('open');if(card)card.classList.add('active');}}
-function switchTab(e,tabId){e.stopPropagation();const panel=e.target.closest('.detail-panel');panel.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));panel.querySelectorAll('.tab-content').forEach(c=>c.classList.remove('active'));e.target.classList.add('active');panel.querySelector('#'+tabId).classList.add('active');}
-
-// 검색 기능
-let originalHTML={};
-function saveOriginals(){document.querySelectorAll('.card').forEach((card,i)=>{card.dataset.idx=i;originalHTML[i]=card.innerHTML;});}
-function getTextContent(html){const d=document.createElement('div');d.innerHTML=html;return d.textContent;}
-function escapeRegex(s){return s.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');}
-function doSearch(q){
-  const clearBtn=document.getElementById('searchClear');
-  const countEl=document.getElementById('searchCount');
-  q=q.trim();
-  clearBtn.style.display=q?'block':'none';
-  // 하이라이트 초기화
-  document.querySelectorAll('.card').forEach(card=>{
-    const i=card.dataset.idx;
-    card.innerHTML=originalHTML[i];
-    card.style.display='';
+/* ── 외부 링크 ── */
+function applySsoToLinks(){
+  document.querySelectorAll('[data-base]').forEach(a => {
+    a.setAttribute('href', a.getAttribute('data-base'));
   });
-  if(!q){countEl.textContent='';return;}
-  const re=new RegExp(escapeRegex(q).replace(/\s+/g,'\\s*'),'gi');
-  let matched=0;
-  document.querySelectorAll('.card').forEach(card=>{
-    const text=getTextContent(originalHTML[card.dataset.idx]);
-    if(re.test(text)){
-      re.lastIndex=0;
-      matched++;
-      // 텍스트 노드만 하이라이트
-      highlightNode(card,re);
-      // 검색 시 패널 자동 열기
-      const panel=card.querySelector('.detail-panel');
-      if(panel&&!panel.classList.contains('open')){panel.classList.add('open');card.classList.add('active');}
-    } else {
-      card.style.display='none';
-    }
-  });
-  countEl.textContent=matched?matched+'개 항목 일치':'결과 없음';
 }
-function highlightNode(node,re){
-  if(node.nodeType===3){
-    const val=node.nodeValue;
-    if(re.test(val)){
-      re.lastIndex=0;
-      const span=document.createElement('span');
-      span.innerHTML=val.replace(re,m=>'<mark class="search-highlight">'+m+'</mark>');
-      node.parentNode.replaceChild(span,node);
+
+/* ── 카드 펼침 ── */
+function toggle(id){
+  const panel = document.getElementById('detail-' + id);
+  if(!panel) return;
+  const card = panel.closest('.card');
+  const open = panel.classList.toggle('open');
+  if(card) card.classList.toggle('active', open);
+}
+
+/* ── 요금제 탭 ── */
+function switchTab(e, tabId){
+  e.stopPropagation();
+  const btn = e.currentTarget;
+  const panel = btn.closest('.detail-panel');
+  panel.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  panel.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+  btn.classList.add('active');
+  panel.querySelector('#' + tabId).classList.add('active');
+}
+
+/* ── 검색 ── */
+let originalHTML = {};
+function saveOriginals(){
+  document.querySelectorAll('.card').forEach((card, i) => {
+    card.dataset.idx = i;
+    originalHTML[i] = card.innerHTML;
+  });
+}
+function getTextContent(html){ const d = document.createElement('div'); d.innerHTML = html; return d.textContent; }
+function escapeRegex(s){ return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); }
+
+function doSearch(q){
+  const clearBtn = document.getElementById('searchClear');
+  const countEl = document.getElementById('searchCount');
+  const emptyEl = document.getElementById('searchEmpty');
+  q = q.trim();
+  clearBtn.style.display = q ? 'block' : 'none';
+
+  document.querySelectorAll('.card').forEach(card => {
+    card.innerHTML = originalHTML[card.dataset.idx];
+    card.style.display = '';
+    card.classList.remove('active');
+  });
+  document.querySelectorAll('.section-head').forEach(h => { h.style.display = ''; });
+  emptyEl.style.display = 'none';
+
+  if(!q){ countEl.textContent = ''; return; }
+
+  const re = new RegExp(escapeRegex(q).replace(/\s+/g, '\\s*'), 'gi');
+  let matched = 0;
+  document.querySelectorAll('.card').forEach(card => {
+    const text = getTextContent(originalHTML[card.dataset.idx]);
+    re.lastIndex = 0;
+    if(re.test(text)){
+      re.lastIndex = 0;
+      matched++;
+      highlightNode(card, re);
+      const panel = card.querySelector('.detail-panel');
+      if(panel){ panel.classList.add('open'); card.classList.add('active'); }
+    } else {
+      card.style.display = 'none';
     }
-    re.lastIndex=0;
-  } else if(node.nodeType===1&&!['SCRIPT','STYLE'].includes(node.tagName)){
-    Array.from(node.childNodes).forEach(c=>highlightNode(c,re));
+  });
+
+  document.querySelectorAll('section[data-sec]').forEach(sec => {
+    const visible = Array.from(sec.querySelectorAll('.card')).filter(c => c.style.display !== 'none').length;
+    const head = sec.querySelector('.section-head');
+    if(head) head.style.display = visible ? '' : 'none';
+  });
+
+  countEl.textContent = matched ? matched + '개 항목 일치' : '결과 없음';
+  emptyEl.style.display = matched ? 'none' : 'block';
+}
+
+function highlightNode(node, re){
+  if(node.nodeType === 3){
+    const val = node.nodeValue;
+    re.lastIndex = 0;
+    if(re.test(val)){
+      re.lastIndex = 0;
+      const span = document.createElement('span');
+      span.innerHTML = val.replace(re, m => '<mark class="search-highlight">' + m + '</mark>');
+      node.parentNode.replaceChild(span, node);
+    }
+    re.lastIndex = 0;
+  } else if(node.nodeType === 1 && !['SCRIPT','STYLE','SVG'].includes(node.tagName.toUpperCase())){
+    /* SVG 하위는 건드리지 않는다 — 도면 안 텍스트가 깨진다 */
+    Array.from(node.childNodes).forEach(c => highlightNode(c, re));
   }
 }
+
 function clearSearch(){
-  const input=document.getElementById('searchInput');
-  input.value='';
+  const input = document.getElementById('searchInput');
+  input.value = '';
   doSearch('');
   input.focus();
 }
+
+/* ── 모바일 섹션 전환 ── */
 function switchMobTab(sec){
-  document.querySelectorAll('section[data-sec]').forEach(s=>s.classList.remove('mob-active'));
-  document.querySelectorAll('.mob-tab').forEach(t=>t.classList.remove('active'));
-  const s=document.querySelector('section[data-sec="'+sec+'"]');
-  const t=document.querySelector('.mob-tab[data-sec="'+sec+'"]');
-  if(s)s.classList.add('mob-active');
-  if(t)t.classList.add('active');
-  window.scrollTo({top:0,behavior:'smooth'});
+  document.querySelectorAll('section[data-sec]').forEach(s => s.classList.remove('mob-active'));
+  document.querySelectorAll('.mob-tab').forEach(t => t.classList.remove('active'));
+  const s = document.querySelector('section[data-sec="' + sec + '"]');
+  const t = document.querySelector('.mob-tab[data-sec="' + sec + '"]');
+  if(s) s.classList.add('mob-active');
+  if(t) t.classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
 }
-window.addEventListener('DOMContentLoaded',()=>{
+
+/* ── 섹션 내비게이션 현재 위치 ── */
+function initSectionNav(){
+  const links = document.querySelectorAll('.section-nav a');
+  if(!links.length || !('IntersectionObserver' in window)) return;
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if(!entry.isIntersecting) return;
+      const key = entry.target.dataset.sec;
+      links.forEach(a => a.classList.toggle('current', a.dataset.nav === key));
+    });
+  }, { rootMargin: '-120px 0px -65% 0px' });
+  document.querySelectorAll('section[data-sec]').forEach(s => io.observe(s));
+}
+
+window.addEventListener('DOMContentLoaded', () => {
   saveOriginals();
   switchMobTab('sales');
+  initSectionNav();
   applySsoToLinks();
   checkExistingSession();
 });
-let pendingApplyUrl=null;
+
+/* ── 모달 ── */
+let pendingApplyUrl = null;
 function openApplyModal(e){
   e.preventDefault();
-  pendingApplyUrl=e.currentTarget.getAttribute('href');
+  pendingApplyUrl = e.currentTarget.getAttribute('href');
   document.getElementById('applyModalOverlay').classList.add('open');
   return false;
 }
 function closeApplyModal(){
   document.getElementById('applyModalOverlay').classList.remove('open');
-  pendingApplyUrl=null;
+  pendingApplyUrl = null;
 }
 function confirmApply(){
-  if(pendingApplyUrl)window.open(pendingApplyUrl,'_blank','noopener');
+  if(pendingApplyUrl) window.open(pendingApplyUrl, '_blank', 'noopener');
   closeApplyModal();
 }
 function showInfoModal(msg){
-  document.getElementById('infoModalMsg').textContent=msg;
+  document.getElementById('infoModalMsg').textContent = msg;
   document.getElementById('infoModalOverlay').classList.add('open');
 }
 function closeInfoModal(){
   document.getElementById('infoModalOverlay').classList.remove('open');
 }
+document.addEventListener('keydown', e => {
+  if(e.key !== 'Escape') return;
+  closeApplyModal();
+  closeInfoModal();
+});
 </script>
 </body>
 </html>
