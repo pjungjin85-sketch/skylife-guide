@@ -15,6 +15,7 @@
 <link rel="stylesheet" href="base.css">
 <link rel="stylesheet" href="style.css">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js" integrity="sha384-0w2KAL2YHP6wKOkUDzkCDGgVvfmHnj02DHeQ6XcHOgTfFsGyonKOpShMH1x6nk9o" crossorigin="anonymous"></script>
+<script src="bi-intro.js"></script>
 </head>
 <body>
 
@@ -645,8 +646,10 @@ const AUTH_EMAIL_DOMAIN = '@skylife-agent.local';
 const USERNAME_RE = /^[a-zA-Z0-9_-]{4,20}$/;
 
 function showAuthArea(){
-  document.getElementById('lock-loading').style.display = 'none';
-  document.getElementById('auth-area').classList.add('show');
+  BiIntro.toLogin(() => {
+    document.getElementById('lock-loading').style.display = 'none';
+    document.getElementById('auth-area').classList.add('show');
+  });
 }
 function switchAuthTab(tab){
   showAuthArea();
@@ -660,11 +663,13 @@ function backToLogin(){
   switchAuthTab('login');
 }
 function showPending(title, desc){
-  document.getElementById('lock-loading').style.display = 'none';
-  document.getElementById('auth-area').classList.remove('show');
-  document.getElementById('auth-pending-title').textContent = title;
-  document.getElementById('auth-pending-desc').textContent = desc;
-  document.getElementById('auth-pending-box').style.display = 'block';
+  BiIntro.toLogin(() => {
+    document.getElementById('lock-loading').style.display = 'none';
+    document.getElementById('auth-area').classList.remove('show');
+    document.getElementById('auth-pending-title').textContent = title;
+    document.getElementById('auth-pending-desc').textContent = desc;
+    document.getElementById('auth-pending-box').style.display = 'block';
+  });
 }
 function setMsg(id, type, text){
   const el = document.getElementById(id);
@@ -732,11 +737,13 @@ async function handleSignup(e){
 }
 
 function unlockGuide(){
-  document.getElementById('lock-overlay').classList.add('hidden');
-  // 라인 드로잉 시작 신호. 다 그린 뒤에는 바로가기 아이콘을 '완성' 상태로 고정해 hover 때만 다시 그린다
-  document.body.classList.add('unlocked');
-  setTimeout(() => document.querySelector('.quick-links')?.classList.add('drawn'), 1800);
   document.getElementById('logout-btn').style.display = '';
+  BiIntro.reveal(() => {
+    document.getElementById('lock-overlay').classList.add('hidden');
+    // 라인 드로잉 시작 신호. 다 그린 뒤에는 바로가기 아이콘을 '완성' 상태로 고정해 hover 때만 다시 그린다
+    document.body.classList.add('unlocked');
+    setTimeout(() => document.querySelector('.quick-links')?.classList.add('drawn'), 1800);
+  });
 }
 
 async function checkExistingSession(){
