@@ -694,10 +694,30 @@ async function handleLogout(){
   location.reload();
 }
 
-/* ── 외부 링크 ── */
+/* ── 다른 페이지로 로그인 상태 넘기기 ──
+   각 페이지가 서로 다른 도메인이라 sessionStorage가 공유되지 않는다.
+   그래서 접속 토큰을 URL 프래그먼트(#sso=)로 넘긴다.
+     · 프래그먼트는 서버로 전송되지 않고 Referer에도 실리지 않는다
+     · 넘기는 것은 수명이 짧은 access_token 뿐이다 (refresh_token은 넘기지 않는다)
+     · 받는 쪽은 서버에 토큰을 검증한 뒤 history.replaceState로 즉시 주소에서 지운다
+   토큰은 클릭하는 순간에 붙인다. 미리 붙여두면 만료된 토큰이 박힌 채 남는다. */
 function applySsoToLinks(){
   document.querySelectorAll('[data-base]').forEach(a => {
-    a.setAttribute('href', a.getAttribute('data-base'));
+    const base = a.getAttribute('data-base');
+    a.setAttribute('href', base);           // 자바스크립트가 막혀도 이동은 되게
+    if(a.dataset.ssoBound) return;
+    a.dataset.ssoBound = '1';
+    a.addEventListener('click', async e => {
+      if(e.metaKey || e.ctrlKey || e.shiftKey || e.button !== 0) return;  // 새 탭 열기는 그대로
+      e.preventDefault();
+      let url = base;
+      try {
+        const { data } = await sb.auth.getSession();
+        const token = data.session && data.session.access_token;
+        if(token) url = base + (base.includes('#') ? '&' : '#') + 'sso=' + encodeURIComponent(token);
+      } catch(_) { /* 토큰을 못 얻으면 그냥 이동한다. 그쪽에서 로그인하면 된다 */ }
+      window.location.href = url;
+    });
   });
 }
 
