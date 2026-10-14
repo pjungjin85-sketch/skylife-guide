@@ -135,11 +135,11 @@
     <button id="searchClear" onclick="clearSearch()" style="display:none" aria-label="검색어 지우기">✕</button>
     <span id="searchCount" aria-live="polite"></span>
     <div class="quick-links">
-      <a href="https://skylife-tps.vercel.app/" data-base="https://skylife-tps.vercel.app/" class="quick-link"><svg><use href="#i-calc"></use></svg>결합계산기</a>
-      <a href="https://skylife-plans-bec2.vercel.app/" data-base="https://skylife-plans-bec2.vercel.app/" class="quick-link"><svg><use href="#i-grid"></use></svg>요금제 리스트</a>
-      <a href="https://skylife-addons-ejol.vercel.app/" data-base="https://skylife-addons-ejol.vercel.app/" class="quick-link"><svg><use href="#i-service"></use></svg>부가서비스</a>
-      <a href="https://skylife-mobile-faq-um3h.vercel.app/" data-base="https://skylife-mobile-faq-um3h.vercel.app/" class="quick-link"><svg><use href="#i-help"></use></svg>FAQ</a>
-      <a href="https://skylife-inquiry.vercel.app/" class="quick-link"><svg><use href="#i-bell"></use></svg>공지사항</a>
+      <a href="https://skylife-tps.vercel.app/" data-base="https://skylife-tps.vercel.app/" class="quick-link"><svg class="qi" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect pathLength="1" x="4" y="2.5" width="16" height="19" rx="2.5"/><path pathLength="1" d="M8 7h8M8.5 12h.01M12 12h.01M15.5 12h.01M8.5 16.5h.01M12 16.5h.01M15.5 16.5h.01"/></svg>결합계산기</a>
+      <a href="https://skylife-plans-bec2.vercel.app/" data-base="https://skylife-plans-bec2.vercel.app/" class="quick-link"><svg class="qi" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect pathLength="1" x="3.5" y="3.5" width="17" height="17" rx="2.5"/><path pathLength="1" d="M3.5 9.5h17M9.5 9.5v11"/></svg>요금제 리스트</a>
+      <a href="https://skylife-addons-ejol.vercel.app/" data-base="https://skylife-addons-ejol.vercel.app/" class="quick-link"><svg class="qi" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle pathLength="1" cx="12" cy="12" r="3"/><path pathLength="1" d="M18.4 5.6a9 9 0 0 1 0 12.8M5.6 5.6a9 9 0 0 0 0 12.8"/></svg>부가서비스</a>
+      <a href="https://skylife-mobile-faq-um3h.vercel.app/" data-base="https://skylife-mobile-faq-um3h.vercel.app/" class="quick-link"><svg class="qi" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle pathLength="1" cx="12" cy="12" r="8.5"/><path pathLength="1" d="M9.6 9.4a2.5 2.5 0 0 1 4.8.8c0 1.7-2.4 2.3-2.4 3.8"/><path pathLength="1" d="M12 17.2h.01"/></svg>FAQ</a>
+      <a href="https://skylife-inquiry.vercel.app/" class="quick-link"><svg class="qi" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path pathLength="1" d="M13.7 20.3a2 2 0 0 1-3.4 0"/><path pathLength="1" d="M18 8.5a6 6 0 0 0-12 0c0 6.5-2.5 8.3-2.5 8.3h17S18 15 18 8.5z"/></svg>공지사항</a>
     </div>
   </div>
 </div>
@@ -733,6 +733,9 @@ async function handleSignup(e){
 
 function unlockGuide(){
   document.getElementById('lock-overlay').classList.add('hidden');
+  // 라인 드로잉 시작 신호. 다 그린 뒤에는 바로가기 아이콘을 '완성' 상태로 고정해 hover 때만 다시 그린다
+  document.body.classList.add('unlocked');
+  setTimeout(() => document.querySelector('.quick-links')?.classList.add('drawn'), 1800);
   document.getElementById('logout-btn').style.display = '';
 }
 

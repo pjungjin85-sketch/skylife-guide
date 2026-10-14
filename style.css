@@ -78,8 +78,9 @@
 .hero-art [data-draw]{
   stroke-dasharray:1;
   stroke-dashoffset:1;
-  animation:draw var(--dur-slow) var(--ease-out) forwards;
 }
+/* 로그인 화면에 가려진 동안 그려져 버리지 않도록, 잠금이 풀린 뒤에 그린다 */
+body.unlocked .hero-art [data-draw]{animation:draw var(--dur-slow) var(--ease-out) forwards;}
 .hero-art .sim-body[data-draw]{animation-delay:.1s;}
 .hero-art .sim-pad[data-draw]{animation-delay:.5s;}
 @keyframes draw{to{stroke-dashoffset:0;}}
@@ -149,6 +150,20 @@
 .quick-link svg{width:15px;height:15px;flex-shrink:0;color:var(--light);}
 .quick-link:hover{border-color:var(--light);background:var(--bg2);}
 .quick-link:hover svg{color:var(--black);}
+
+/* 바로가기 아이콘 라인 드로잉 — 유심 그림이 그려진 뒤 왼쪽부터 차례로, 마우스를 올리면 다시 그린다 */
+.quick-link .qi>*{stroke-dasharray:1;stroke-dashoffset:1;}
+body.unlocked .quick-link .qi>*{
+  animation:draw var(--dur-slow) var(--ease-out) forwards;
+  animation-delay:calc(.7s + var(--qi-i,0) * .09s);
+}
+.quick-link:nth-child(2){--qi-i:1;}
+.quick-link:nth-child(3){--qi-i:2;}
+.quick-link:nth-child(4){--qi-i:3;}
+.quick-link:nth-child(5){--qi-i:4;}
+body.unlocked .quick-links.drawn .qi>*{animation:none;stroke-dashoffset:0;}
+body.unlocked .quick-links.drawn .quick-link:hover .qi>*{animation:redraw .5s var(--ease-out);}
+@keyframes redraw{from{stroke-dashoffset:1;}to{stroke-dashoffset:0;}}
 
 /* ============================================================
    섹션 내비게이션 (데스크톱)
@@ -819,7 +834,7 @@ footer{
     transition-duration:.01ms !important;
     scroll-behavior:auto !important;
   }
-  .hero-art [data-draw]{stroke-dashoffset:0;}
+  .hero-art [data-draw],.quick-link .qi>*{stroke-dashoffset:0;animation:none !important;}
 }
 
 /* ============================================================
