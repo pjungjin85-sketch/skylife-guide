@@ -1,138 +1,12 @@
 @charset "UTF-8";
 /* ============================================================
-   kt skylife 모바일 현장영업 통합 가이드
+   skylife-guide — 모바일 현장영업 통합 가이드
    Created by 박정진
    ------------------------------------------------------------
-   브랜드 색은 /Users/jaypark/workspace/CLAUDE.md 공식 변수를 그대로
-   사용한다(값 변경 금지). 아래 --space / --radius / --text 토큰만
-   이 페이지에서 추가로 정의한다.
+   공통 토큰·컴포넌트는 base.css. 이 파일은 이 페이지 전용.
    ============================================================ */
 
-:root{
-  /* ── 공식 브랜드 변수 (변경 금지) ── */
-  --red:#E60012;
-  --red2:#CC0010;
-  --red-light:#FFF5F5;
-  --red-border:#FFCCCC;
-  --black:#1A1A1A;
-  --dark:#333333;
-  --mid:#666666;
-  --light:#999999;
-  --bg:#FFFFFF;
-  --bg2:#F7F7F7;
-  --bg3:#FAFAFA;
-  --border:#E8E8E8;
-  --shadow:0 2px 12px rgba(0,0,0,0.08);
-  --shadow-hover:0 8px 28px rgba(0,0,0,0.14);
-
-  /* ── 간격 ── */
-  --s-1:4px;  --s-2:8px;  --s-3:12px; --s-4:16px;
-  --s-5:24px; --s-6:32px; --s-7:48px; --s-8:64px; --s-9:96px;
-
-  /* ── 모서리: 위계별로 다르게 쓴다 ──
-     pill = 태그/뱃지, md = 카드 안쪽 상자, lg = 카드 자체 */
-  --r-pill:999px;
-  --r-sm:6px;
-  --r-md:10px;
-  --r-lg:16px;
-
-  /* ── 타이포 ── */
-  --t-display:clamp(30px,4.2vw,42px);
-  --t-h2:22px;
-  --t-h3:17px;
-  --t-body:14.5px;
-  --t-sm:13px;
-  --t-xs:12px;
-
-  /* ── 모션 ── */
-  --ease:cubic-bezier(.4,0,.2,1);
-  --ease-out:cubic-bezier(.16,1,.3,1);
-  --dur-fast:.16s;
-  --dur:.3s;
-  --dur-slow:.6s;
-
-  --wrap:1120px;
-}
-
-*{margin:0;padding:0;box-sizing:border-box;}
-
-html{-webkit-text-size-adjust:100%;}
-
-body{
-  background:var(--bg);
-  color:var(--dark);
-  font-family:'Pretendard Variable',Pretendard,-apple-system,BlinkMacSystemFont,system-ui,sans-serif;
-  font-size:var(--t-body);
-  line-height:1.7;
-  letter-spacing:-.011em;
-  min-height:100vh;
-  overflow-x:hidden;
-  -webkit-font-smoothing:antialiased;
-  text-rendering:optimizeLegibility;
-  /* 한글은 단어 중간에서 끊지 않는다 */
-  word-break:keep-all;
-  overflow-wrap:break-word;
-}
-
-svg{display:block;}
-button{font-family:inherit;letter-spacing:inherit;}
-
-/* 키보드 포커스만 표시 */
-:focus-visible{
-  outline:2px solid var(--red);
-  outline-offset:2px;
-  border-radius:3px;
-}
-:focus:not(:focus-visible){outline:none;}
-
-.wrap{max-width:var(--wrap);margin:0 auto;padding:0 var(--s-5);}
-
-/* ============================================================
-   헤더
-   ============================================================ */
-header{
-  background:var(--bg);
-  border-top:3px solid var(--red);
-  border-bottom:1px solid var(--border);
-  position:sticky;
-  top:0;
-  z-index:100;
-}
-.header-inner{
-  max-width:var(--wrap);
-  margin:0 auto;
-  padding:0 var(--s-5);
-  display:flex;
-  align-items:center;
-  height:60px;
-  gap:var(--s-3);
-}
-.logo-text{
-  font-size:19px;
-  font-weight:800;
-  color:var(--black);
-  letter-spacing:-.03em;
-  white-space:nowrap;
-}
-.logo-text span{color:var(--red);}
-.header-badge{
-  font-size:var(--t-xs);
-  font-weight:600;
-  color:var(--mid);
-  padding-left:var(--s-3);
-  border-left:1px solid var(--border);
-  white-space:nowrap;
-}
-.header-title{
-  font-size:var(--t-sm);
-  font-weight:600;
-  color:var(--dark);
-  padding-left:var(--s-3);
-  border-left:1px solid var(--border);
-  white-space:nowrap;
-}
-.header-right{display:flex;align-items:center;gap:var(--s-3);margin-left:auto;}
-.header-sub{font-size:var(--t-xs);color:var(--light);white-space:nowrap;}
+/* 헤더 로그아웃 버튼 (base.css에는 없는 이 페이지 전용) */
 .logout-btn{
   padding:7px 14px;
   border:1px solid var(--border);
@@ -196,28 +70,6 @@ header{
   max-width:46ch;
 }
 .hero-actions{display:flex;gap:var(--s-2);margin-top:var(--s-5);flex-wrap:wrap;}
-
-.btn{
-  display:inline-flex;
-  align-items:center;
-  gap:7px;
-  padding:12px 20px;
-  border-radius:var(--r-md);
-  font-size:var(--t-sm);
-  font-weight:700;
-  text-decoration:none;
-  border:1px solid transparent;
-  cursor:pointer;
-  white-space:nowrap;
-  transition:background var(--dur-fast) var(--ease),
-             border-color var(--dur-fast) var(--ease),
-             color var(--dur-fast) var(--ease);
-}
-.btn svg{width:16px;height:16px;flex-shrink:0;}
-.btn-primary{background:var(--red);color:#fff;}
-.btn-primary:hover{background:var(--red2);}
-.btn-quiet{background:var(--bg);color:var(--dark);border-color:var(--border);}
-.btn-quiet:hover{border-color:var(--light);background:var(--bg2);}
 
 /* 유심 드로잉 */
 .hero-art{width:260px;flex-shrink:0;color:var(--border);}
@@ -612,7 +464,7 @@ body.searching main section{display:block;animation:none;margin-bottom:var(--s-8
   font-size:10.5px;
   font-weight:700;
   padding:1px 7px;
-  border-radius:var(--r-pill);
+  border-radius:var(--r-tag);
   margin-left:5px;
   vertical-align:middle;
   white-space:nowrap;
