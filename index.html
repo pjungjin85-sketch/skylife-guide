@@ -116,7 +116,7 @@
       <p>가입 안내부터 유심 장착, 번호이동, 요금제 설명까지. 현장에서 바로 꺼내 쓰는 실무 안내서입니다.</p>
       <div class="hero-actions">
         <a href="https://shop.skylife.co.kr/mvno/appinfo?code=12Xh1W" onclick="return openApplyModal(event)" class="btn btn-primary"><svg><use href="#i-external"></use></svg>개통하기</a>
-        <a href="#sec-sales" class="btn btn-quiet">가이드 보기</a>
+        <button type="button" class="btn btn-quiet" onclick="scrollToGuide()">가이드 보기</button>
       </div>
     </div>
     <svg class="hero-art" viewBox="0 0 200 150" fill="none" role="img" aria-label="나노 유심 카드 도면">
@@ -145,18 +145,18 @@
   </div>
 </div>
 
-<nav class="section-nav" aria-label="섹션 바로가기">
+<nav class="section-nav" aria-label="섹션 선택">
   <div class="section-nav-inner">
-    <a href="#sec-sales" data-nav="sales">현장 영업 프로세스</a>
-    <a href="#sec-join" data-nav="join">가입 &amp; 개통 절차</a>
-    <a href="#sec-usim" data-nav="usim">유심 안내</a>
-    <a href="#sec-customer" data-nav="customer">고객 설명 핵심</a>
+    <button type="button" class="current" data-nav="sales" onclick="showSection('sales')">현장 영업 프로세스</button>
+    <button type="button" data-nav="join" onclick="showSection('join')">가입 &amp; 개통 절차</button>
+    <button type="button" data-nav="usim" onclick="showSection('usim')">유심 안내</button>
+    <button type="button" data-nav="customer" onclick="showSection('customer')">고객 설명 핵심</button>
   </div>
 </nav>
 
 <main>
 
-<section id="sec-sales" data-sec="sales" class="mob-active">
+<section id="sec-sales" data-sec="sales" class="sec-active">
 <div class="section-head">
   <span class="section-num">01</span>
   <h2>현장 영업 프로세스</h2>
@@ -559,10 +559,10 @@
 </main>
 
 <nav class="mobile-tab-bar" aria-label="섹션 전환">
-  <button class="mob-tab active" data-sec="sales" onclick="switchMobTab('sales')"><svg><use href="#i-talk"></use></svg><span class="mob-tab-label">영업</span></button>
-  <button class="mob-tab" data-sec="join" onclick="switchMobTab('join')"><svg><use href="#i-doc"></use></svg><span class="mob-tab-label">가입</span></button>
-  <button class="mob-tab" data-sec="usim" onclick="switchMobTab('usim')"><svg><use href="#i-sim"></use></svg><span class="mob-tab-label">유심</span></button>
-  <button class="mob-tab" data-sec="customer" onclick="switchMobTab('customer')"><svg><use href="#i-help"></use></svg><span class="mob-tab-label">고객응대</span></button>
+  <button class="mob-tab active" data-sec="sales" onclick="showSection('sales')"><svg><use href="#i-talk"></use></svg><span class="mob-tab-label">영업</span></button>
+  <button class="mob-tab" data-sec="join" onclick="showSection('join')"><svg><use href="#i-doc"></use></svg><span class="mob-tab-label">가입</span></button>
+  <button class="mob-tab" data-sec="usim" onclick="showSection('usim')"><svg><use href="#i-sim"></use></svg><span class="mob-tab-label">유심</span></button>
+  <button class="mob-tab" data-sec="customer" onclick="showSection('customer')"><svg><use href="#i-help"></use></svg><span class="mob-tab-label">고객응대</span></button>
 </nav>
 
 <footer>Created by 박정진 &nbsp;|&nbsp; 모바일 현장영업 통합 가이드</footer>
@@ -735,6 +735,7 @@ function doSearch(q){
   const emptyEl = document.getElementById('searchEmpty');
   q = q.trim();
   clearBtn.style.display = q ? 'block' : 'none';
+  document.body.classList.toggle('searching', !!q);
 
   document.querySelectorAll('.card').forEach(card => {
     card.innerHTML = originalHTML[card.dataset.idx];
@@ -796,35 +797,26 @@ function clearSearch(){
   input.focus();
 }
 
-/* ── 모바일 섹션 전환 ── */
-function switchMobTab(sec){
-  document.querySelectorAll('section[data-sec]').forEach(s => s.classList.remove('mob-active'));
-  document.querySelectorAll('.mob-tab').forEach(t => t.classList.remove('active'));
-  const s = document.querySelector('section[data-sec="' + sec + '"]');
-  const t = document.querySelector('.mob-tab[data-sec="' + sec + '"]');
-  if(s) s.classList.add('mob-active');
-  if(t) t.classList.add('active');
+/* ── 섹션 전환 (상단 탭 · 모바일 하단 탭 공용) ── */
+function showSection(sec){
+  // 검색 중이면 전 섹션이 펼쳐져 있다. 섹션을 고르면 검색을 끝낸다.
+  const input = document.getElementById('searchInput');
+  if(input.value || document.body.classList.contains('searching')){ input.value = ''; doSearch(''); }
+
+  document.querySelectorAll('section[data-sec]').forEach(s => s.classList.toggle('sec-active', s.dataset.sec === sec));
+  document.querySelectorAll('.mob-tab').forEach(t => t.classList.toggle('active', t.dataset.sec === sec));
+  document.querySelectorAll('.section-nav button').forEach(b => b.classList.toggle('current', b.dataset.nav === sec));
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-/* ── 섹션 내비게이션 현재 위치 ── */
-function initSectionNav(){
-  const links = document.querySelectorAll('.section-nav a');
-  if(!links.length || !('IntersectionObserver' in window)) return;
-  const io = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if(!entry.isIntersecting) return;
-      const key = entry.target.dataset.sec;
-      links.forEach(a => a.classList.toggle('current', a.dataset.nav === key));
-    });
-  }, { rootMargin: '-120px 0px -65% 0px' });
-  document.querySelectorAll('section[data-sec]').forEach(s => io.observe(s));
+function scrollToGuide(){
+  const nav = document.querySelector('.section-nav');
+  if(nav) window.scrollTo({ top: nav.offsetTop - 60, behavior: 'smooth' });
 }
 
 window.addEventListener('DOMContentLoaded', () => {
   saveOriginals();
-  switchMobTab('sales');
-  initSectionNav();
+  showSection('sales');
   applySsoToLinks();
   checkExistingSession();
 });

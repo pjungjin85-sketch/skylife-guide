@@ -322,26 +322,32 @@ header{
   scrollbar-width:none;
 }
 .section-nav-inner::-webkit-scrollbar{display:none;}
-.section-nav a{
+.section-nav button{
   padding:13px 0;
   font-size:var(--t-sm);
   font-weight:600;
   color:var(--light);
-  text-decoration:none;
+  background:none;
+  border:none;
+  cursor:pointer;
   white-space:nowrap;
   border-bottom:2px solid transparent;
   margin-bottom:-1px;
   transition:color var(--dur-fast) var(--ease),border-color var(--dur-fast) var(--ease);
 }
-.section-nav a:hover{color:var(--dark);}
-.section-nav a.current{color:var(--black);border-bottom-color:var(--red);}
+.section-nav button:hover{color:var(--dark);}
+.section-nav button.current{color:var(--black);border-bottom-color:var(--red);}
 
 /* ============================================================
    본문 / 섹션
    ============================================================ */
 main{max-width:var(--wrap);margin:0 auto;padding:var(--s-7) var(--s-5) var(--s-9);}
-section{margin-bottom:var(--s-8);scroll-margin-top:120px;}
-section:last-child{margin-bottom:0;}
+/* 한 번에 한 섹션만 보여준다 (상단 탭 / 모바일 하단 탭으로 전환) */
+section{display:none;}
+section.sec-active{display:block;animation:section-in var(--dur) var(--ease-out);}
+@keyframes section-in{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:none;}}
+/* 검색 중에는 전 섹션을 펼쳐 결과가 가려지지 않게 한다 */
+body.searching main section{display:block;animation:none;margin-bottom:var(--s-8);}
 
 .section-head{
   display:flex;
@@ -894,9 +900,6 @@ footer{
   .section-nav{display:none;}
 
   main{padding:var(--s-5) var(--s-4) 92px;}
-  section{display:none;margin-bottom:0;}
-  section.mob-active{display:block;animation:section-in var(--dur) var(--ease-out);}
-  @keyframes section-in{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:none;}}
 
   .card-grid{grid-template-columns:1fr;}
   .split-grid{grid-template-columns:1fr;}
