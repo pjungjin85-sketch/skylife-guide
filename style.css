@@ -116,13 +116,11 @@ header{
 }
 .logo-text span{color:var(--red);}
 .header-badge{
-  background:var(--bg2);
-  color:var(--mid);
-  border:1px solid var(--border);
-  font-size:11px;
+  font-size:var(--t-xs);
   font-weight:600;
-  padding:2px 8px;
-  border-radius:var(--r-pill);
+  color:var(--mid);
+  padding-left:var(--s-3);
+  border-left:1px solid var(--border);
   white-space:nowrap;
 }
 .header-title{
@@ -424,19 +422,19 @@ body.searching main section{display:block;animation:none;margin-bottom:var(--s-8
   margin-top:5px;
   line-height:1.65;
 }
+.tag + .tag::before{content:'·';margin:0 6px;color:var(--border);}
 .card-footer{
   padding:0 var(--s-5) var(--s-4);
   display:flex;
   align-items:center;
   gap:var(--s-3);
 }
-.card-tags{display:flex;gap:5px;flex-wrap:wrap;}
+/* 가운뎃점 구분자가 붙으려면 flex gap이 아니라 흐르는 텍스트여야 한다 */
+.card-tags{display:block;}
 .tag{
+  display:inline;
   font-size:var(--t-xs);
   font-weight:500;
-  padding:3px 10px;
-  border-radius:var(--r-pill);
-  background:var(--bg2);
   color:var(--mid);
 }
 
