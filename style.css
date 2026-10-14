@@ -227,6 +227,26 @@ body.searching main section{display:block;animation:none;margin-bottom:var(--s-8
   white-space:nowrap;
 }
 
+/* 섹션 머리 일러스트 — 그림이 구분선 위에 서 있도록 아래로 붙인다 */
+.section-head.has-illust{align-items:flex-end;padding-bottom:0;}
+.section-head-text{
+  display:flex;flex-wrap:wrap;align-items:baseline;
+  column-gap:var(--s-3);row-gap:var(--s-1);
+  padding-bottom:var(--s-3);
+  min-width:0;
+}
+.has-illust .section-note{margin-left:0;flex-basis:100%;}
+.section-illust{
+  flex:none;margin-left:auto;
+  height:120px;width:auto;
+  margin-bottom:-1px;
+}
+/* 번호와 제목이 떨어지지 않게: 제목이 줄어들며 줄바꿈한다 */
+.has-illust .section-head-text h2{flex:1 1 0;min-width:0;}
+@media(max-width:768px){
+  .section-illust{height:92px;max-width:32%;object-fit:contain;object-position:right bottom;}
+}
+
 .card-grid{
   display:flex;
   flex-direction:column;
@@ -548,6 +568,11 @@ body.searching main section{display:block;animation:none;margin-bottom:var(--s-8
 .dg-label{font-size:12px;font-weight:600;fill:var(--dark);}
 .dg-dim{font-size:11px;font-weight:500;fill:var(--light);}
 .dg-accent-label{font-size:12px;font-weight:700;fill:var(--red);}
+/* 모바일에서는 그림 전체가 약 0.7배로 줄어 글자가 8px대가 되므로 키운다 */
+@media(max-width:768px){
+  .dg-label,.dg-accent-label{font-size:14px;transform:translateY(2px);}
+  .dg-dim{font-size:12.5px;transform:translateY(5px);}
+}
 
 /* ============================================================
    모바일 하단 탭

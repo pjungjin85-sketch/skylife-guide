@@ -157,10 +157,13 @@
 <main>
 
 <section id="sec-sales" data-sec="sales" class="sec-active">
-<div class="section-head">
-  <span class="section-num">01</span>
-  <h2>현장 영업 프로세스</h2>
-  <span class="section-note">접근부터 개통 안내까지</span>
+<div class="section-head has-illust">
+  <div class="section-head-text">
+    <span class="section-num">01</span>
+    <h2>현장 영업 프로세스</h2>
+    <span class="section-note">접근부터 개통 안내까지</span>
+  </div>
+  <img class="section-illust" src="img/illust/sales.svg" width="755" height="731" alt="" loading="lazy" decoding="async">
 </div>
 <div class="card-grid">
 
@@ -252,10 +255,13 @@
 </section>
 
 <section id="sec-join" data-sec="join">
-<div class="section-head">
-  <span class="section-num">02</span>
-  <h2>가입 &amp; 개통 절차</h2>
-  <span class="section-note">서류 · 번호이동 · 신규</span>
+<div class="section-head has-illust">
+  <div class="section-head-text">
+    <span class="section-num">02</span>
+    <h2>가입 &amp; 개통 절차</h2>
+    <span class="section-note">서류 · 번호이동 · 신규</span>
+  </div>
+  <img class="section-illust" src="img/illust/join.svg" width="900" height="716" alt="" loading="lazy" decoding="async">
 </div>
 <div class="card-grid">
 
@@ -343,10 +349,13 @@
 </section>
 
 <section id="sec-usim" data-sec="usim">
-<div class="section-head">
-  <span class="section-num">03</span>
-  <h2>유심(USIM) 안내</h2>
-  <span class="section-note">규격 · 장착 · eSIM</span>
+<div class="section-head has-illust">
+  <div class="section-head-text">
+    <span class="section-num">03</span>
+    <h2>유심(USIM) 안내</h2>
+    <span class="section-note">규격 · 장착 · eSIM</span>
+  </div>
+  <img class="section-illust" src="img/illust/usim.svg" width="524" height="740" alt="" loading="lazy" decoding="async">
 </div>
 <div class="card-grid">
 
@@ -457,11 +466,52 @@
     </div>
     <div class="card-footer"><div class="card-tags"><span class="tag">QR코드</span><span class="tag">EID</span></div></div>
     <div class="detail-panel" id="detail-esim-guide"><div class="detail-inner"><div class="detail-body">
-      <div class="steps">
+
+      <div class="card-split">
+      <div class="diagram">
+        <svg viewBox="0 0 440 150" role="img" aria-label="eSIM 개통 흐름도: QR 스캔, 프로파일 다운로드, 개통 완료">
+          <rect class="dg-fill" x="50" y="16" width="50" height="94" rx="8"/>
+          <rect class="dg-line" x="50" y="16" width="50" height="94" rx="8"/>
+          <path class="dg-thin" d="M67 23h16"/>
+          <rect class="dg-line" x="63" y="50" width="8" height="8" rx="1"/>
+          <rect class="dg-line" x="79" y="50" width="8" height="8" rx="1"/>
+          <rect class="dg-line" x="63" y="66" width="8" height="8" rx="1"/>
+          <path class="dg-line" d="M79 66h3M85 66v3M79 72v2h8"/>
+          <path class="dg-accent" d="M58 51v-6h6M86 45h6v6M92 73v6h-6M64 79h-6v-6"/>
+          <text class="dg-label" x="75" y="128" text-anchor="middle">① QR 스캔</text>
+          <text class="dg-dim" x="75" y="143" text-anchor="middle">기본 카메라 앱</text>
+
+          <path class="dg-thin" d="M112 63h68M175 58l5 5-5 5"/>
+
+          <rect class="dg-fill-accent" x="195" y="16" width="50" height="94" rx="8"/>
+          <rect class="dg-accent" x="195" y="16" width="50" height="94" rx="8"/>
+          <path class="dg-thin" d="M212 23h16"/>
+          <path class="dg-line" d="M207 47a18 18 0 0 1 26 0M211.5 52.5a11 11 0 0 1 17 0"/>
+          <circle class="dg-line" cx="220" cy="58" r="1"/>
+          <path class="dg-accent" d="M220 68v16M213.5 78l6.5 6.5 6.5-6.5M210 92h20"/>
+          <text class="dg-accent-label" x="220" y="128" text-anchor="middle">② 프로파일 다운로드</text>
+          <text class="dg-dim" x="220" y="143" text-anchor="middle">Wi-Fi 연결 필수</text>
+
+          <path class="dg-thin" d="M257 63h68M320 58l5 5-5 5"/>
+
+          <rect class="dg-fill" x="340" y="16" width="50" height="94" rx="8"/>
+          <rect class="dg-line" x="340" y="16" width="50" height="94" rx="8"/>
+          <path class="dg-thin" d="M357 23h16"/>
+          <path class="dg-line" d="M354 60v-4M359 60v-7M364 60v-10M369 60v-13"/>
+          <circle class="dg-accent" cx="365" cy="82" r="10"/>
+          <path class="dg-accent" d="M360.5 82l3 3 6-6.5"/>
+          <text class="dg-label" x="365" y="128" text-anchor="middle">③ 개통 완료</text>
+          <text class="dg-dim" x="365" y="143" text-anchor="middle">안테나 바 표시 확인</text>
+        </svg>
+        <div class="diagram-caption">QR 스캔과 프로파일 다운로드는 반드시 Wi-Fi에 연결된 상태에서 진행하세요.</div>
+      </div>
+
+      <div class="steps" style="margin-top:12px">
         <div class="step"><div class="step-num">1</div><div class="step-body"><div class="step-title">eSIM 지원 단말기 여부 확인</div><div class="step-desc">설정 → 일반 → 정보 → EID가 있는 경우 eSIM 사용 가능. 또는 제조사 공식 스펙 확인.</div></div></div>
         <div class="step"><div class="step-num">2</div><div class="step-body"><div class="step-title">개통 시스템에서 eSIM 선택</div><div class="step-desc">IMEI1, IMEI2, EID 정보 입력 (최대 32자리 숫자로 구성)</div><div class="step-tip">핸드폰에서 개통 시 숫자를 길게 눌러 복사 붙여넣기 처리 / PC 개통 시 입력 주의</div></div></div>
         <div class="step"><div class="step-num">3</div><div class="step-body"><div class="step-title">프로파일 다운로드</div><div class="step-desc">방법1: 휴대폰 기본 카메라 실행 → QR 코드 스캔 → 프로파일 자동 다운로드<br>방법2: 개통한 eSIM IMEI 기준으로 단말기에서 프로파일 설치 안내 메시지 수신 후 다운로드</div><div class="step-tip">Wi-Fi 연결 필수 — 프로파일 다운로드에 데이터 연결이 필요합니다</div></div></div>
         <div class="step"><div class="step-num">4</div><div class="step-body"><div class="step-title">개통 완료 확인</div><div class="step-desc">화면 상단의 안테나 바가 표시되면 완료.</div></div></div>
+      </div>
       </div>
       <div class="note note-alert"><svg><use href="#i-alert"></use></svg><span>단말기에서 eSIM과 유심 모두 사용하는 경우 동일 명의만 가능합니다. 다른 명의의 eSIM과 유심이 함께 있는 경우 자동 정지처리 됩니다.</span></div>
     </div></div></div>
@@ -471,10 +521,13 @@
 </section>
 
 <section id="sec-customer" data-sec="customer">
-<div class="section-head">
-  <span class="section-num">04</span>
-  <h2>고객 설명 핵심 포인트</h2>
-  <span class="section-note">FAQ · 주의사항 · 문제 대응</span>
+<div class="section-head has-illust">
+  <div class="section-head-text">
+    <span class="section-num">04</span>
+    <h2>고객 설명 핵심 포인트</h2>
+    <span class="section-note">FAQ · 주의사항 · 문제 대응</span>
+  </div>
+  <img class="section-illust" src="img/illust/customer.svg" width="856" height="615" alt="" loading="lazy" decoding="async">
 </div>
 <div class="card-grid">
 
