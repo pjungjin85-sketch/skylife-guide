@@ -343,7 +343,7 @@ header{
    ============================================================ */
 main{max-width:var(--wrap);margin:0 auto;padding:var(--s-7) var(--s-5) var(--s-9);}
 /* 한 번에 한 섹션만 보여준다 (상단 탭 / 모바일 하단 탭으로 전환) */
-section{display:none;max-width:880px;}
+section{display:none;}
 section.sec-active{display:block;animation:section-in var(--dur) var(--ease-out);}
 @keyframes section-in{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:none;}}
 /* 검색 중에는 전 섹션을 펼쳐 결과가 가려지지 않게 한다 */
@@ -452,7 +452,14 @@ body.searching main section{display:block;animation:none;margin-bottom:var(--s-8
 /* ============================================================
    단계 목록 (실제 순서가 있는 내용에만 번호를 쓴다)
    ============================================================ */
-.steps{display:flex;flex-direction:column;gap:var(--s-2);}
+.steps{display:grid;grid-template-columns:1fr;gap:var(--s-2);}
+@media(min-width:900px){
+  /* 넓은 화면에서는 카드 안쪽도 좌우로 채운다. 번호가 있어 읽는 순서는 분명하다 */
+  .steps{grid-template-columns:repeat(2,minmax(0,1fr));}
+  .faq-list{grid-template-columns:repeat(2,minmax(0,1fr));}
+  .case-list{grid-template-columns:repeat(2,minmax(0,1fr));}
+  .info-box ol{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px var(--s-5);}
+}
 .step{
   display:flex;
   gap:var(--s-4);
@@ -489,7 +496,7 @@ body.searching main section{display:block;animation:none;margin-bottom:var(--s-8
 }
 
 /* 사례 목록 (순서가 아닌 것 — 번호를 쓰지 않는다) */
-.case-list{display:flex;flex-direction:column;gap:var(--s-2);}
+.case-list{display:grid;grid-template-columns:1fr;gap:var(--s-2);}
 .case-item{
   background:var(--bg);
   border:1px solid var(--border);
@@ -651,7 +658,7 @@ body.searching main section{display:block;animation:none;margin-bottom:var(--s-8
 }
 .rule-card.ban .rule-item::before{background:var(--red);}
 
-.faq-list{display:flex;flex-direction:column;gap:var(--s-2);}
+.faq-list{display:grid;grid-template-columns:1fr;gap:var(--s-2);}
 .faq-item{background:var(--bg);border:1px solid var(--border);border-radius:var(--r-md);padding:var(--s-4);}
 .faq-q{font-size:var(--t-body);font-weight:700;color:var(--black);line-height:1.5;letter-spacing:-.02em;}
 .faq-a{font-size:var(--t-sm);color:var(--mid);line-height:1.75;margin-top:7px;}
@@ -659,6 +666,14 @@ body.searching main section{display:block;animation:none;margin-bottom:var(--s-8
 /* ============================================================
    개념도 (유심 규격 / 장착 방향)
    ============================================================ */
+.card-split{display:grid;grid-template-columns:1fr;gap:var(--s-4);align-items:start;}
+@media(min-width:1024px){
+  .card-split{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:var(--s-5);}
+  .card-split .diagram{margin-top:0;}
+  .card-split .steps{grid-template-columns:1fr;}
+}
+.card-split>*{min-width:0;}
+
 .diagram{
   background:var(--bg);
   border:1px solid var(--border);
@@ -666,7 +681,8 @@ body.searching main section{display:block;animation:none;margin-bottom:var(--s-8
   padding:var(--s-5) var(--s-4) var(--s-4);
   margin-top:var(--s-3);
 }
-.diagram svg{width:100%;height:auto;max-width:620px;margin:0 auto;}
+.diagram svg{width:100%;height:auto;max-width:640px;margin:0 auto;}
+.card-split .diagram svg{max-width:none;}
 .diagram-caption{
   font-size:var(--t-xs);
   color:var(--mid);
