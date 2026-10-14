@@ -116,7 +116,6 @@
       <p>가입 안내부터 유심 장착, 번호이동, 요금제 설명까지. 현장에서 바로 꺼내 쓰는 실무 안내서입니다.</p>
       <div class="hero-actions">
         <a href="https://shop.skylife.co.kr/mvno/appinfo?code=12Xh1W" onclick="return openApplyModal(event)" class="btn btn-primary"><svg><use href="#i-external"></use></svg>개통하기</a>
-        <button type="button" class="btn btn-quiet" onclick="scrollToGuide()">가이드 보기</button>
       </div>
     </div>
     <svg class="hero-art" viewBox="0 0 200 150" fill="none" role="img" aria-label="나노 유심 카드 도면">
@@ -872,11 +871,6 @@ function showSection(sec){
   document.querySelectorAll('.mob-tab').forEach(t => t.classList.toggle('active', t.dataset.sec === sec));
   document.querySelectorAll('.section-nav button').forEach(b => b.classList.toggle('current', b.dataset.nav === sec));
   window.scrollTo({ top: 0, behavior: 'smooth' });
-}
-
-function scrollToGuide(){
-  const nav = document.querySelector('.section-nav');
-  if(nav) window.scrollTo({ top: nav.offsetTop - 60, behavior: 'smooth' });
 }
 
 window.addEventListener('DOMContentLoaded', () => {
