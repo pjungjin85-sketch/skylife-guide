@@ -31,7 +31,6 @@
 <symbol id="i-help" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M9.6 9.4a2.5 2.5 0 0 1 4.8.8c0 1.7-2.4 2.3-2.4 3.8"/><path d="M12 17.2h.01"/></symbol>
 <symbol id="i-alert" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M10.3 3.9 2.6 17.2A2 2 0 0 0 4.3 20.2h15.4a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/><path d="M12 9.5v4M12 17h.01"/></symbol>
 <symbol id="i-diagnose" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m15.3 15.3 4.4 4.4"/><path d="M8 10.5h5M10.5 8v5"/></symbol>
-<symbol id="i-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9.5 6 6 6-6"/></symbol>
 <symbol id="i-search" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7.5"/><path d="m16.5 16.5 4 4"/></symbol>
 <symbol id="i-external" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13.5V19a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h5.5"/><path d="M15 3h6v6M21 3l-9 9"/></symbol>
 <symbol id="i-info" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 11v5.5M12 7.8h.01"/></symbol>
@@ -164,7 +163,7 @@
 </div>
 <div class="card-grid">
 
-  <div class="card" onclick="toggle('sales-flow')">
+  <div class="card">
     <div class="card-header">
       <div class="card-icon"><svg><use href="#i-talk"></use></svg></div>
       <div class="card-meta">
@@ -172,7 +171,7 @@
         <div class="card-desc">고객과의 첫 접점에서 신뢰를 쌓는 대화 흐름</div>
       </div>
     </div>
-    <div class="card-footer"><div class="card-tags"><span class="tag">인사</span><span class="tag">니즈파악</span></div><span class="chevron"><svg><use href="#i-chevron"></use></svg></span></div>
+    <div class="card-footer"><div class="card-tags"><span class="tag">인사</span><span class="tag">니즈파악</span></div></div>
     <div class="detail-panel" id="detail-sales-flow"><div class="detail-inner"><div class="detail-body">
       <div class="steps">
         <div class="step"><div class="step-num">1</div><div class="step-body"><div class="step-title">자연스러운 인사 &amp; 소속 안내</div><div class="step-desc">"안녕하세요, kt skylife OOO대리점 소속 OOO입니다." — 소속을 명확히 밝혀 신뢰감 형성</div></div></div>
@@ -185,7 +184,7 @@
     </div></div></div>
   </div>
 
-  <div class="card wide" onclick="toggle('plan-intro')">
+  <div class="card">
     <div class="card-header">
       <div class="card-icon"><svg><use href="#i-plan"></use></svg></div>
       <div class="card-meta">
@@ -193,7 +192,7 @@
         <div class="card-desc">고객용·대리점용 요금제 탭 전환 비교</div>
       </div>
     </div>
-    <div class="card-footer"><div class="card-tags"><span class="tag">고객용</span><span class="tag">대리점용</span></div><span class="chevron"><svg><use href="#i-chevron"></use></svg></span></div>
+    <div class="card-footer"><div class="card-tags"><span class="tag">고객용</span><span class="tag">대리점용</span></div></div>
     <div class="detail-panel" id="detail-plan-intro"><div class="detail-inner"><div class="detail-body">
       <div class="tabs">
         <button class="tab-btn active" onclick="switchTab(event,'tab-customer')">고객용 요금제</button>
@@ -229,7 +228,7 @@
     </div></div></div>
   </div>
 
-  <div class="card" onclick="toggle('bundle-sales')">
+  <div class="card">
     <div class="card-header">
       <div class="card-icon"><svg><use href="#i-bundle"></use></svg></div>
       <div class="card-meta">
@@ -237,7 +236,7 @@
         <div class="card-desc">기존 kt skylife 이용 고객 결합 혜택</div>
       </div>
     </div>
-    <div class="card-footer"><div class="card-tags"><span class="tag">결합할인</span><span class="tag">가족결합</span></div><span class="chevron"><svg><use href="#i-chevron"></use></svg></span></div>
+    <div class="card-footer"><div class="card-tags"><span class="tag">결합할인</span><span class="tag">가족결합</span></div></div>
     <div class="detail-panel" id="detail-bundle-sales"><div class="detail-inner"><div class="detail-body">
       <div class="steps">
         <div class="step"><div class="step-num">1</div><div class="step-body"><div class="step-title">기존 kt skylife 이용 확인</div><div class="step-desc">인터넷, IPTV, 위성방송 등 기존 이용 서비스를 확인합니다.</div></div></div>
@@ -259,7 +258,7 @@
 </div>
 <div class="card-grid">
 
-  <div class="card" onclick="toggle('join-docs')">
+  <div class="card">
     <div class="card-header">
       <div class="card-icon"><svg><use href="#i-doc"></use></svg></div>
       <div class="card-meta">
@@ -267,7 +266,7 @@
         <div class="card-desc">신규·번호이동 가입별 필요 서류 및 인증 수단 정리</div>
       </div>
     </div>
-    <div class="card-footer"><div class="card-tags"><span class="tag">신분증</span><span class="tag">간편인증</span><span class="tag">안면인증</span></div><span class="chevron"><svg><use href="#i-chevron"></use></svg></span></div>
+    <div class="card-footer"><div class="card-tags"><span class="tag">신분증</span><span class="tag">간편인증</span><span class="tag">안면인증</span></div></div>
     <div class="detail-panel" id="detail-join-docs"><div class="detail-inner"><div class="detail-body">
       <div class="split-grid" style="margin-top:0">
         <div class="doc-card"><div class="doc-card-title">공통 필수</div>
@@ -286,7 +285,7 @@
     </div></div></div>
   </div>
 
-  <div class="card" onclick="toggle('mnp-guide')">
+  <div class="card">
     <div class="card-header">
       <div class="card-icon"><svg><use href="#i-swap"></use></svg></div>
       <div class="card-meta">
@@ -294,7 +293,7 @@
         <div class="card-desc">사전동의 ARS 번호 포함 상세 절차 &amp; 오류 대응</div>
       </div>
     </div>
-    <div class="card-footer"><div class="card-tags"><span class="tag">MNP</span><span class="tag">ARS</span><span class="tag">사전동의</span></div><span class="chevron"><svg><use href="#i-chevron"></use></svg></span></div>
+    <div class="card-footer"><div class="card-tags"><span class="tag">MNP</span><span class="tag">ARS</span><span class="tag">사전동의</span></div></div>
     <div class="detail-panel" id="detail-mnp-guide"><div class="detail-inner"><div class="detail-body">
       <div class="steps">
         <div class="step"><div class="step-num">1</div><div class="step-body"><div class="step-title">기존 통신사 약정 잔여 기간 확인</div><div class="step-desc">위약금 발생 여부를 사전에 안내합니다. 고객 핸드폰에서 114 통화 시 해당 통신사 고객센터로 자동 연결됩니다.</div></div></div>
@@ -320,7 +319,7 @@
     </div></div></div>
   </div>
 
-  <div class="card" onclick="toggle('new-join')">
+  <div class="card">
     <div class="card-header">
       <div class="card-icon"><svg><use href="#i-check"></use></svg></div>
       <div class="card-meta">
@@ -328,7 +327,7 @@
         <div class="card-desc">처음 가입하는 고객의 개통 단계별 안내</div>
       </div>
     </div>
-    <div class="card-footer"><div class="card-tags"><span class="tag">본인인증</span><span class="tag">개통</span></div><span class="chevron"><svg><use href="#i-chevron"></use></svg></span></div>
+    <div class="card-footer"><div class="card-tags"><span class="tag">본인인증</span><span class="tag">개통</span></div></div>
     <div class="detail-panel" id="detail-new-join"><div class="detail-inner"><div class="detail-body">
       <div class="steps">
         <div class="step"><div class="step-num">1</div><div class="step-body"><div class="step-title">요금제 선택</div><div class="step-desc">고객 니즈에 맞는 요금제 확정. 고객용·대리점용 구분 중 주요 요금제 리스트에서 선택.</div></div></div>
@@ -350,7 +349,7 @@
 </div>
 <div class="card-grid">
 
-  <div class="card wide" onclick="toggle('usim-type')">
+  <div class="card">
     <div class="card-header">
       <div class="card-icon"><svg><use href="#i-sim"></use></svg></div>
       <div class="card-meta">
@@ -358,7 +357,7 @@
         <div class="card-desc">단말기에 맞는 유심 규격 확인 방법</div>
       </div>
     </div>
-    <div class="card-footer"><div class="card-tags"><span class="tag">나노유심</span><span class="tag">eSIM</span></div><span class="chevron"><svg><use href="#i-chevron"></use></svg></span></div>
+    <div class="card-footer"><div class="card-tags"><span class="tag">나노유심</span><span class="tag">eSIM</span></div></div>
     <div class="detail-panel" id="detail-usim-type"><div class="detail-inner"><div class="detail-body">
 
       <div class="diagram">
@@ -398,7 +397,7 @@
     </div></div></div>
   </div>
 
-  <div class="card wide" onclick="toggle('usim-install')">
+  <div class="card">
     <div class="card-header">
       <div class="card-icon"><svg><use href="#i-tool"></use></svg></div>
       <div class="card-meta">
@@ -406,7 +405,7 @@
         <div class="card-desc">단계별 유심 장착 가이드 및 주의사항</div>
       </div>
     </div>
-    <div class="card-footer"><div class="card-tags"><span class="tag">장착순서</span><span class="tag">주의</span></div><span class="chevron"><svg><use href="#i-chevron"></use></svg></span></div>
+    <div class="card-footer"><div class="card-tags"><span class="tag">장착순서</span><span class="tag">주의</span></div></div>
     <div class="detail-panel" id="detail-usim-install"><div class="detail-inner"><div class="detail-body">
 
       <div class="diagram">
@@ -443,7 +442,7 @@
     </div></div></div>
   </div>
 
-  <div class="card" onclick="toggle('esim-guide')">
+  <div class="card">
     <div class="card-header">
       <div class="card-icon"><svg><use href="#i-qr"></use></svg></div>
       <div class="card-meta">
@@ -451,7 +450,7 @@
         <div class="card-desc">물리 유심 없이 개통하는 eSIM 절차</div>
       </div>
     </div>
-    <div class="card-footer"><div class="card-tags"><span class="tag">QR코드</span><span class="tag">EID</span></div><span class="chevron"><svg><use href="#i-chevron"></use></svg></span></div>
+    <div class="card-footer"><div class="card-tags"><span class="tag">QR코드</span><span class="tag">EID</span></div></div>
     <div class="detail-panel" id="detail-esim-guide"><div class="detail-inner"><div class="detail-body">
       <div class="steps">
         <div class="step"><div class="step-num">1</div><div class="step-body"><div class="step-title">eSIM 지원 단말기 여부 확인</div><div class="step-desc">설정 → 일반 → 정보 → EID가 있는 경우 eSIM 사용 가능. 또는 제조사 공식 스펙 확인.</div></div></div>
@@ -474,7 +473,7 @@
 </div>
 <div class="card-grid">
 
-  <div class="card" onclick="toggle('faq-customer')">
+  <div class="card">
     <div class="card-header">
       <div class="card-icon"><svg><use href="#i-help"></use></svg></div>
       <div class="card-meta">
@@ -482,7 +481,7 @@
         <div class="card-desc">현장에서 자주 나오는 질문과 모범 답변</div>
       </div>
     </div>
-    <div class="card-footer"><div class="card-tags"><span class="tag">Q&amp;A</span><span class="tag">대응</span></div><span class="chevron"><svg><use href="#i-chevron"></use></svg></span></div>
+    <div class="card-footer"><div class="card-tags"><span class="tag">Q&amp;A</span><span class="tag">대응</span></div></div>
     <div class="detail-panel" id="detail-faq-customer"><div class="detail-inner"><div class="detail-body">
       <div class="faq-list">
         <div class="faq-item"><div class="faq-q">기존 폰 그대로 쓸 수 있나요?</div><div class="faq-a">네, 현재 사용 중인 단말기에 유심만 교체하면 됩니다. 단, 기존 통신사에 단말기가 잠금(락)되어 있는 경우 해제가 필요합니다.</div></div>
@@ -494,7 +493,7 @@
     </div></div></div>
   </div>
 
-  <div class="card" onclick="toggle('caution-list')">
+  <div class="card">
     <div class="card-header">
       <div class="card-icon"><svg><use href="#i-alert"></use></svg></div>
       <div class="card-meta">
@@ -502,7 +501,7 @@
         <div class="card-desc">민원·법적 문제 예방을 위한 필수 주의사항</div>
       </div>
     </div>
-    <div class="card-footer"><div class="card-tags"><span class="tag">금지</span><span class="tag">필수</span></div><span class="chevron"><svg><use href="#i-chevron"></use></svg></span></div>
+    <div class="card-footer"><div class="card-tags"><span class="tag">금지</span><span class="tag">필수</span></div></div>
     <div class="detail-panel" id="detail-caution-list"><div class="detail-inner"><div class="detail-body">
       <div class="split-grid" style="margin-top:0">
         <div class="rule-card ban">
@@ -529,7 +528,7 @@
     </div></div></div>
   </div>
 
-  <div class="card" onclick="toggle('after-sales')">
+  <div class="card">
     <div class="card-header">
       <div class="card-icon"><svg><use href="#i-diagnose"></use></svg></div>
       <div class="card-meta">
@@ -537,7 +536,7 @@
         <div class="card-desc">유심 미인식, 통신사향 단말기 등 문제 발생 시 점검 가이드</div>
       </div>
     </div>
-    <div class="card-footer"><div class="card-tags"><span class="tag">유심</span><span class="tag">eSIM</span><span class="tag">KAIT</span></div><span class="chevron"><svg><use href="#i-chevron"></use></svg></span></div>
+    <div class="card-footer"><div class="card-tags"><span class="tag">유심</span><span class="tag">eSIM</span><span class="tag">KAIT</span></div></div>
     <div class="detail-panel" id="detail-after-sales"><div class="detail-inner"><div class="detail-body">
       <div class="case-list">
         <div class="case-item"><div class="case-title">개통 이력이 없는 통신사향 전용 새 단말기</div><div class="case-desc">해당 통신사 전용 단말기는 타 통신사 유심 사용 불가 → 사용 불가 안내</div></div>
@@ -698,15 +697,6 @@ function applySsoToLinks(){
   });
 }
 
-/* ── 카드 펼침 ── */
-function toggle(id){
-  const panel = document.getElementById('detail-' + id);
-  if(!panel) return;
-  const card = panel.closest('.card');
-  const open = panel.classList.toggle('open');
-  if(card) card.classList.toggle('active', open);
-}
-
 /* ── 요금제 탭 ── */
 function switchTab(e, tabId){
   e.stopPropagation();
@@ -740,7 +730,6 @@ function doSearch(q){
   document.querySelectorAll('.card').forEach(card => {
     card.innerHTML = originalHTML[card.dataset.idx];
     card.style.display = '';
-    card.classList.remove('active');
   });
   document.querySelectorAll('.section-head').forEach(h => { h.style.display = ''; });
   emptyEl.style.display = 'none';
@@ -756,8 +745,6 @@ function doSearch(q){
       re.lastIndex = 0;
       matched++;
       highlightNode(card, re);
-      const panel = card.querySelector('.detail-panel');
-      if(panel){ panel.classList.add('open'); card.classList.add('active'); }
     } else {
       card.style.display = 'none';
     }
