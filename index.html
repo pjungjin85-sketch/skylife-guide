@@ -203,29 +203,29 @@
         <button class="tab-btn" onclick="switchTab(event,'tab-dealer')">대리점용 요금제</button>
       </div>
       <div class="tab-content active" id="tab-customer">
-        <p class="tab-note">저렴한 가격으로 스펙 좋은 요금제 — 고객 설득용<br>판매가는 <strong>2026.10.01 기준</strong> (VAT 포함)</p>
+        <p class="tab-note">저렴한 가격으로 스펙 좋은 요금제 — 고객 설득용<br>판매가는 <strong class="plan-base-date">2026.10.01 기준</strong> (VAT 포함)</p>
         <div class="table-scroll">
         <table class="data-table"><thead><tr><th>상품명</th><th>판매가</th><th>데이터/통화</th><th>제휴혜택</th></tr></thead><tbody>
-          <tr><td>슬림 1GB/100분<span class="plan-badge no-dealer">대리점 개통 불가</span></td><td class="price-tag">2,900원</td><td>1GB / 100분</td><td>-</td></tr>
-          <tr><td>통화 충분 1.5GB</td><td class="price-tag">6,600원</td><td>1.5GB / 통화 무제한</td><td>-</td></tr>
-          <tr><td>데이터 충분 2.2GB+/100분</td><td class="price-tag">11,700원</td><td>2.2GB+ / 이후 1Mbps / 100분</td><td>-</td></tr>
-          <tr><td>모두 충분 7GB+(밀리의서재)</td><td class="price-tag">16,800원</td><td>7GB+ / 이후 1Mbps / 통화 무제한</td><td>밀리의서재 이용권</td></tr>
-          <tr><td>모두 충분 11GB+(밀리의서재)</td><td class="price-tag">34,300원</td><td>11GB+일2GB / 이후 3Mbps / 통화 무제한</td><td>밀리의서재 이용권</td></tr>
-          <tr><td>5G 모두 충분 안심 6GB+<span class="plan-badge new">신규</span></td><td class="price-tag">15,900원</td><td>6GB+ / 이후 400Kbps / 통화 무제한</td><td>-</td></tr>
-          <tr><td>5G 모두 충분 안심 10GB+<span class="plan-badge new">신규</span></td><td class="price-tag">18,900원</td><td>10GB+ / 이후 400Kbps / 통화 무제한</td><td>-</td></tr>
+          <tr data-plan-code="PL227S452"><td>슬림 1GB/100분<span class="plan-badge no-dealer">대리점 개통 불가</span></td><td class="price-tag">2,900원</td><td>1GB / 100분</td><td>-</td></tr>
+          <tr data-plan-code="PL209O190"><td>통화 충분 1.5GB</td><td class="price-tag">6,600원</td><td>1.5GB / 통화 무제한</td><td>-</td></tr>
+          <tr data-plan-code="PL2192922"><td>데이터 충분 2.2GB+/100분</td><td class="price-tag">11,700원</td><td>2.2GB+ / 이후 1Mbps / 100분</td><td>-</td></tr>
+          <tr data-plan-code="PL235Q985"><td>모두 충분 7GB+(밀리의서재)</td><td class="price-tag">16,800원</td><td>7GB+ / 이후 1Mbps / 통화 무제한</td><td>밀리의서재 이용권</td></tr>
+          <tr data-plan-code="PL234L638"><td>모두 충분 11GB+(밀리의서재)</td><td class="price-tag">34,300원</td><td>11GB+일2GB / 이후 3Mbps / 통화 무제한</td><td>밀리의서재 이용권</td></tr>
+          <tr data-plan-code="PL2686623"><td>5G 모두 충분 안심 6GB+<span class="plan-badge new">신규</span></td><td class="price-tag">15,900원</td><td>6GB+ / 이후 400Kbps / 통화 무제한</td><td>-</td></tr>
+          <tr data-plan-code="PL2686622"><td>5G 모두 충분 안심 10GB+<span class="plan-badge new">신규</span></td><td class="price-tag">18,900원</td><td>10GB+ / 이후 400Kbps / 통화 무제한</td><td>-</td></tr>
         </tbody></table>
         </div>
         <div class="info-box"><div class="info-box-title">설명 순서</div><ol><li>현재 요금과 비교</li><li>절감 금액 강조</li><li>데이터·통화 조건</li><li>부가 혜택 설명</li></ol></div>
       </div>
       <div class="tab-content" id="tab-dealer">
-        <p class="tab-note">수수료 우수 요금제 — 대리점 내부 참고용<br>판매가는 <strong>2026.10.01 기준</strong> (VAT 포함)</p>
+        <p class="tab-note">수수료 우수 요금제 — 대리점 내부 참고용<br>판매가는 <strong class="plan-base-date">2026.10.01 기준</strong> (VAT 포함)</p>
         <div class="table-scroll">
         <table class="data-table"><thead><tr><th>상품명</th><th>판매가</th><th>데이터/통화</th><th>제휴혜택</th></tr></thead><tbody>
-          <tr><td>SKY 데이터 충분 2.2GB+/100분</td><td class="price-tag">14,100원</td><td>2.2GB+ / 이후 1Mbps / 100분</td><td>-</td></tr>
-          <tr><td>SKY 모두 충분 7GB+(밀리의서재)</td><td class="price-tag">18,400원</td><td>7GB+ / 이후 1Mbps / 통화 무제한</td><td>밀리의서재 이용권</td></tr>
-          <tr><td>SKY 모두 충분 10GB+(밀리의서재)</td><td class="price-tag">20,300원</td><td>10GB+ / 이후 1Mbps / 통화 무제한</td><td>밀리의서재 이용권</td></tr>
-          <tr><td>SKY 모두 충분 11GB+(밀리의서재)</td><td class="price-tag">35,200원</td><td>11GB+일2GB / 이후 3Mbps / 통화 무제한</td><td>밀리의서재 이용권</td></tr>
-          <tr><td>SKY 모두 충분 100GB+(밀리의서재)</td><td class="price-tag">41,100원</td><td>100GB+ / 이후 5Mbps / 통화 무제한</td><td>밀리의서재 이용권</td></tr>
+          <tr data-plan-code="PL2544296"><td>SKY 데이터 충분 2.2GB+/100분</td><td class="price-tag">14,100원</td><td>2.2GB+ / 이후 1Mbps / 100분</td><td>-</td></tr>
+          <tr data-plan-code="PL253A840"><td>SKY 모두 충분 7GB+(밀리의서재)</td><td class="price-tag">18,400원</td><td>7GB+ / 이후 1Mbps / 통화 무제한</td><td>밀리의서재 이용권</td></tr>
+          <tr data-plan-code="PL253A855"><td>SKY 모두 충분 10GB+(밀리의서재)</td><td class="price-tag">20,300원</td><td>10GB+ / 이후 1Mbps / 통화 무제한</td><td>밀리의서재 이용권</td></tr>
+          <tr data-plan-code="PL253A865"><td>SKY 모두 충분 11GB+(밀리의서재)</td><td class="price-tag">35,200원</td><td>11GB+일2GB / 이후 3Mbps / 통화 무제한</td><td>밀리의서재 이용권</td></tr>
+          <tr data-plan-code="PL253A870"><td>SKY 모두 충분 100GB+(밀리의서재)</td><td class="price-tag">41,100원</td><td>100GB+ / 이후 5Mbps / 통화 무제한</td><td>밀리의서재 이용권</td></tr>
         </tbody></table>
         </div>
       </div>
@@ -883,11 +883,43 @@ function showSection(sec){
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
+/* ── 요금제 표: plans.json 에서 판매가·기준일 자동 반영 ──
+   월별 키("YYYY-MM") 중 이번 달 이하의 가장 최근 월을 쓴다. 불러오기 실패 시 HTML에 적힌 값 그대로 둔다. */
+async function syncPlanTables(){
+  try{
+    const res = await fetch('https://raw.githubusercontent.com/pjungjin85-sketch/skylife-plans/main/data/plans.json', { cache: 'no-store' });
+    if(!res.ok) throw new Error(`HTTP ${res.status}`);
+    const data = await res.json();
+    const now = new Date();
+    const currentKey = `${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}`;
+    const keys = Object.keys(data).filter(k => /^\d{4}-\d{2}$/.test(k)).sort();
+    const key = keys.filter(k => k <= currentKey).pop() ?? keys[0];
+    const byCode = {};
+    data[key].forEach(p => { byCode[p.code] = p; });
+
+    // 검색 하이라이트가 걸린 상태일 수 있으니 원본으로 되돌린 뒤 고치고 다시 저장
+    const q = document.getElementById('searchInput').value;
+    doSearch('');
+    const [y, m] = key.split('-');
+    document.querySelectorAll('.plan-base-date').forEach(el => { el.textContent = `${y}.${m}.01 기준`; });
+    document.querySelectorAll('tr[data-plan-code]').forEach(tr => {
+      const plan = byCode[tr.dataset.planCode];
+      const priceEl = tr.querySelector('.price-tag');
+      priceEl.textContent = plan ? `${plan.price.toLocaleString()}원` : '정보 없음';
+    });
+    saveOriginals();
+    if(q) doSearch(q);
+  }catch(err){
+    console.warn('요금제 표 갱신 실패:', err);
+  }
+}
+
 window.addEventListener('DOMContentLoaded', () => {
   saveOriginals();
   showSection('sales');
   applySsoToLinks();
   checkExistingSession();
+  syncPlanTables();
 });
 
 /* ── 모달 ── */
