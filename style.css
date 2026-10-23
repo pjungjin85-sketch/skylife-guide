@@ -107,9 +107,13 @@
   max-width:46ch;
 }
 .hero-actions{display:flex;gap:var(--s-2);margin-top:var(--s-5);flex-wrap:wrap;}
+/* 텔레그램 업무 지원봇 버튼 — 텔레그램 BI 색 (공식 브랜드 블루 #26A5E4) */
+:root{--telegram:#26A5E4;--telegram2:#1E8FC6;}
+.btn-telegram{background:var(--telegram);color:#fff;}
+.btn-telegram:hover{background:var(--telegram2);}
 /* 텔레그램 미연결이면 흐리게 — 눌러도 링크 대신 등록 안내 (telegram-link.js) */
 .hero-actions .btn.is-disabled{opacity:.4;cursor:not-allowed;}
-.hero-actions .btn.is-disabled:hover{background:var(--red);}
+.hero-actions .btn-telegram.is-disabled:hover{background:var(--telegram);}
 
 /* 유심 드로잉 */
 .hero-art{width:260px;flex-shrink:0;color:var(--border);}
