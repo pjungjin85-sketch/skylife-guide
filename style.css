@@ -107,6 +107,9 @@
   max-width:46ch;
 }
 .hero-actions{display:flex;gap:var(--s-2);margin-top:var(--s-5);flex-wrap:wrap;}
+/* 텔레그램 미연결이면 흐리게 — 눌러도 링크 대신 등록 안내 (telegram-link.js) */
+.hero-actions .btn.is-disabled{opacity:.4;cursor:not-allowed;}
+.hero-actions .btn.is-disabled:hover{background:var(--red);}
 
 /* 유심 드로잉 */
 .hero-art{width:260px;flex-shrink:0;color:var(--border);}

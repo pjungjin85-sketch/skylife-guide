@@ -33,7 +33,24 @@ const TgLink = (() => {
     return b;
   }
 
+  // 히어로의 「텔레그램 업무 지원봇」 버튼 — 연결된 계정만 활성화
+  function updateBotButton() {
+    const b = document.getElementById('bot-btn');
+    if (!b) return;
+    b.classList.toggle('is-disabled', !current);
+    b.setAttribute('aria-disabled', current ? 'false' : 'true');
+  }
+
+  function openBot(e) {
+    if (current) return true;  // 링크 그대로 열기 (새 창 → 텔레그램 봇 대화방)
+    e.preventDefault();
+    showInfoModal('업무 지원 봇 사용을 위해서는 텔레그램 계정을 등록해 주세요.\n\n' +
+      '화면 위쪽 로그아웃 버튼 옆에 텔레그램 ID를 넣고 「계정 연결하기」를 누르면 됩니다.\n\n' + HOW_TO);
+    return false;
+  }
+
   function render() {
+    updateBotButton();
     el.textContent = '';
     el.classList.toggle('linked', !!current);
     if (current) {
@@ -83,5 +100,5 @@ const TgLink = (() => {
     render();
   }
 
-  return { init };
+  return { init, openBot };
 })();
