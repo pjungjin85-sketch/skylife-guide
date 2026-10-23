@@ -70,7 +70,7 @@ const TgLink = (() => {
     input.setAttribute('aria-label', '텔레그램 ID');
     input.onkeydown = e => { if (e.key === 'Enter') link(input, connect); };
     const connect = button('계정 연결하기', 'tg-btn primary', () => link(input, connect));
-    const help = button('ID 확인', 'tg-help', () => showInfoModal(HOW_TO));
+    const help = button('ID 확인 방법', 'tg-help', () => showInfoModal(HOW_TO));
     el.append(input, connect, help);
   }
 
