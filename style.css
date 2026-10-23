@@ -21,6 +21,43 @@
 }
 .logout-btn:hover{border-color:var(--light);color:var(--black);}
 
+/* 텔레그램 업무지원 봇 연결 (telegram-link.js) — 로그아웃 버튼 왼쪽 */
+.tg-link{display:flex;align-items:center;gap:6px;margin-left:auto;}
+.tg-link[hidden]{display:none;}
+.tg-link:not([hidden]) + .header-right{margin-left:var(--s-3);}
+.tg-input{
+  width:130px;padding:7px 10px;border:1px solid var(--border);border-radius:var(--r-md);
+  font-size:var(--t-xs);font-variant-numeric:tabular-nums;color:var(--dark);background:var(--bg);
+}
+.tg-input:focus{outline:none;border-color:var(--dark);}
+.tg-input::placeholder{color:var(--light);}
+.tg-btn{
+  padding:7px 12px;border:1px solid var(--border);border-radius:var(--r-md);
+  font-size:var(--t-xs);font-weight:600;color:var(--mid);background:var(--bg);
+  cursor:pointer;white-space:nowrap;
+  transition:border-color var(--dur-fast) var(--ease),color var(--dur-fast) var(--ease),background var(--dur-fast) var(--ease);
+}
+.tg-btn:hover{border-color:var(--light);color:var(--black);}
+.tg-btn.primary{background:var(--red);border-color:var(--red);color:#fff;}
+.tg-btn.primary:hover{background:var(--red2);border-color:var(--red2);}
+.tg-btn:disabled{opacity:.5;cursor:default;}
+.tg-help{
+  border:none;background:none;padding:4px 2px;cursor:pointer;white-space:nowrap;
+  font-size:var(--t-xs);color:var(--light);text-decoration:underline;text-underline-offset:2px;
+}
+.tg-help:hover{color:var(--dark);}
+.tg-status{font-size:var(--t-xs);font-weight:600;color:var(--ok, #15803D);white-space:nowrap;}
+.tg-status::before{content:'● ';font-size:9px;vertical-align:1px;}
+#infoModalMsg{white-space:pre-line;}  /* 안내 문구의 줄바꿈을 살린다 */
+@media(max-width:768px){
+  /* 좁은 화면: 헤더 두 번째 줄로 내려 전체 폭을 쓴다 */
+  header .header-inner{flex-wrap:wrap;height:auto;min-height:54px;padding-top:9px;padding-bottom:9px;row-gap:8px;}
+  .tg-link{order:10;flex-basis:100%;margin:0;}
+  .tg-link .tg-input{flex:1 1 auto;width:auto;min-width:0;}
+  .tg-link.linked{justify-content:space-between;}
+  .tg-link:not([hidden]) + .header-right{margin-left:auto;}
+}
+
 /* ============================================================
    히어로 — 유심 테크니컬 드로잉이 유일한 연출 지점
    ============================================================ */

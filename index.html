@@ -16,6 +16,7 @@
 <link rel="stylesheet" href="style.css">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js" integrity="sha384-0w2KAL2YHP6wKOkUDzkCDGgVvfmHnj02DHeQ6XcHOgTfFsGyonKOpShMH1x6nk9o" crossorigin="anonymous"></script>
 <script src="bi-intro.js"></script>
+<script src="telegram-link.js"></script>
 </head>
 <body>
 
@@ -102,6 +103,7 @@
     <div class="logo-text">kt <span>skylife</span></div>
     <span class="header-badge">대리점 전용</span>
     <span class="header-title">현장영업 안내</span>
+    <div id="tg-link" class="tg-link" hidden></div>
     <div class="header-right">
       <span class="header-sub">v2.0</span>
       <button id="logout-btn" class="logout-btn" onclick="handleLogout()" style="display:none">로그아웃</button>
@@ -705,6 +707,7 @@ async function afterLogin(session){
     return;
   }
   unlockGuide();
+  TgLink.init(session);  // telegram-link.js — 로그아웃 옆 텔레그램 연결
 }
 
 async function handleSignup(e){
