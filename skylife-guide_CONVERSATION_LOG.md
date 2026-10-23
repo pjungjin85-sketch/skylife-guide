@@ -499,3 +499,14 @@ CSS 파일 내 미디어쿼리가 중간에 위치하고, 검색바·퀵링크 �
 - 4개 스포크: 캐시 플래그 제거, 매 로드마다 `profiles.status`를 서버에서 재확인하도록 변경 — 상세는 각 프로젝트 로그 참고(skylife-plans, skylife-addons, skylife-mobile-faq, TPS)
 - admin.html: 같은 점검 과정에서 새로고침할 때마다 로그인 화면이 잠깐 보였다 사라지는 깜빡임도 발견해 수정 (다른 사이트처럼 로딩 스피너 우선 노출 방식 적용) — 상세는 skylife-inquiry 로그 참고
 - 커밋 요약: skylife-plans `789b30e`, skylife-addons `8ac403d`, skylife-mobile-faq `c7e7895`, TPS `2c55927`, skylife-inquiry(admin.html) `4b5ebc2` — 전부 git push로 자동배포 반영
+
+---
+
+## 2026-10-23 업데이트 — 로그아웃 옆 텔레그램 봇 계정 연결
+
+- 사용자 요청: 별도 페이지 없이 메인 화면 로그아웃 버튼 옆에서 처리
+- 미연결: [텔레그램 ID 입력] [계정 연결하기] [ID 확인] / 연결됨: "● 텔레그램 연결됨" [계정 연결 해제]
+- `telegram-link.js` 신규, DB 함수 `set_my_telegram_id` / `unlink_my_telegram` (skylife-inquiry/schema_bot.sql) — 승인 계정만, 다른 승인 계정이 쓰는 ID 는 거부
+- ID 확인 방법: 텔레그램에서 @skylife_support_bot 에 `/id`
+- 모바일에서는 헤더 둘째 줄로 내려감. 사용자 본인 계정으로 연결·해제·재연결 테스트 완료
+- 커밋 `4347718`
